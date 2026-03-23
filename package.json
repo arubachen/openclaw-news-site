@@ -1,0 +1,11 @@
+{
+  "name": "openclaw-news-site",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A static intelligence/news site that can be deployed to GitHub Pages.",
+  "scripts": {
+    "serve": "python3 -m http.server 4173 -d .",
+    "validate": "node scripts/validate-data.mjs",
+    "build": "npm run validate"
+  }
+}

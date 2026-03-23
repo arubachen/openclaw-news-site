@@ -1,0 +1,20 @@
+[
+  {
+    "channel": "市场快讯",
+    "title": "示例：可直接导入站点的数据项",
+    "score": 7.8,
+    "publishedAt": "2026-03-24T00:00:00+08:00",
+    "summary": "这是给 cron 或人工导入用的示例数据。",
+    "facts": [
+      { "label": "主", "value": "示例主体" },
+      { "label": "时", "value": "示例时间" },
+      { "label": "数", "value": "示例数字" },
+      { "label": "影", "value": "示例影响" }
+    ],
+    "judgment": "这是示例判断。",
+    "tags": ["示例", "导入"],
+    "sourceName": "OpenClaw",
+    "sourceType": "原文",
+    "sourceUrl": "https://example.com/sample"
+  }
+]
