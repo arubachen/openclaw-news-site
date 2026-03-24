@@ -10,21 +10,20 @@ const state = {
   items: [],
   query: '',
   activeChannel: '全部',
-  scoreFilter: '全部',
+  scoreFilter: '高价值',
   themeMode: 'system',
 };
 
 const els = {
   root: document.querySelector('#content-root'),
   routeTitle: document.querySelector('#route-title'),
-  chips: document.querySelector('#channel-chips'),
-  scoreChips: document.querySelector('#score-chips'),
   overviewSummary: document.querySelector('#overview-summary'),
   channelSummary: document.querySelector('#channel-summary'),
   dateLinks: document.querySelector('#date-links'),
   tagCloud: document.querySelector('#tag-cloud'),
   searchInput: document.querySelector('#search-input'),
   themeToggle: document.querySelector('#theme-toggle'),
+  featuredTags: document.querySelector('#featured-tags'),
 };
 
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -48,7 +47,29 @@ const readHash = () => (window.location.hash || '#/').replace(/^#/, '');
 const scoreTone = (score = 0) => score >= 8 ? '高价值' : score >= 7 ? '中价值' : '一般';
 const scoreColor = (score = 0) => score >= 8 ? 'var(--high)' : score >= 7 ? 'var(--warn)' : 'var(--good)';
 const scoreClass = (score = 0) => score >= 8 ? 'score-high' : score >= 7 ? 'score-mid' : 'score-low';
-const stripCommentPrefix = (value = '') => String(value).replace(/^\*\*评：\*\*\s*/u, '').replace(/^评：\s*/u, '').trim();
+const stripCommentPrefix = (value = '') => String(value)
+  .replace(/^\*\*(?:评|点评)：\*\*\s*/u, '')
+  .replace(/^(?:评|点评)：\s*/u, '')
+  .trim();
+
+function humanizeComment(value = '') {
+  let text = stripCommentPrefix(value);
+  const replacements = [
+    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:真正|最)?(?:值得看|重要|关键|核心)?(?:[^。]{0,12})?(?:不是|不在于)\s*[^，。；]+[，,、 ]*(?:而是|而在于)\s*/u, ''],
+    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:的)?(?:重点|看点|价值|核心|关键)(?:是|在于)\s*/u, ''],
+    [/^(?:真正|更)?值得看的是\s*/u, ''],
+    [/^(?:这不只是|这不单是)\s*[^，。；]+[，,、 ]*(?:更是|更意味着)\s*/u, ''],
+    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:释放出的信号是|说明了)\s*/u, ''],
+    [/^(?:核心|关键|重点)(?:在于|是)\s*/u, ''],
+    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:真正值得看)?[，,]\s*/u, ''],
+  ];
+  for (const [pattern, replacement] of replacements) {
+    text = text.replace(pattern, replacement);
+  }
+  text = text.replace(/^(?:而是|而在于)\s*/u, '');
+  text = text.replace(/^[，,。；、\s]+/u, '');
+  return text.trim();
+}
 
 function getActualTheme(mode = state.themeMode) {
   return mode === 'system' ? (mediaDark.matches ? 'dark' : 'light') : mode;
@@ -130,35 +151,14 @@ function summarize() {
   `).join('');
 }
 
-function renderChips() {
-  const channels = ['全部', ...new Set(state.items.map((item) => item.channel))];
-  els.chips.innerHTML = channels.map((channel) => `
-    <button class="chip ${state.activeChannel === channel ? 'active' : ''}" data-channel="${esc(channel)}">${esc(channel)}</button>
-  `).join('');
-
-  els.chips.querySelectorAll('[data-channel]').forEach((button) => {
-    button.addEventListener('click', () => {
-      state.activeChannel = button.dataset.channel;
-      window.location.hash = state.activeChannel === '全部'
-        ? '#/all'
-        : `#/channel/${slugifyHash(state.activeChannel)}`;
-    });
-  });
-}
-
-function renderScoreChips() {
-  const options = ['全部', '高价值', '中价值', '一般'];
-  els.scoreChips.innerHTML = options.map((option) => `
-    <button class="chip ${state.scoreFilter === option ? 'active' : ''}" data-score-filter="${esc(option)}">${esc(option)}</button>
-  `).join('');
-
-  els.scoreChips.querySelectorAll('[data-score-filter]').forEach((button) => {
-    button.addEventListener('click', () => {
-      state.scoreFilter = button.dataset.scoreFilter;
-      renderScoreChips();
-      renderRoute();
-    });
-  });
+function renderFeaturedTags() {
+  const highItems = state.items.filter((item) => Number(item.score || 0) >= 8);
+  const counts = new Map();
+  highItems.flatMap((item) => item.tags || []).forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1));
+  const topTags = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const fixed = `<span class="badge-static">高价值</span>`;
+  const tags = topTags.map(([tag]) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)}</a>`).join('');
+  els.featuredTags.innerHTML = fixed + tags;
 }
 
 function renderSidebar() {
@@ -245,7 +245,7 @@ function renderFactRows(item) {
 
 function renderCommentBox(item) {
   const facts = buildDisplayFacts(item);
-  const judgment = stripCommentPrefix(item.judgment || '');
+  const judgment = humanizeComment(item.judgment || '');
   const lines = [];
   if (facts.impact) lines.push(`<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>`);
   if (judgment) lines.push(`<p class="comment-line"><strong>点评：</strong>${esc(judgment)}</p>`);
@@ -259,7 +259,7 @@ function renderScorePill(item) {
 function renderCards(title, description, items) {
   renderRouteTitle(title, description, items);
   if (!items.length) {
-    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、价值筛选或关键词再试。</p></div>`;
+    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、标签或关键词再试。</p></div>`;
     return;
   }
 
@@ -297,7 +297,6 @@ function renderArticle(slug) {
   }
 
   state.activeChannel = item.channel;
-  renderChips();
   const facts = buildDisplayFacts(item);
   renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`, [item]);
 
@@ -344,7 +343,7 @@ function renderArticle(slug) {
         <section class="article-section">
           <h3>点评</h3>
           ${facts.impact ? `<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>` : ''}
-          <p class="comment-line"><strong>点评：</strong>${esc(stripCommentPrefix(item.judgment || ''))}</p>
+          <p class="comment-line"><strong>点评：</strong>${esc(humanizeComment(item.judgment || ''))}</p>
         </section>
 
         <section class="article-section">
@@ -369,7 +368,6 @@ function renderRoute() {
 
   if (route === 'channel' && value) {
     state.activeChannel = decodeURIComponent(value);
-    renderChips();
     renderCards(`频道：${state.activeChannel}`, '按频道查看', filteredItems((item) => item.channel === state.activeChannel));
     return;
   }
@@ -377,7 +375,6 @@ function renderRoute() {
   if (route === 'tag' && value) {
     const tag = decodeURIComponent(value);
     state.activeChannel = '全部';
-    renderChips();
     renderCards(`标签：#${tag}`, '按标签查看', filteredItems((item) => item.tags.includes(tag)));
     return;
   }
@@ -385,13 +382,11 @@ function renderRoute() {
   if (route === 'date' && value) {
     const day = decodeURIComponent(value);
     state.activeChannel = '全部';
-    renderChips();
     renderCards(`归档：${day}`, '按日期查看', filteredItems((item) => item.publishedAt.startsWith(day)));
     return;
   }
 
   state.activeChannel = '全部';
-  renderChips();
   renderCards('最新资讯', '默认按发布时间倒序', filteredItems());
 }
 
@@ -400,9 +395,8 @@ async function bootstrap() {
   const response = await fetch('./data/news.json');
   state.items = await response.json();
   summarize();
+  renderFeaturedTags();
   renderSidebar();
-  renderChips();
-  renderScoreChips();
   renderRoute();
 
   els.searchInput.addEventListener('input', (event) => {
