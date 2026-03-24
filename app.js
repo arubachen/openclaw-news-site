@@ -1,19 +1,33 @@
+const THEME_KEY = 'openclaw-news-site-theme-mode';
+const themeModes = ['system', 'dark', 'light'];
+const themeMeta = {
+  system: { icon: '◐', title: '主题：跟随系统（点击切换）' },
+  dark: { icon: '☾', title: '主题：深色（点击切换）' },
+  light: { icon: '☀︎', title: '主题：浅色（点击切换）' },
+};
+
 const state = {
   items: [],
   query: '',
   activeChannel: '全部',
+  scoreFilter: '全部',
+  themeMode: 'system',
 };
 
 const els = {
   root: document.querySelector('#content-root'),
   routeTitle: document.querySelector('#route-title'),
   chips: document.querySelector('#channel-chips'),
+  scoreChips: document.querySelector('#score-chips'),
   overviewSummary: document.querySelector('#overview-summary'),
   channelSummary: document.querySelector('#channel-summary'),
   dateLinks: document.querySelector('#date-links'),
   tagCloud: document.querySelector('#tag-cloud'),
   searchInput: document.querySelector('#search-input'),
+  themeToggle: document.querySelector('#theme-toggle'),
 };
+
+const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 const fmtDate = (value) => new Date(value).toLocaleString('zh-CN', {
   year: 'numeric',
@@ -33,7 +47,40 @@ const slugifyHash = (text) => encodeURIComponent(text);
 const readHash = () => (window.location.hash || '#/').replace(/^#/, '');
 const scoreTone = (score = 0) => score >= 8 ? '高价值' : score >= 7 ? '中价值' : '一般';
 const scoreColor = (score = 0) => score >= 8 ? 'var(--high)' : score >= 7 ? 'var(--warn)' : 'var(--good)';
+const scoreClass = (score = 0) => score >= 8 ? 'score-high' : score >= 7 ? 'score-mid' : 'score-low';
 const stripCommentPrefix = (value = '') => String(value).replace(/^\*\*评：\*\*\s*/u, '').replace(/^评：\s*/u, '').trim();
+
+function getActualTheme(mode = state.themeMode) {
+  return mode === 'system' ? (mediaDark.matches ? 'dark' : 'light') : mode;
+}
+
+function applyTheme(mode = state.themeMode) {
+  const actual = getActualTheme(mode);
+  document.documentElement.dataset.theme = actual;
+  const meta = themeMeta[mode];
+  if (els.themeToggle && meta) {
+    els.themeToggle.textContent = meta.icon;
+    els.themeToggle.title = meta.title;
+    els.themeToggle.setAttribute('aria-label', meta.title);
+  }
+}
+
+function cycleTheme() {
+  const currentIndex = themeModes.indexOf(state.themeMode);
+  state.themeMode = themeModes[(currentIndex + 1) % themeModes.length];
+  localStorage.setItem(THEME_KEY, state.themeMode);
+  applyTheme();
+}
+
+function initTheme() {
+  const stored = localStorage.getItem(THEME_KEY);
+  if (themeModes.includes(stored)) state.themeMode = stored;
+  applyTheme();
+  els.themeToggle?.addEventListener('click', cycleTheme);
+  mediaDark.addEventListener('change', () => {
+    if (state.themeMode === 'system') applyTheme();
+  });
+}
 
 function buildDisplayFacts(item) {
   const facts = Array.isArray(item.facts) ? item.facts : [];
@@ -99,6 +146,21 @@ function renderChips() {
   });
 }
 
+function renderScoreChips() {
+  const options = ['全部', '高价值', '中价值', '一般'];
+  els.scoreChips.innerHTML = options.map((option) => `
+    <button class="chip ${state.scoreFilter === option ? 'active' : ''}" data-score-filter="${esc(option)}">${esc(option)}</button>
+  `).join('');
+
+  els.scoreChips.querySelectorAll('[data-score-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.scoreFilter = button.dataset.scoreFilter;
+      renderScoreChips();
+      renderRoute();
+    });
+  });
+}
+
 function renderSidebar() {
   const channelCounts = new Map();
   state.items.forEach((item) => channelCounts.set(item.channel, (channelCounts.get(item.channel) || 0) + 1));
@@ -140,16 +202,29 @@ function matchesQuery(item, query) {
   return blob.includes(query.toLowerCase());
 }
 
+function matchesScore(item) {
+  const score = Number(item.score || 0);
+  if (state.scoreFilter === '高价值') return score >= 8;
+  if (state.scoreFilter === '中价值') return score >= 7 && score < 8;
+  if (state.scoreFilter === '一般') return score < 7;
+  return true;
+}
+
 function filteredItems(extraFilter = () => true) {
   return state.items
     .filter((item) => state.activeChannel === '全部' || item.channel === state.activeChannel)
     .filter((item) => matchesQuery(item, state.query))
+    .filter(matchesScore)
     .filter(extraFilter)
     .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
 }
 
-function renderRouteTitle(title, subtitle = '') {
-  els.routeTitle.innerHTML = `<strong>${esc(title)}</strong>${subtitle ? `<span class="route-subtitle">${esc(subtitle)}</span>` : ''}`;
+function renderRouteTitle(title, description = '', items = []) {
+  const chips = [];
+  if (state.scoreFilter !== '全部') chips.push(`价值：${state.scoreFilter}`);
+  if (state.query) chips.push(`检索：${state.query}`);
+  const suffix = [description, chips.join(' · '), `${items.length} 条`].filter(Boolean).join(' · ');
+  els.routeTitle.innerHTML = `<strong>${esc(title)}</strong>${suffix ? `<span class="route-subtitle">${esc(suffix)}</span>` : ''}`;
 }
 
 function renderFactRows(item) {
@@ -173,14 +248,18 @@ function renderCommentBox(item) {
   const judgment = stripCommentPrefix(item.judgment || '');
   const lines = [];
   if (facts.impact) lines.push(`<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>`);
-  if (judgment) lines.push(`<p class="comment-line"><strong>评：</strong>${esc(judgment)}</p>`);
+  if (judgment) lines.push(`<p class="comment-line"><strong>点评：</strong>${esc(judgment)}</p>`);
   return `<div class="comment-box">${lines.join('')}</div>`;
 }
 
+function renderScorePill(item) {
+  return `<span class="meta-pill score-pill ${scoreClass(item.score)}">${esc(scoreTone(item.score))} ${Number(item.score || 0).toFixed(1)}</span>`;
+}
+
 function renderCards(title, description, items) {
-  renderRouteTitle(title, `${description} · 共 ${items.length} 条`);
+  renderRouteTitle(title, description, items);
   if (!items.length) {
-    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类或关键词再试。</p></div>`;
+    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、价值筛选或关键词再试。</p></div>`;
     return;
   }
 
@@ -191,7 +270,8 @@ function renderCards(title, description, items) {
           <div class="meta-row">
             <span class="meta-pill primary">${esc(item.channel)}</span>
             <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
-            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)} · ${esc(scoreTone(item.score))} ${Number(item.score || 0).toFixed(1)}</span>
+            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
+            ${renderScorePill(item)}
           </div>
           <h3><a href="#/article/${esc(item.slug)}">${esc(item.title)}</a></h3>
         </div>
@@ -218,8 +298,8 @@ function renderArticle(slug) {
 
   state.activeChannel = item.channel;
   renderChips();
-  renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`);
   const facts = buildDisplayFacts(item);
+  renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`, [item]);
 
   els.root.innerHTML = `
     <article class="article" style="border-left:4px solid ${scoreColor(item.score)};">
@@ -228,7 +308,8 @@ function renderArticle(slug) {
           <div class="meta-row">
             <span class="article-pill">${esc(item.channel)}</span>
             <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
-            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)} · ${esc(scoreTone(item.score))} ${Number(item.score || 0).toFixed(1)}</span>
+            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
+            ${renderScorePill(item)}
           </div>
           <h2>${esc(item.title)}</h2>
         </div>
@@ -261,9 +342,9 @@ function renderArticle(slug) {
         </section>
 
         <section class="article-section">
-          <h3>评</h3>
+          <h3>点评</h3>
           ${facts.impact ? `<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>` : ''}
-          <p class="comment-line"><strong>评：</strong>${esc(stripCommentPrefix(item.judgment || ''))}</p>
+          <p class="comment-line"><strong>点评：</strong>${esc(stripCommentPrefix(item.judgment || ''))}</p>
         </section>
 
         <section class="article-section">
@@ -315,10 +396,13 @@ function renderRoute() {
 }
 
 async function bootstrap() {
+  initTheme();
   const response = await fetch('./data/news.json');
   state.items = await response.json();
   summarize();
   renderSidebar();
+  renderChips();
+  renderScoreChips();
   renderRoute();
 
   els.searchInput.addEventListener('input', (event) => {
