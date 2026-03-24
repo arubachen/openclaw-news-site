@@ -247,6 +247,7 @@ function getRouteContext() {
 
 function renderScoreSummary(baseItems) {
   const scores = [
+    { label: '全部', className: 'score-all', count: baseItems.length },
     { label: '高匹配', className: 'score-high', count: baseItems.filter((item) => Number(item.score || 0) >= 8).length },
     { label: '中匹配', className: 'score-mid', count: baseItems.filter((item) => Number(item.score || 0) >= 7 && Number(item.score || 0) < 8).length },
   ];
@@ -261,20 +262,69 @@ function renderScoreSummary(baseItems) {
   els.scoreSummary.querySelectorAll('[data-score]').forEach((button) => {
     button.addEventListener('click', () => {
       const target = button.dataset.score;
-      state.scoreFilter = state.scoreFilter === target ? '全部' : target;
+      state.scoreFilter = target === '全部' ? '全部' : (state.scoreFilter === target ? '全部' : target);
       state.visibleCount = PAGE_SIZE;
       renderRoute();
     });
   });
 }
 
+function getRouteFilterPills() {
+  const raw = readHash();
+  const [_, route = 'all', value = ''] = raw.split('/');
+  const pills = [];
+
+  if (route === 'channel' && value) pills.push({ key: 'channel', label: `资讯类型：${decodeURIComponent(value)}` });
+  if (route === 'tag' && value) pills.push({ key: 'tag', label: `标签：#${decodeURIComponent(value)}` });
+  if (route === 'date' && value) pills.push({ key: 'date', label: `日期：${decodeURIComponent(value)}` });
+  if (state.scoreFilter !== '全部') pills.push({ key: 'score', label: `业务匹配：${state.scoreFilter}` });
+  if (state.query) pills.push({ key: 'query', label: `检索：${state.query}` });
+
+  return pills;
+}
+
+function bindRouteFilterActions() {
+  els.routeTitle.querySelectorAll('[data-clear-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const key = button.dataset.clearFilter;
+      state.visibleCount = PAGE_SIZE;
+
+      if (key === 'score') {
+        state.scoreFilter = '全部';
+        renderRoute();
+        return;
+      }
+
+      if (key === 'query') {
+        state.query = '';
+        if (els.searchInput) els.searchInput.value = '';
+        renderRoute();
+        return;
+      }
+
+      if (['channel', 'tag', 'date'].includes(key)) {
+        window.location.hash = '#/all';
+      }
+    });
+  });
+}
+
 function renderRouteTitle(title, description = '', totalCount = 0, visibleCount = totalCount) {
-  const chips = [];
-  if (state.scoreFilter !== '全部') chips.push(`匹配：${state.scoreFilter}`);
-  if (state.query) chips.push(`检索：${state.query}`);
-  if (visibleCount < totalCount) chips.push(`已显示 ${visibleCount}/${totalCount}`);
-  const suffix = [description, chips.join(' · '), `${totalCount} 条`].filter(Boolean).join(' · ');
-  els.routeTitle.innerHTML = `<strong>${esc(title)}</strong>${suffix ? `<span class="route-subtitle">${esc(suffix)}</span>` : ''}`;
+  const subtitleParts = [description, visibleCount < totalCount ? `已显示 ${visibleCount}/${totalCount}` : '', `${totalCount} 条`].filter(Boolean);
+  const pills = getRouteFilterPills();
+
+  els.routeTitle.innerHTML = `
+    <strong>${esc(title)}</strong>
+    ${subtitleParts.length ? `<span class="route-subtitle">${esc(subtitleParts.join(' · '))}</span>` : ''}
+    ${pills.length ? `<div class="route-filters">${pills.map((item) => `
+      <button type="button" class="filter-pill" data-clear-filter="${esc(item.key)}">
+        <span>${esc(item.label)}</span>
+        <b>×</b>
+      </button>
+    `).join('')}</div>` : ''}
+  `;
+
+  bindRouteFilterActions();
 }
 
 function renderFactRows(item) {

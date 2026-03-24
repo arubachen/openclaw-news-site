@@ -304,6 +304,10 @@ h1 {
   background: var(--accent-soft);
 }
 
+.metric-link.score-all {
+  color: var(--muted);
+}
+
 .metric-link.score-high {
   color: color-mix(in srgb, var(--high) 85%, var(--text));
 }
@@ -332,6 +336,35 @@ h1 {
   font-size: 22px;
   display: block;
   margin-bottom: 6px;
+}
+
+.route-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.filter-pill b {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.filter-pill:hover {
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
 }
 
 .cards {
