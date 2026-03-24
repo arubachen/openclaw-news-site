@@ -165,7 +165,7 @@ function renderChannelChips() {
 }
 
 function renderSidebarStatic() {
-  const dates = [...new Set(state.items.map((item) => item.publishedAt.slice(0, 10)))].sort().reverse().slice(0, 3);
+  const dates = [...new Set(state.items.map((item) => item.publishedAt.slice(0, 10)))].sort().reverse().slice(0, 5);
   els.dateLinks.innerHTML = dates.map((day) => `
     <a href="#/date/${day}">
       <span>${day}</span>
@@ -175,7 +175,7 @@ function renderSidebarStatic() {
 
   const tagCounts = new Map();
   state.items.flatMap((item) => item.tags || []).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1));
-  const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
   els.tagCloud.innerHTML = tags.map(([tag, count]) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)} · ${count}</a>`).join('');
 }
 

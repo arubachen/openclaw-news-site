@@ -238,12 +238,12 @@ h1 {
 }
 
 .panel {
-  padding: 14px;
-  margin-bottom: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
 }
 
 .compact-panel {
-  padding: 13px 14px;
+  padding: 11px 12px;
 }
 
 .panel-head {
@@ -267,7 +267,7 @@ h1 {
 .stack-links {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .stack-links a,
@@ -276,7 +276,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  min-height: 38px;
+  min-height: 34px;
   font-size: 13px;
   color: var(--muted);
 }
