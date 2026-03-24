@@ -115,11 +115,34 @@ function initTheme() {
 
 function buildDisplayFacts(item) {
   const facts = Array.isArray(item.facts) ? item.facts : [];
-  const valuesByLabel = new Map(facts.map((fact) => [String(fact.label || '').trim(), String(fact.value || '').trim()]));
-  const eventParts = [];
+  const take = (...labels) => facts
+    .filter((fact) => labels.includes(String(fact.label || '').trim()))
+    .map((fact) => String(fact.value || '').trim())
+    .filter(Boolean);
 
+  if (item.channel === '招投标') {
+    const eventParts = [
+      ...take('采购方', '主', '类', '门槛', '中标方', '一候', '二候'),
+    ];
+    const timeParts = [
+      ...take('截标', '时', '标书获取', '售标', '发布时间'),
+    ];
+    const numberParts = [
+      ...take('预算', '数', '价', '报价'),
+    ];
+
+    return {
+      event: eventParts.join('；'),
+      time: timeParts.join('；'),
+      number: numberParts.join('；'),
+      impact: take('影').join('；'),
+    };
+  }
+
+  const first = (...labels) => take(...labels)[0] || '';
+  const eventParts = [];
   for (const label of ['主', '动', '落']) {
-    const value = valuesByLabel.get(label);
+    const value = first(label);
     if (value) eventParts.push(value);
   }
 
@@ -134,9 +157,9 @@ function buildDisplayFacts(item) {
 
   return {
     event: eventParts.join('；'),
-    time: valuesByLabel.get('时') || '',
-    number: valuesByLabel.get('数') || '',
-    impact: valuesByLabel.get('影') || '',
+    time: first('时'),
+    number: first('数'),
+    impact: first('影'),
   };
 }
 
@@ -329,10 +352,13 @@ function renderRouteTitle(title, description = '', totalCount = 0, visibleCount 
 
 function renderFactRows(item) {
   const facts = buildDisplayFacts(item);
+  const labels = item.channel === '招投标'
+    ? ['事项', '节点', '金额']
+    : ['事件', '时间', '数字'];
   const rows = [
-    ['事件', facts.event],
-    ['时间', facts.time],
-    ['数字', facts.number],
+    [labels[0], facts.event],
+    [labels[1], facts.time],
+    [labels[2], facts.number],
   ].filter(([, value]) => value);
 
   return `<div class="facts-block">${rows.map(([label, value]) => `
@@ -354,6 +380,22 @@ function renderCommentBox(item) {
 
 function renderScorePill(item) {
   return `<span class="meta-pill score-pill ${scoreClass(item.score)}">${esc(scoreTone(item.score))} ${Number(item.score || 0).toFixed(1)}</span>`;
+}
+
+function renderMetaRow(item) {
+  const parts = [
+    `<span class="meta-pill primary">${esc(item.channel)}</span>`,
+    item.channel === '招投标'
+      ? `<span class="meta-pill">${esc(item.sourceName)}</span>`
+      : `<span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>`,
+  ];
+
+  if (item.channel !== '招投标') {
+    parts.push(`<span class="meta-pill">${fmtDate(item.publishedAt)}</span>`);
+  }
+
+  parts.push(renderScorePill(item));
+  return parts.join('');
 }
 
 function renderTagRow(item) {
@@ -385,12 +427,7 @@ function renderCards(title, description, items) {
             <h3><a href="#/article/${esc(item.slug)}">${esc(item.title)}</a></h3>
             <a class="headline-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a>
           </div>
-          <div class="meta-row">
-            <span class="meta-pill primary">${esc(item.channel)}</span>
-            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
-            <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
-            ${renderScorePill(item)}
-          </div>
+          <div class="meta-row">${renderMetaRow(item)}</div>
         </div>
         <p class="summary">${esc(item.summary)}</p>
         ${renderFactRows(item)}
@@ -412,7 +449,7 @@ function renderCards(title, description, items) {
 
 function renderArticle(item) {
   const facts = buildDisplayFacts(item);
-  renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`, 1, 1);
+  renderRouteTitle(item.title, item.channel === '招投标' ? item.channel : `${item.channel} · ${fmtDate(item.publishedAt)}`, 1, 1);
 
   els.root.innerHTML = `
     <article class="article" style="border-left:4px solid ${scoreColor(item.score)};">
@@ -421,12 +458,7 @@ function renderArticle(item) {
           <h2>${esc(item.title)}</h2>
           <a class="headline-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a>
         </div>
-        <div class="meta-row">
-          <span class="article-pill">${esc(item.channel)}</span>
-          <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
-          <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
-          ${renderScorePill(item)}
-        </div>
+        <div class="meta-row">${renderMetaRow(item)}</div>
       </div>
 
       <div class="tag-row">
@@ -443,9 +475,9 @@ function renderArticle(item) {
           <h3>关键信息</h3>
           <div class="facts-block">
             ${[
-              ['事件', facts.event],
-              ['时间', facts.time],
-              ['数字', facts.number],
+              ...(item.channel === '招投标'
+                ? [['事项', facts.event], ['节点', facts.time], ['金额', facts.number]]
+                : [['事件', facts.event], ['时间', facts.time], ['数字', facts.number]]),
             ].filter(([, value]) => value).map(([label, value]) => `
               <div class="fact-row">
                 <span class="fact-key">${esc(label)}</span>
