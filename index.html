@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#e60000" />
-    <title>TTA运营商行业情报站</title>
+    <title>TTA运营商行业资讯站</title>
     <meta
       name="description"
       content="聚合运营商动态、市场快讯、竞品情报、软通动态与招投标实时信息。"
@@ -18,50 +18,47 @@
       <header class="masthead">
         <div class="masthead-main">
           <div class="brand-block">
-            <p class="eyebrow">INTELLIGENCE DESK · STATIC ARCHIVE</p>
-            <h1>TTA运营商行业情报站</h1>
+            <p class="eyebrow">NEWS DESK · STATIC ARCHIVE</p>
+            <h1>TTA运营商行业资讯站</h1>
             <p class="subline">聚合运营商动态、市场快讯、竞品情报、软通动态与招投标实时信息</p>
           </div>
 
           <div class="header-controls">
-            <div class="toolbar-search compact-search">
-              <div class="search-input-wrap">
-                <input id="search-input" type="search" placeholder="搜索标题、摘要、标签、来源、点评..." />
-                <span class="search-icon" aria-hidden="true">⌕</span>
+            <div class="search-control-row">
+              <div class="toolbar-search compact-search">
+                <div class="search-input-wrap">
+                  <input id="search-input" type="search" placeholder="搜索标题、摘要、标签、来源、点评..." />
+                  <span class="search-icon" aria-hidden="true">⌕</span>
+                </div>
               </div>
+
+              <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换主题" title="切换主题"></button>
             </div>
 
-            <label id="high-value-label" class="high-value-toggle" for="high-value-toggle">
-              <input id="high-value-toggle" type="checkbox" />
-              <span>仅看高价值</span>
-            </label>
-
-            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换主题" title="切换主题"></button>
+            <div class="type-tabs-row">
+              <div id="channel-chips" class="chips inline-chips"></div>
+            </div>
           </div>
-        </div>
-
-        <div class="masthead-tabs">
-          <div id="channel-chips" class="chips inline-chips"></div>
         </div>
       </header>
 
       <main class="layout">
         <aside class="sidebar">
-          <section class="panel overview-panel">
+          <section class="panel overview-panel compact-panel">
             <div class="panel-head">
-              <h3>概览</h3>
+              <h3>匹配概览</h3>
             </div>
-            <div id="overview-summary" class="overview-mini-grid"></div>
+            <div id="score-summary" class="stack-links metric-links"></div>
           </section>
 
-          <section class="panel">
+          <section class="panel compact-panel">
             <div class="panel-head">
               <h3>最近日期</h3>
             </div>
             <div id="date-links" class="stack-links"></div>
           </section>
 
-          <section class="panel">
+          <section class="panel compact-panel">
             <div class="panel-head">
               <h3>高频标签</h3>
             </div>

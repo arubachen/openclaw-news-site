@@ -11,7 +11,7 @@ const state = {
   items: [],
   query: '',
   activeChannel: '全部',
-  onlyHighValue: false,
+  scoreFilter: '全部',
   themeMode: 'system',
   visibleCount: PAGE_SIZE,
 };
@@ -20,12 +20,10 @@ const els = {
   root: document.querySelector('#content-root'),
   routeTitle: document.querySelector('#route-title'),
   channelChips: document.querySelector('#channel-chips'),
-  overviewSummary: document.querySelector('#overview-summary'),
+  scoreSummary: document.querySelector('#score-summary'),
   dateLinks: document.querySelector('#date-links'),
   tagCloud: document.querySelector('#tag-cloud'),
   searchInput: document.querySelector('#search-input'),
-  highValueToggle: document.querySelector('#high-value-toggle'),
-  highValueLabel: document.querySelector('#high-value-label'),
   themeToggle: document.querySelector('#theme-toggle'),
 };
 
@@ -39,11 +37,6 @@ const fmtDate = (value) => new Date(value).toLocaleString('zh-CN', {
   minute: '2-digit',
 });
 
-const fmtShortDate = (value) => new Date(value).toLocaleDateString('zh-CN', {
-  month: '2-digit',
-  day: '2-digit',
-});
-
 const esc = (value = '') => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -51,8 +44,8 @@ const esc = (value = '') => String(value)
   .replaceAll('"', '&quot;');
 
 const slugifyHash = (text) => encodeURIComponent(text);
-const readHash = () => (window.location.hash || '#/').replace(/^#/, '');
-const scoreTone = (score = 0) => score >= 8 ? '高价值' : score >= 7 ? '中价值' : '一般';
+const readHash = () => (window.location.hash || '#/all').replace(/^#/, '');
+const scoreTone = (score = 0) => score >= 8 ? '高匹配' : score >= 7 ? '中匹配' : '一般';
 const scoreColor = (score = 0) => score >= 8 ? 'var(--high)' : score >= 7 ? 'var(--warn)' : 'var(--good)';
 const scoreClass = (score = 0) => score >= 8 ? 'score-high' : score >= 7 ? 'score-mid' : 'score-low';
 
@@ -82,10 +75,7 @@ function humanizeComment(value = '') {
     /^(?:这不只是|这不单是)\s*[^，。；]+(?:，|,|、)?(?:更是|更意味着)\s*/u,
   ];
 
-  for (const pattern of patterns) {
-    text = text.replace(pattern, '');
-  }
-
+  for (const pattern of patterns) text = text.replace(pattern, '');
   text = text.replace(/^(?:而是|而在于|意味着|说明)\s*/u, '');
   text = text.replace(/^[，,。；、\s]+/u, '');
   return text.trim();
@@ -123,11 +113,6 @@ function initTheme() {
   });
 }
 
-function updateHighValueToggle() {
-  if (els.highValueToggle) els.highValueToggle.checked = state.onlyHighValue;
-  els.highValueLabel?.classList.toggle('active', state.onlyHighValue);
-}
-
 function buildDisplayFacts(item) {
   const facts = Array.isArray(item.facts) ? item.facts : [];
   const valuesByLabel = new Map(facts.map((fact) => [String(fact.label || '').trim(), String(fact.value || '').trim()]));
@@ -155,37 +140,15 @@ function buildDisplayFacts(item) {
   };
 }
 
-function summarize() {
-  const items = state.items;
-  const tagsCount = new Set(items.flatMap((item) => item.tags || [])).size;
-  const last24h = items.filter((item) => Date.now() - new Date(item.publishedAt).getTime() <= 24 * 60 * 60 * 1000).length;
-  const highScore = items.filter((item) => Number(item.score || 0) >= 8).length;
-  const latest = items[0]?.publishedAt;
-
-  els.overviewSummary.innerHTML = [
-    { label: '总条数', value: items.length, note: '当前可检索资讯' },
-    { label: '24h新增', value: last24h, note: '最近 24 小时' },
-    { label: '高价值', value: highScore, note: '评分 ≥ 8.0' },
-    { label: '标签数', value: tagsCount, note: latest ? `最新：${fmtShortDate(latest)}` : '标签覆盖' },
-  ].map((item) => `
-    <div class="mini-stat">
-      <strong>${esc(item.value)}</strong>
-      <span>${esc(item.label)}</span>
-      <em>${esc(item.note)}</em>
-    </div>
-  `).join('');
-}
-
 function renderChannelChips() {
   const counts = new Map();
   state.items.forEach((item) => counts.set(item.channel, (counts.get(item.channel) || 0) + 1));
   const channels = ['全部', ...new Set(state.items.map((item) => item.channel))];
+
   els.channelChips.innerHTML = channels.map((channel) => {
-    const count = channel === '全部'
-      ? state.items.length
-      : (counts.get(channel) || 0);
+    const count = channel === '全部' ? state.items.length : (counts.get(channel) || 0);
     return `
-      <button class="chip ${state.activeChannel === channel ? 'active' : ''}" data-channel="${esc(channel)}">
+      <button class="chip ${state.activeChannel === channel ? 'active' : ''}" data-channel="${esc(channel)}" type="button">
         <span>${esc(channel)}</span>
         <em>${count}</em>
       </button>
@@ -195,15 +158,14 @@ function renderChannelChips() {
   els.channelChips.querySelectorAll('[data-channel]').forEach((button) => {
     button.addEventListener('click', () => {
       const channel = button.dataset.channel;
-      window.location.hash = channel === '全部'
-        ? '#/all'
-        : `#/channel/${slugifyHash(channel)}`;
+      state.visibleCount = PAGE_SIZE;
+      window.location.hash = channel === '全部' ? '#/all' : `#/channel/${slugifyHash(channel)}`;
     });
   });
 }
 
-function renderSidebar() {
-  const dates = [...new Set(state.items.map((item) => item.publishedAt.slice(0, 10)))].sort().reverse();
+function renderSidebarStatic() {
+  const dates = [...new Set(state.items.map((item) => item.publishedAt.slice(0, 10)))].sort().reverse().slice(0, 3);
   els.dateLinks.innerHTML = dates.map((day) => `
     <a href="#/date/${day}">
       <span>${day}</span>
@@ -213,7 +175,7 @@ function renderSidebar() {
 
   const tagCounts = new Map();
   state.items.flatMap((item) => item.tags || []).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1));
-  const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 24);
+  const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
   els.tagCloud.innerHTML = tags.map(([tag, count]) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)} · ${count}</a>`).join('');
 }
 
@@ -232,22 +194,83 @@ function matchesQuery(item, query) {
   return blob.includes(query.toLowerCase());
 }
 
-function matchesScore(item) {
-  return !state.onlyHighValue || Number(item.score || 0) >= 8;
+function matchesScore(item, scoreFilter = state.scoreFilter) {
+  const score = Number(item.score || 0);
+  if (scoreFilter === '高匹配') return score >= 8;
+  if (scoreFilter === '中匹配') return score >= 7 && score < 8;
+  return true;
 }
 
-function filteredItems(extraFilter = () => true) {
-  return state.items
-    .filter((item) => state.activeChannel === '全部' || item.channel === state.activeChannel)
+function getRouteContext() {
+  const raw = readHash();
+  const [_, route = 'all', value = ''] = raw.split('/');
+
+  if (route === 'article' && value) {
+    const item = state.items.find((entry) => entry.slug === decodeURIComponent(value));
+    if (!item) return { kind: 'missing', title: '文章不存在', description: '请返回列表重新选择', items: [], baseItems: [] };
+    state.activeChannel = item.channel;
+    const baseItems = state.items.filter((entry) => entry.channel === item.channel);
+    return { kind: 'article', item, title: item.title, description: `${item.channel} · ${fmtDate(item.publishedAt)}`, items: [item], baseItems };
+  }
+
+  let extraFilter = () => true;
+  let title = '最新资讯';
+  let description = '默认按发布时间倒序';
+  state.activeChannel = '全部';
+
+  if (route === 'channel' && value) {
+    state.activeChannel = decodeURIComponent(value);
+    const channel = state.activeChannel;
+    extraFilter = (item) => item.channel === channel;
+    title = `频道：${channel}`;
+    description = '按频道查看';
+  } else if (route === 'tag' && value) {
+    const tag = decodeURIComponent(value);
+    extraFilter = (item) => (item.tags || []).includes(tag);
+    title = `标签：#${tag}`;
+    description = '按标签查看';
+  } else if (route === 'date' && value) {
+    const day = decodeURIComponent(value);
+    extraFilter = (item) => item.publishedAt.startsWith(day);
+    title = `归档：${day}`;
+    description = '按日期查看';
+  }
+
+  const baseItems = state.items
     .filter((item) => matchesQuery(item, state.query))
-    .filter(matchesScore)
     .filter(extraFilter)
     .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+
+  const items = baseItems.filter((item) => matchesScore(item));
+  return { kind: 'list', title, description, items, baseItems };
+}
+
+function renderScoreSummary(baseItems) {
+  const scores = [
+    { label: '高匹配', className: 'score-high', count: baseItems.filter((item) => Number(item.score || 0) >= 8).length },
+    { label: '中匹配', className: 'score-mid', count: baseItems.filter((item) => Number(item.score || 0) >= 7 && Number(item.score || 0) < 8).length },
+  ];
+
+  els.scoreSummary.innerHTML = scores.map((item) => `
+    <button type="button" class="metric-link ${item.className} ${state.scoreFilter === item.label ? 'active' : ''}" data-score="${item.label}">
+      <strong>${item.label}</strong>
+      <span>${item.count} 条</span>
+    </button>
+  `).join('');
+
+  els.scoreSummary.querySelectorAll('[data-score]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = button.dataset.score;
+      state.scoreFilter = state.scoreFilter === target ? '全部' : target;
+      state.visibleCount = PAGE_SIZE;
+      renderRoute();
+    });
+  });
 }
 
 function renderRouteTitle(title, description = '', totalCount = 0, visibleCount = totalCount) {
   const chips = [];
-  if (state.onlyHighValue) chips.push('仅看高价值');
+  if (state.scoreFilter !== '全部') chips.push(`匹配：${state.scoreFilter}`);
   if (state.query) chips.push(`检索：${state.query}`);
   if (visibleCount < totalCount) chips.push(`已显示 ${visibleCount}/${totalCount}`);
   const suffix = [description, chips.join(' · '), `${totalCount} 条`].filter(Boolean).join(' · ');
@@ -299,7 +322,7 @@ function renderCards(title, description, items) {
   renderRouteTitle(title, description, items.length, visibleItems.length);
 
   if (!items.length) {
-    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、关键词，或关掉高价值筛选再试。</p></div>`;
+    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个资讯类型、关键词，或切一下高/中匹配再试。</p></div>`;
     return;
   }
 
@@ -337,13 +360,7 @@ function renderCards(title, description, items) {
   });
 }
 
-function renderArticle(slug) {
-  const item = state.items.find((entry) => entry.slug === slug);
-  if (!item) {
-    renderCards('文章不存在', '请返回列表重新选择', []);
-    return;
-  }
-
+function renderArticle(item) {
   const facts = buildDisplayFacts(item);
   renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`, 1, 1);
 
@@ -406,59 +423,29 @@ function renderArticle(slug) {
 }
 
 function renderRoute() {
-  const raw = readHash();
-  const [_, route = 'all', value = ''] = raw.split('/');
-
+  const context = getRouteContext();
   renderChannelChips();
-  updateHighValueToggle();
+  renderScoreSummary(context.baseItems || state.items);
 
-  if (route === 'article' && value) {
-    renderArticle(decodeURIComponent(value));
+  if (context.kind === 'article') {
+    renderArticle(context.item);
     return;
   }
 
-  if (route === 'channel' && value) {
-    state.activeChannel = decodeURIComponent(value);
-    renderChannelChips();
-    renderCards(`频道：${state.activeChannel}`, '按频道查看', filteredItems((item) => item.channel === state.activeChannel));
+  if (context.kind === 'missing') {
+    renderCards(context.title, context.description, []);
     return;
   }
 
-  if (route === 'tag' && value) {
-    const tag = decodeURIComponent(value);
-    state.activeChannel = '全部';
-    renderChannelChips();
-    renderCards(`标签：#${tag}`, '按标签查看', filteredItems((item) => item.tags.includes(tag)));
-    return;
-  }
-
-  if (route === 'date' && value) {
-    const day = decodeURIComponent(value);
-    state.activeChannel = '全部';
-    renderChannelChips();
-    renderCards(`归档：${day}`, '按日期查看', filteredItems((item) => item.publishedAt.startsWith(day)));
-    return;
-  }
-
-  state.activeChannel = '全部';
-  renderChannelChips();
-  renderCards('最新资讯', '默认按发布时间倒序', filteredItems());
+  renderCards(context.title, context.description, context.items);
 }
 
 async function bootstrap() {
   initTheme();
   const response = await fetch('./data/news.json');
   state.items = (await response.json()).sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-  summarize();
-  renderSidebar();
+  renderSidebarStatic();
   renderRoute();
-
-  els.highValueToggle?.addEventListener('change', (event) => {
-    state.onlyHighValue = event.target.checked;
-    state.visibleCount = PAGE_SIZE;
-    updateHighValueToggle();
-    renderRoute();
-  });
 
   els.searchInput?.addEventListener('input', (event) => {
     state.query = event.target.value.trim();

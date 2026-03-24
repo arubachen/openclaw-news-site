@@ -6,11 +6,11 @@
     <title>TTA 图标预览</title>
     <style>
       body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; background: #f5f5f5; color: #222; }
-      .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px; }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
       .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
       .card { background: #fff; border: 1px solid rgba(51,51,51,.12); border-radius: 18px; padding: 20px; }
       .card h2 { margin: 0 0 8px; font-size: 20px; }
-      .meta { color: #666; font-size: 13px; margin-bottom: 16px; }
+      .meta { color: #666; font-size: 13px; margin-bottom: 16px; line-height: 1.6; }
       .icon-box { display: flex; align-items: center; justify-content: center; min-height: 200px; border-radius: 16px; background: linear-gradient(180deg, #fafafa, #f0f0f0); }
       .icon-box.dark { background: linear-gradient(180deg, #222, #111); }
       img { width: 128px; height: 128px; }
@@ -20,20 +20,34 @@
   <body>
     <main class="wrap">
       <h1>TTA 图标预览</h1>
-      <p>默认站点图标当前使用 <code>favicon-a.svg</code>。这里保留 A / B 两个方向，方便继续挑。</p>
+      <p>当前站点默认图标仍使用 <code>favicon-a.svg</code>。下面保留 A / B / C / D 四个方向，方便你们按视觉规范挑。</p>
       <div class="grid">
         <section class="card">
           <h2>A · 专业稳重</h2>
-          <div class="meta">动力黑底 / 动力红条 / 动力白字</div>
+          <div class="meta">动力黑底 / 动力红顶条 / 动力白字，最像正式行业站。</div>
           <div class="icon-box dark">
             <img src="./assets/favicon-a.svg" alt="TTA favicon A" />
           </div>
         </section>
         <section class="card">
           <h2>B · 科技感</h2>
-          <div class="meta">白底黑框 / 动力红信号线 / 黑色字标</div>
+          <div class="meta">白底黑框 / 红色信号线 / 黑色字标，更像科技产品页。</div>
           <div class="icon-box">
             <img src="./assets/favicon-b.svg" alt="TTA favicon B" />
+          </div>
+        </section>
+        <section class="card">
+          <h2>C · 品牌冲击</h2>
+          <div class="meta">动力红底更强势，右上黑角和底部黑带让品牌色更直接。</div>
+          <div class="icon-box">
+            <img src="./assets/favicon-c.svg" alt="TTA favicon C" />
+          </div>
+        </section>
+        <section class="card">
+          <h2>D · 通信终端</h2>
+          <div class="meta">黑底白框 + 红色信号弧线，偏通信行业终端/控制台感。</div>
+          <div class="icon-box dark">
+            <img src="./assets/favicon-d.svg" alt="TTA favicon D" />
           </div>
         </section>
       </div>
