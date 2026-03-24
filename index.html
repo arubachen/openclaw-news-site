@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>情报站</title>
     <meta
       name="description"
-      content="把运营商动态、市场快讯、竞品情报、软通动态和招投标内容集中展示成一个可检索的静态情报站。"
+      content="聚合运营商动态、市场快讯、竞品情报、软通动态与招投标实时信息。"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -15,43 +16,34 @@
       <header class="masthead">
         <div class="brand-block">
           <p class="eyebrow">INTELLIGENCE DESK · STATIC ARCHIVE</p>
-          <div class="brand-row">
-            <h1>情报站</h1>
-            <span class="status-pill">GitHub Pages</span>
-          </div>
-          <p class="subline">
-            聚合运营商动态、市场快讯、竞品情报、软通动态与招投标，优先解决“扫读效率”和“归档检索”。
-          </p>
+          <h1>情报站</h1>
+          <p class="subline">聚合运营商动态、市场快讯、竞品情报、软通动态与招投标实时信息</p>
         </div>
-        <div class="top-actions">
-          <a class="ghost-btn" href="#/all">查看全部</a>
-          <a class="ghost-btn" href="#/channel/市场快讯">市场快讯</a>
-          <a class="ghost-btn" href="#/channel/招投标">招投标</a>
+
+        <div class="masthead-search">
+          <label for="search-input">检索</label>
+          <input id="search-input" type="search" placeholder="搜标题、摘要、标签、来源、判断..." />
         </div>
       </header>
 
-      <section class="overview-strip">
-        <div id="hero-stats" class="overview-grid"></div>
-      </section>
-
       <section class="toolbar">
-        <div class="search-box">
-          <label for="search-input">关键词检索</label>
-          <input id="search-input" type="search" placeholder="搜标题、摘要、标签、来源、判断..." />
-        </div>
-        <div class="toolbar-side">
-          <span class="toolbar-label">频道筛选</span>
+        <div class="toolbar-main">
+          <span class="toolbar-label">频道</span>
           <div id="channel-chips" class="chips"></div>
         </div>
       </section>
 
       <main class="layout">
         <aside class="sidebar">
-          <section class="panel">
+          <section class="panel overview-panel">
             <div class="panel-head">
-              <h3>频道概览</h3>
+              <h3>概览</h3>
             </div>
-            <div id="channel-summary" class="channel-summary"></div>
+            <div id="overview-summary" class="overview-mini-grid"></div>
+            <div class="channel-block">
+              <div class="panel-subhead">频道概览</div>
+              <div id="channel-summary" class="channel-summary"></div>
+            </div>
           </section>
 
           <section class="panel">
@@ -66,17 +58,6 @@
               <h3>高频标签</h3>
             </div>
             <div id="tag-cloud" class="chips tag-cloud"></div>
-          </section>
-
-          <section class="panel note-panel">
-            <div class="panel-head">
-              <h3>站点说明</h3>
-            </div>
-            <ul>
-              <li>静态站，适合 GitHub Pages 直接发布</li>
-              <li>资讯先发 Discord，再批量写入站点 JSON</li>
-              <li>30 分钟自动检查并发布站点更新</li>
-            </ul>
           </section>
         </aside>
 

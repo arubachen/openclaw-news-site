@@ -6,12 +6,12 @@ const state = {
 
 const els = {
   root: document.querySelector('#content-root'),
-  heroStats: document.querySelector('#hero-stats'),
-  chips: document.querySelector('#channel-chips'),
   routeTitle: document.querySelector('#route-title'),
+  chips: document.querySelector('#channel-chips'),
+  overviewSummary: document.querySelector('#overview-summary'),
+  channelSummary: document.querySelector('#channel-summary'),
   dateLinks: document.querySelector('#date-links'),
   tagCloud: document.querySelector('#tag-cloud'),
-  channelSummary: document.querySelector('#channel-summary'),
   searchInput: document.querySelector('#search-input'),
 };
 
@@ -33,24 +33,49 @@ const slugifyHash = (text) => encodeURIComponent(text);
 const readHash = () => (window.location.hash || '#/').replace(/^#/, '');
 const scoreTone = (score = 0) => score >= 8 ? '高价值' : score >= 7 ? '中价值' : '一般';
 const scoreColor = (score = 0) => score >= 8 ? 'var(--high)' : score >= 7 ? 'var(--warn)' : 'var(--good)';
-const scorePill = (score = 0) => `${scoreTone(score)} · ${Number(score).toFixed(1)}`;
+const stripCommentPrefix = (value = '') => String(value).replace(/^\*\*评：\*\*\s*/u, '').replace(/^评：\s*/u, '').trim();
+
+function buildDisplayFacts(item) {
+  const facts = Array.isArray(item.facts) ? item.facts : [];
+  const valuesByLabel = new Map(facts.map((fact) => [String(fact.label || '').trim(), String(fact.value || '').trim()]));
+  const eventParts = [];
+
+  for (const label of ['主', '动', '落']) {
+    const value = valuesByLabel.get(label);
+    if (value) eventParts.push(value);
+  }
+
+  if (!eventParts.length) {
+    for (const fact of facts) {
+      const label = String(fact.label || '').trim();
+      if (!['时', '数', '影'].includes(label) && fact.value) {
+        eventParts.push(String(fact.value).trim());
+      }
+    }
+  }
+
+  return {
+    event: eventParts.join('；'),
+    time: valuesByLabel.get('时') || '',
+    number: valuesByLabel.get('数') || '',
+    impact: valuesByLabel.get('影') || '',
+  };
+}
 
 function summarize() {
   const items = state.items;
-  const channels = new Set(items.map((item) => item.channel));
-  const tags = new Set(items.flatMap((item) => item.tags));
-  const last24h = items.filter((item) => (Date.now() - new Date(item.publishedAt).getTime()) <= 24 * 60 * 60 * 1000);
-  const highScore = items.filter((item) => Number(item.score || 0) >= 8);
-  const latest = items[0];
+  const channelCount = new Set(items.map((item) => item.channel)).size;
+  const tagsCount = new Set(items.flatMap((item) => item.tags)).size;
+  const last24h = items.filter((item) => Date.now() - new Date(item.publishedAt).getTime() <= 24 * 60 * 60 * 1000).length;
+  const highScore = items.filter((item) => Number(item.score || 0) >= 8).length;
 
-  els.heroStats.innerHTML = [
-    { label: '总条数', value: items.length, note: '当前站点可检索资讯总量' },
-    { label: '24h新增', value: last24h.length, note: '最近 24 小时入库内容' },
-    { label: '高分条目', value: highScore.length, note: '评分 ≥ 8.0' },
-    { label: '频道数', value: channels.size, note: `${tags.size} 个标签可检索` },
-    { label: '最近更新', value: latest ? latest.channel : '—', note: latest ? fmtDate(latest.publishedAt) : '暂无数据' },
+  els.overviewSummary.innerHTML = [
+    { label: '总条数', value: items.length, note: '当前可检索资讯' },
+    { label: '24h新增', value: last24h, note: '最近 24 小时' },
+    { label: '高分', value: highScore, note: '评分 ≥ 8.0' },
+    { label: '频道/标签', value: `${channelCount}/${tagsCount}`, note: '频道数 / 标签数' },
   ].map((item) => `
-    <div class="stat-box">
+    <div class="mini-stat">
       <strong>${esc(item.value)}</strong>
       <span>${esc(item.label)}</span>
       <em>${esc(item.note)}</em>
@@ -63,6 +88,7 @@ function renderChips() {
   els.chips.innerHTML = channels.map((channel) => `
     <button class="chip ${state.activeChannel === channel ? 'active' : ''}" data-channel="${esc(channel)}">${esc(channel)}</button>
   `).join('');
+
   els.chips.querySelectorAll('[data-channel]').forEach((button) => {
     button.addEventListener('click', () => {
       state.activeChannel = button.dataset.channel;
@@ -78,15 +104,24 @@ function renderSidebar() {
   state.items.forEach((item) => channelCounts.set(item.channel, (channelCounts.get(item.channel) || 0) + 1));
   els.channelSummary.innerHTML = [...channelCounts.entries()]
     .sort((a, b) => b[1] - a[1])
-    .map(([channel, count]) => `<a class="channel-row" href="#/channel/${slugifyHash(channel)}"><strong>${esc(channel)}</strong><span>${count} 条</span></a>`)
-    .join('');
+    .map(([channel, count]) => `
+      <a class="channel-row" href="#/channel/${slugifyHash(channel)}">
+        <strong>${esc(channel)}</strong>
+        <span>${count} 条</span>
+      </a>
+    `).join('');
 
   const dates = [...new Set(state.items.map((item) => item.publishedAt.slice(0, 10)))].sort().reverse();
-  els.dateLinks.innerHTML = dates.map((day) => `<a href="#/date/${day}">${day}<span>${state.items.filter((item) => item.publishedAt.startsWith(day)).length} 条</span></a>`).join('');
+  els.dateLinks.innerHTML = dates.map((day) => `
+    <a href="#/date/${day}">
+      <span>${day}</span>
+      <span>${state.items.filter((item) => item.publishedAt.startsWith(day)).length} 条</span>
+    </a>
+  `).join('');
 
   const tagCounts = new Map();
   state.items.flatMap((item) => item.tags).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1));
-  const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
+  const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 24);
   els.tagCloud.innerHTML = tags.map(([tag, count]) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)} · ${count}</a>`).join('');
 }
 
@@ -117,13 +152,29 @@ function renderRouteTitle(title, subtitle = '') {
   els.routeTitle.innerHTML = `<strong>${esc(title)}</strong>${subtitle ? `<span class="route-subtitle">${esc(subtitle)}</span>` : ''}`;
 }
 
-function renderFactList(facts = []) {
-  return `<div class="fact-list">${facts.map((fact) => `
-    <div class="fact-item">
-      <span class="fact-label">${esc(fact.label)}</span>
-      <div class="fact-value">${esc(fact.value)}</div>
+function renderFactRows(item) {
+  const facts = buildDisplayFacts(item);
+  const rows = [
+    ['事件', facts.event],
+    ['时间', facts.time],
+    ['数字', facts.number],
+  ].filter(([, value]) => value);
+
+  return `<div class="facts-block">${rows.map(([label, value]) => `
+    <div class="fact-row">
+      <span class="fact-key">${esc(label)}</span>
+      <div class="fact-value">${esc(value)}</div>
     </div>
   `).join('')}</div>`;
+}
+
+function renderCommentBox(item) {
+  const facts = buildDisplayFacts(item);
+  const judgment = stripCommentPrefix(item.judgment || '');
+  const lines = [];
+  if (facts.impact) lines.push(`<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>`);
+  if (judgment) lines.push(`<p class="comment-line"><strong>评：</strong>${esc(judgment)}</p>`);
+  return `<div class="comment-box">${lines.join('')}</div>`;
 }
 
 function renderCards(title, description, items) {
@@ -138,25 +189,21 @@ function renderCards(title, description, items) {
       <div class="card-head">
         <div>
           <div class="meta-row">
-            <span class="channel-badge">${esc(item.channel)}</span>
+            <span class="meta-pill primary">${esc(item.channel)}</span>
             <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
-            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
+            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)} · ${esc(scoreTone(item.score))} ${Number(item.score || 0).toFixed(1)}</span>
           </div>
           <h3><a href="#/article/${esc(item.slug)}">${esc(item.title)}</a></h3>
         </div>
-        <div class="score-badge">${esc(scorePill(item.score))}</div>
       </div>
       <p class="summary">${esc(item.summary)}</p>
-      ${renderFactList(item.facts || [])}
-      <div class="judgment-box">
-        <h4>判断</h4>
-        <p class="summary">${esc(item.judgment)}</p>
-      </div>
+      ${renderFactRows(item)}
+      ${renderCommentBox(item)}
       <div class="footer-row">
         <div class="tag-row">
           ${(item.tags || []).map((tag) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)}</a>`).join('')}
         </div>
-        <p class="footer-note">${esc(item.sourceName)} - ${esc(item.sourceType)} - <a href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a></p>
+        <a class="footer-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a>
       </div>
     </article>
   `).join('')}</div>`;
@@ -172,18 +219,19 @@ function renderArticle(slug) {
   state.activeChannel = item.channel;
   renderChips();
   renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`);
+  const facts = buildDisplayFacts(item);
+
   els.root.innerHTML = `
-    <article class="article" style="--card-accent:${scoreColor(item.score)}; border-left:4px solid ${scoreColor(item.score)};">
+    <article class="article" style="border-left:4px solid ${scoreColor(item.score)};">
       <div class="article-head">
         <div>
           <div class="meta-row">
-            <span class="channel-badge">${esc(item.channel)}</span>
+            <span class="article-pill">${esc(item.channel)}</span>
             <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
-            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
+            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)} · ${esc(scoreTone(item.score))} ${Number(item.score || 0).toFixed(1)}</span>
           </div>
           <h2>${esc(item.title)}</h2>
         </div>
-        <div class="score-badge">${esc(scorePill(item.score))}</div>
       </div>
 
       <div class="tag-row">
@@ -197,18 +245,30 @@ function renderArticle(slug) {
         </section>
 
         <section class="article-section">
-          <h3>关键细节</h3>
-          ${renderFactList(item.facts || [])}
+          <h3>关键信息</h3>
+          <div class="facts-block">
+            ${[
+              ['事件', facts.event],
+              ['时间', facts.time],
+              ['数字', facts.number],
+            ].filter(([, value]) => value).map(([label, value]) => `
+              <div class="fact-row">
+                <span class="fact-key">${esc(label)}</span>
+                <div class="fact-value">${esc(value)}</div>
+              </div>
+            `).join('')}
+          </div>
         </section>
 
         <section class="article-section">
-          <h3>判断</h3>
-          <p class="summary">${esc(item.judgment)}</p>
+          <h3>评</h3>
+          ${facts.impact ? `<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>` : ''}
+          <p class="comment-line"><strong>评：</strong>${esc(stripCommentPrefix(item.judgment || ''))}</p>
         </section>
 
         <section class="article-section">
           <h3>来源</h3>
-          <p class="source-line">${esc(item.sourceName)} - ${esc(item.sourceType)} - <a href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a></p>
+          <p class="source-line">${esc(item.sourceName)} · ${esc(item.sourceType)} · <a href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a></p>
         </section>
       </div>
 
