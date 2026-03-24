@@ -1,4 +1,5 @@
 const THEME_KEY = 'openclaw-news-site-theme-mode';
+const PAGE_SIZE = 20;
 const themeModes = ['system', 'dark', 'light'];
 const themeMeta = {
   system: { icon: '◐', title: '主题：跟随系统（点击切换）' },
@@ -10,20 +11,21 @@ const state = {
   items: [],
   query: '',
   activeChannel: '全部',
-  scoreFilter: '全部',
+  onlyHighValue: false,
   themeMode: 'system',
+  visibleCount: PAGE_SIZE,
 };
 
 const els = {
   root: document.querySelector('#content-root'),
   routeTitle: document.querySelector('#route-title'),
   channelChips: document.querySelector('#channel-chips'),
-  scoreSelect: document.querySelector('#score-select'),
   overviewSummary: document.querySelector('#overview-summary'),
-  channelSummary: document.querySelector('#channel-summary'),
   dateLinks: document.querySelector('#date-links'),
   tagCloud: document.querySelector('#tag-cloud'),
   searchInput: document.querySelector('#search-input'),
+  highValueToggle: document.querySelector('#high-value-toggle'),
+  highValueLabel: document.querySelector('#high-value-label'),
   themeToggle: document.querySelector('#theme-toggle'),
 };
 
@@ -35,6 +37,11 @@ const fmtDate = (value) => new Date(value).toLocaleString('zh-CN', {
   day: '2-digit',
   hour: '2-digit',
   minute: '2-digit',
+});
+
+const fmtShortDate = (value) => new Date(value).toLocaleDateString('zh-CN', {
+  month: '2-digit',
+  day: '2-digit',
 });
 
 const esc = (value = '') => String(value)
@@ -116,6 +123,11 @@ function initTheme() {
   });
 }
 
+function updateHighValueToggle() {
+  if (els.highValueToggle) els.highValueToggle.checked = state.onlyHighValue;
+  els.highValueLabel?.classList.toggle('active', state.onlyHighValue);
+}
+
 function buildDisplayFacts(item) {
   const facts = Array.isArray(item.facts) ? item.facts : [];
   const valuesByLabel = new Map(facts.map((fact) => [String(fact.label || '').trim(), String(fact.value || '').trim()]));
@@ -145,16 +157,16 @@ function buildDisplayFacts(item) {
 
 function summarize() {
   const items = state.items;
-  const channelCount = new Set(items.map((item) => item.channel)).size;
-  const tagsCount = new Set(items.flatMap((item) => item.tags)).size;
+  const tagsCount = new Set(items.flatMap((item) => item.tags || [])).size;
   const last24h = items.filter((item) => Date.now() - new Date(item.publishedAt).getTime() <= 24 * 60 * 60 * 1000).length;
   const highScore = items.filter((item) => Number(item.score || 0) >= 8).length;
+  const latest = items[0]?.publishedAt;
 
   els.overviewSummary.innerHTML = [
     { label: '总条数', value: items.length, note: '当前可检索资讯' },
     { label: '24h新增', value: last24h, note: '最近 24 小时' },
-    { label: '高分', value: highScore, note: '评分 ≥ 8.0' },
-    { label: '频道/标签', value: `${channelCount}/${tagsCount}`, note: '频道数 / 标签数' },
+    { label: '高价值', value: highScore, note: '评分 ≥ 8.0' },
+    { label: '标签数', value: tagsCount, note: latest ? `最新：${fmtShortDate(latest)}` : '标签覆盖' },
   ].map((item) => `
     <div class="mini-stat">
       <strong>${esc(item.value)}</strong>
@@ -165,33 +177,32 @@ function summarize() {
 }
 
 function renderChannelChips() {
+  const counts = new Map();
+  state.items.forEach((item) => counts.set(item.channel, (counts.get(item.channel) || 0) + 1));
   const channels = ['全部', ...new Set(state.items.map((item) => item.channel))];
-  els.channelChips.innerHTML = channels.map((channel) => `
-    <button class="chip ${state.activeChannel === channel ? 'active' : ''}" data-channel="${esc(channel)}">${esc(channel)}</button>
-  `).join('');
+  els.channelChips.innerHTML = channels.map((channel) => {
+    const count = channel === '全部'
+      ? state.items.length
+      : (counts.get(channel) || 0);
+    return `
+      <button class="chip ${state.activeChannel === channel ? 'active' : ''}" data-channel="${esc(channel)}">
+        <span>${esc(channel)}</span>
+        <em>${count}</em>
+      </button>
+    `;
+  }).join('');
 
   els.channelChips.querySelectorAll('[data-channel]').forEach((button) => {
     button.addEventListener('click', () => {
-      state.activeChannel = button.dataset.channel;
-      window.location.hash = state.activeChannel === '全部'
+      const channel = button.dataset.channel;
+      window.location.hash = channel === '全部'
         ? '#/all'
-        : `#/channel/${slugifyHash(state.activeChannel)}`;
+        : `#/channel/${slugifyHash(channel)}`;
     });
   });
 }
 
 function renderSidebar() {
-  const channelCounts = new Map();
-  state.items.forEach((item) => channelCounts.set(item.channel, (channelCounts.get(item.channel) || 0) + 1));
-  els.channelSummary.innerHTML = [...channelCounts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .map(([channel, count]) => `
-      <a class="channel-row" href="#/channel/${slugifyHash(channel)}">
-        <strong>${esc(channel)}</strong>
-        <span>${count} 条</span>
-      </a>
-    `).join('');
-
   const dates = [...new Set(state.items.map((item) => item.publishedAt.slice(0, 10)))].sort().reverse();
   els.dateLinks.innerHTML = dates.map((day) => `
     <a href="#/date/${day}">
@@ -201,7 +212,7 @@ function renderSidebar() {
   `).join('');
 
   const tagCounts = new Map();
-  state.items.flatMap((item) => item.tags).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1));
+  state.items.flatMap((item) => item.tags || []).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1));
   const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 24);
   els.tagCloud.innerHTML = tags.map(([tag, count]) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)} · ${count}</a>`).join('');
 }
@@ -222,11 +233,7 @@ function matchesQuery(item, query) {
 }
 
 function matchesScore(item) {
-  const score = Number(item.score || 0);
-  if (state.scoreFilter === '高价值') return score >= 8;
-  if (state.scoreFilter === '中价值') return score >= 7 && score < 8;
-  if (state.scoreFilter === '一般') return score < 7;
-  return true;
+  return !state.onlyHighValue || Number(item.score || 0) >= 8;
 }
 
 function filteredItems(extraFilter = () => true) {
@@ -238,11 +245,12 @@ function filteredItems(extraFilter = () => true) {
     .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
 }
 
-function renderRouteTitle(title, description = '', items = []) {
+function renderRouteTitle(title, description = '', totalCount = 0, visibleCount = totalCount) {
   const chips = [];
-  if (state.scoreFilter !== '全部') chips.push(`价值：${state.scoreFilter}`);
+  if (state.onlyHighValue) chips.push('仅看高价值');
   if (state.query) chips.push(`检索：${state.query}`);
-  const suffix = [description, chips.join(' · '), `${items.length} 条`].filter(Boolean).join(' · ');
+  if (visibleCount < totalCount) chips.push(`已显示 ${visibleCount}/${totalCount}`);
+  const suffix = [description, chips.join(' · '), `${totalCount} 条`].filter(Boolean).join(' · ');
   els.routeTitle.innerHTML = `<strong>${esc(title)}</strong>${suffix ? `<span class="route-subtitle">${esc(suffix)}</span>` : ''}`;
 }
 
@@ -275,37 +283,58 @@ function renderScorePill(item) {
   return `<span class="meta-pill score-pill ${scoreClass(item.score)}">${esc(scoreTone(item.score))} ${Number(item.score || 0).toFixed(1)}</span>`;
 }
 
+function renderTagRow(item) {
+  if (!item.tags?.length) return '';
+  return `
+    <div class="footer-row">
+      <div class="tag-row">
+        ${item.tags.map((tag) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)}</a>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
 function renderCards(title, description, items) {
-  renderRouteTitle(title, description, items);
+  const visibleItems = items.slice(0, state.visibleCount);
+  renderRouteTitle(title, description, items.length, visibleItems.length);
+
   if (!items.length) {
-    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、价值条件或关键词再试。</p></div>`;
+    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、关键词，或关掉高价值筛选再试。</p></div>`;
     return;
   }
 
-  els.root.innerHTML = `<div class="cards">${items.map((item) => `
-    <article class="card" style="--card-accent:${scoreColor(item.score)};">
-      <div class="card-head">
-        <div>
+  const hasMore = items.length > visibleItems.length;
+  els.root.innerHTML = `${
+    `<div class="cards">${visibleItems.map((item) => `
+      <article class="card" style="--card-accent:${scoreColor(item.score)};">
+        <div class="card-head">
+          <div class="card-title-row">
+            <h3><a href="#/article/${esc(item.slug)}">${esc(item.title)}</a></h3>
+            <a class="headline-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a>
+          </div>
           <div class="meta-row">
             <span class="meta-pill primary">${esc(item.channel)}</span>
-            <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
             <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
+            <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
             ${renderScorePill(item)}
           </div>
-          <h3><a href="#/article/${esc(item.slug)}">${esc(item.title)}</a></h3>
         </div>
-      </div>
-      <p class="summary">${esc(item.summary)}</p>
-      ${renderFactRows(item)}
-      ${renderCommentBox(item)}
-      <div class="footer-row">
-        <div class="tag-row">
-          ${(item.tags || []).map((tag) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)}</a>`).join('')}
-        </div>
-        <a class="footer-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a>
-      </div>
-    </article>
-  `).join('')}</div>`;
+        <p class="summary">${esc(item.summary)}</p>
+        ${renderFactRows(item)}
+        ${renderCommentBox(item)}
+        ${renderTagRow(item)}
+      </article>
+    `).join('')}</div>`
+  }${hasMore ? `
+    <div class="load-more-wrap">
+      <button id="load-more" class="load-more-btn" type="button">加载更多（${visibleItems.length}/${items.length}）</button>
+    </div>
+  ` : ''}`;
+
+  document.querySelector('#load-more')?.addEventListener('click', () => {
+    state.visibleCount += PAGE_SIZE;
+    renderRoute();
+  });
 }
 
 function renderArticle(slug) {
@@ -316,19 +345,20 @@ function renderArticle(slug) {
   }
 
   const facts = buildDisplayFacts(item);
-  renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`, [item]);
+  renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`, 1, 1);
 
   els.root.innerHTML = `
     <article class="article" style="border-left:4px solid ${scoreColor(item.score)};">
       <div class="article-head">
-        <div>
-          <div class="meta-row">
-            <span class="article-pill">${esc(item.channel)}</span>
-            <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
-            <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
-            ${renderScorePill(item)}
-          </div>
+        <div class="article-title-row">
           <h2>${esc(item.title)}</h2>
+          <a class="headline-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a>
+        </div>
+        <div class="meta-row">
+          <span class="article-pill">${esc(item.channel)}</span>
+          <span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>
+          <span class="meta-pill">${fmtDate(item.publishedAt)}</span>
+          ${renderScorePill(item)}
         </div>
       </div>
 
@@ -366,7 +396,7 @@ function renderArticle(slug) {
 
         <section class="article-section">
           <h3>来源</h3>
-          <p class="source-line">${esc(item.sourceName)} · ${esc(item.sourceType)} · <a href="${esc(item.sourceUrl)}" target="_blank" rel="noreferrer">原文↗</a></p>
+          <p class="source-line">${esc(item.sourceName)} · ${esc(item.sourceType)}</p>
         </section>
       </div>
 
@@ -378,6 +408,9 @@ function renderArticle(slug) {
 function renderRoute() {
   const raw = readHash();
   const [_, route = 'all', value = ''] = raw.split('/');
+
+  renderChannelChips();
+  updateHighValueToggle();
 
   if (route === 'article' && value) {
     renderArticle(decodeURIComponent(value));
@@ -415,24 +448,28 @@ function renderRoute() {
 async function bootstrap() {
   initTheme();
   const response = await fetch('./data/news.json');
-  state.items = await response.json();
+  state.items = (await response.json()).sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
   summarize();
   renderSidebar();
-  renderChannelChips();
   renderRoute();
 
-  els.scoreSelect.value = state.scoreFilter;
-  els.scoreSelect.addEventListener('change', (event) => {
-    state.scoreFilter = event.target.value;
+  els.highValueToggle?.addEventListener('change', (event) => {
+    state.onlyHighValue = event.target.checked;
+    state.visibleCount = PAGE_SIZE;
+    updateHighValueToggle();
     renderRoute();
   });
 
-  els.searchInput.addEventListener('input', (event) => {
+  els.searchInput?.addEventListener('input', (event) => {
     state.query = event.target.value.trim();
+    state.visibleCount = PAGE_SIZE;
     renderRoute();
   });
 
-  window.addEventListener('hashchange', renderRoute);
+  window.addEventListener('hashchange', () => {
+    state.visibleCount = PAGE_SIZE;
+    renderRoute();
+  });
 }
 
 bootstrap().catch((error) => {

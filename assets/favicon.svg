@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TTA favicon">
+  <rect width="64" height="64" rx="16" fill="#333333"/>
+  <path d="M10 12h44c0 7.732-6.268 14-14 14H10V12Z" fill="#E60000"/>
+  <text x="32" y="43" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" letter-spacing="-1.4" fill="#FFFFFF">TTA</text>
+  <rect x="16" y="47" width="32" height="5" rx="2.5" fill="#E60000"/>
+</svg>
