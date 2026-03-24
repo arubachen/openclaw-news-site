@@ -10,20 +10,21 @@ const state = {
   items: [],
   query: '',
   activeChannel: '全部',
-  scoreFilter: '高价值',
+  scoreFilter: '全部',
   themeMode: 'system',
 };
 
 const els = {
   root: document.querySelector('#content-root'),
   routeTitle: document.querySelector('#route-title'),
+  channelChips: document.querySelector('#channel-chips'),
+  scoreSelect: document.querySelector('#score-select'),
   overviewSummary: document.querySelector('#overview-summary'),
   channelSummary: document.querySelector('#channel-summary'),
   dateLinks: document.querySelector('#date-links'),
   tagCloud: document.querySelector('#tag-cloud'),
   searchInput: document.querySelector('#search-input'),
   themeToggle: document.querySelector('#theme-toggle'),
-  featuredTags: document.querySelector('#featured-tags'),
 };
 
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -47,26 +48,38 @@ const readHash = () => (window.location.hash || '#/').replace(/^#/, '');
 const scoreTone = (score = 0) => score >= 8 ? '高价值' : score >= 7 ? '中价值' : '一般';
 const scoreColor = (score = 0) => score >= 8 ? 'var(--high)' : score >= 7 ? 'var(--warn)' : 'var(--good)';
 const scoreClass = (score = 0) => score >= 8 ? 'score-high' : score >= 7 ? 'score-mid' : 'score-low';
-const stripCommentPrefix = (value = '') => String(value)
-  .replace(/^\*\*(?:评|点评)：\*\*\s*/u, '')
-  .replace(/^(?:评|点评)：\s*/u, '')
-  .trim();
+
+function stripCommentPrefix(value = '') {
+  return String(value)
+    .replace(/^\*\*(?:评|点评)：\*\*\s*/u, '')
+    .replace(/^(?:评|点评)：\s*/u, '')
+    .trim();
+}
 
 function humanizeComment(value = '') {
   let text = stripCommentPrefix(value);
-  const replacements = [
-    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:真正|最)?(?:值得看|重要|关键|核心)?(?:[^。]{0,12})?(?:不是|不在于)\s*[^，。；]+[，,、 ]*(?:而是|而在于)\s*/u, ''],
-    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:的)?(?:重点|看点|价值|核心|关键)(?:是|在于)\s*/u, ''],
-    [/^(?:真正|更)?值得看的是\s*/u, ''],
-    [/^(?:这不只是|这不单是)\s*[^，。；]+[，,、 ]*(?:更是|更意味着)\s*/u, ''],
-    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:释放出的信号是|说明了)\s*/u, ''],
-    [/^(?:核心|关键|重点)(?:在于|是)\s*/u, ''],
-    [/^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:真正值得看)?[，,]\s*/u, ''],
-  ];
-  for (const [pattern, replacement] of replacements) {
-    text = text.replace(pattern, replacement);
+  const firstSentence = text.split(/[。！？]/u)[0] || text;
+
+  if (/^(?:这条|这类|这则|这波)/u.test(text) && /(?:不是|不在于)/u.test(firstSentence) && /(?:而是|而在于)/u.test(firstSentence)) {
+    const idx = text.search(/(?:而是|而在于)/u);
+    if (idx !== -1) text = text.slice(idx).replace(/^(?:而是|而在于)\s*/u, '');
   }
-  text = text.replace(/^(?:而是|而在于)\s*/u, '');
+
+  const patterns = [
+    /^(?:真正|更)?值得看的是\s*/u,
+    /^(?:真正|更)?值得盯的是\s*/u,
+    /^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:的)?(?:重点|看点|价值|核心|关键)(?:是|在于)\s*/u,
+    /^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:释放出的信号是|说明了)\s*/u,
+    /^(?:核心|关键|重点)(?:在于|是)\s*/u,
+    /^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?[，,]\s*/u,
+    /^(?:这不只是|这不单是)\s*[^，。；]+(?:，|,|、)?(?:更是|更意味着)\s*/u,
+  ];
+
+  for (const pattern of patterns) {
+    text = text.replace(pattern, '');
+  }
+
+  text = text.replace(/^(?:而是|而在于|意味着|说明)\s*/u, '');
   text = text.replace(/^[，,。；、\s]+/u, '');
   return text.trim();
 }
@@ -151,14 +164,20 @@ function summarize() {
   `).join('');
 }
 
-function renderFeaturedTags() {
-  const highItems = state.items.filter((item) => Number(item.score || 0) >= 8);
-  const counts = new Map();
-  highItems.flatMap((item) => item.tags || []).forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1));
-  const topTags = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
-  const fixed = `<span class="badge-static">高价值</span>`;
-  const tags = topTags.map(([tag]) => `<a class="chip" href="#/tag/${slugifyHash(tag)}">#${esc(tag)}</a>`).join('');
-  els.featuredTags.innerHTML = fixed + tags;
+function renderChannelChips() {
+  const channels = ['全部', ...new Set(state.items.map((item) => item.channel))];
+  els.channelChips.innerHTML = channels.map((channel) => `
+    <button class="chip ${state.activeChannel === channel ? 'active' : ''}" data-channel="${esc(channel)}">${esc(channel)}</button>
+  `).join('');
+
+  els.channelChips.querySelectorAll('[data-channel]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.activeChannel = button.dataset.channel;
+      window.location.hash = state.activeChannel === '全部'
+        ? '#/all'
+        : `#/channel/${slugifyHash(state.activeChannel)}`;
+    });
+  });
 }
 
 function renderSidebar() {
@@ -259,7 +278,7 @@ function renderScorePill(item) {
 function renderCards(title, description, items) {
   renderRouteTitle(title, description, items);
   if (!items.length) {
-    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、标签或关键词再试。</p></div>`;
+    els.root.innerHTML = `<div class="empty"><h3>没有匹配内容</h3><p>可以换个分类、价值条件或关键词再试。</p></div>`;
     return;
   }
 
@@ -296,7 +315,6 @@ function renderArticle(slug) {
     return;
   }
 
-  state.activeChannel = item.channel;
   const facts = buildDisplayFacts(item);
   renderRouteTitle(item.title, `${item.channel} · ${fmtDate(item.publishedAt)}`, [item]);
 
@@ -368,6 +386,7 @@ function renderRoute() {
 
   if (route === 'channel' && value) {
     state.activeChannel = decodeURIComponent(value);
+    renderChannelChips();
     renderCards(`频道：${state.activeChannel}`, '按频道查看', filteredItems((item) => item.channel === state.activeChannel));
     return;
   }
@@ -375,6 +394,7 @@ function renderRoute() {
   if (route === 'tag' && value) {
     const tag = decodeURIComponent(value);
     state.activeChannel = '全部';
+    renderChannelChips();
     renderCards(`标签：#${tag}`, '按标签查看', filteredItems((item) => item.tags.includes(tag)));
     return;
   }
@@ -382,11 +402,13 @@ function renderRoute() {
   if (route === 'date' && value) {
     const day = decodeURIComponent(value);
     state.activeChannel = '全部';
+    renderChannelChips();
     renderCards(`归档：${day}`, '按日期查看', filteredItems((item) => item.publishedAt.startsWith(day)));
     return;
   }
 
   state.activeChannel = '全部';
+  renderChannelChips();
   renderCards('最新资讯', '默认按发布时间倒序', filteredItems());
 }
 
@@ -395,9 +417,15 @@ async function bootstrap() {
   const response = await fetch('./data/news.json');
   state.items = await response.json();
   summarize();
-  renderFeaturedTags();
   renderSidebar();
+  renderChannelChips();
   renderRoute();
+
+  els.scoreSelect.value = state.scoreFilter;
+  els.scoreSelect.addEventListener('change', (event) => {
+    state.scoreFilter = event.target.value;
+    renderRoute();
+  });
 
   els.searchInput.addEventListener('input', (event) => {
     state.query = event.target.value.trim();
