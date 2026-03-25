@@ -86,10 +86,10 @@ def parse_score(value: Any) -> float:
         return 0.0
 
 
-def normalize_published_at(value: Any) -> str:
+def normalize_timestamp(value: Any, *, fallback_now: bool = True) -> str:
     text = clean_text(value)
     if not text:
-        return datetime.now(TZ_SH).isoformat(timespec="seconds")
+        return datetime.now(TZ_SH).isoformat(timespec="seconds") if fallback_now else ""
     try:
         if text.endswith("Z"):
             dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
@@ -100,6 +100,20 @@ def normalize_published_at(value: Any) -> str:
         return dt.astimezone(TZ_SH).isoformat(timespec="seconds")
     except Exception:
         return text
+
+
+def normalize_published_at(value: Any) -> str:
+    return normalize_timestamp(value, fallback_now=True)
+
+
+def normalize_ingested_at(value: Any, fallback: Any = None) -> str:
+    text = clean_text(value)
+    if text:
+        return normalize_timestamp(text, fallback_now=True)
+    fallback_text = clean_text(fallback)
+    if fallback_text:
+        return normalize_timestamp(fallback_text, fallback_now=True)
+    return datetime.now(TZ_SH).isoformat(timespec="seconds")
 
 
 def stable_id(item: dict[str, Any]) -> str:
@@ -132,6 +146,10 @@ def normalize_item(raw: dict[str, Any]) -> dict[str, Any]:
         "title": clean_text(raw.get("title")),
         "score": parse_score(raw.get("score")),
         "publishedAt": normalize_published_at(raw.get("publishedAt")),
+        "ingestedAt": normalize_ingested_at(
+            raw.get("ingestedAt") or raw.get("sentAt") or raw.get("insertedAt"),
+            raw.get("publishedAt"),
+        ),
         "summary": clean_text(raw.get("summary")),
         "facts": normalize_facts(raw.get("facts")),
         "judgment": clean_text(raw.get("judgment")),
@@ -162,6 +180,11 @@ def load_existing(path: Path) -> list[dict[str, Any]]:
         return []
     data = json.loads(path.read_text(encoding="utf-8"))
     return data if isinstance(data, list) else []
+
+
+def sort_dt(item: dict[str, Any]) -> datetime:
+    return parse_dt(item.get("ingestedAt") or item.get("publishedAt") or "")
+
 
 
 def upsert(existing: list[dict[str, Any]], incoming: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int, int]:
@@ -198,6 +221,7 @@ def upsert(existing: list[dict[str, Any]], incoming: list[dict[str, Any]]) -> tu
         else:
             updated += 1
             merged = match | item
+            merged["ingestedAt"] = clean_text(match.get("ingestedAt")) or clean_text(item.get("ingestedAt")) or normalize_ingested_at(None, merged.get("publishedAt"))
             for key in keys_for(merged):
                 by_key[key] = merged
 
@@ -205,7 +229,7 @@ def upsert(existing: list[dict[str, Any]], incoming: list[dict[str, Any]]) -> tu
     for key, item in by_key.items():
         deduped[f"id:{item['id']}"] = item
 
-    result = sorted(deduped.values(), key=lambda x: parse_dt(x.get("publishedAt", "")), reverse=True)
+    result = sorted(deduped.values(), key=sort_dt, reverse=True)
     return result, added, updated
 
 

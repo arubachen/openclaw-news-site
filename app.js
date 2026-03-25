@@ -37,6 +37,10 @@ const fmtDate = (value) => new Date(value).toLocaleString('zh-CN', {
   minute: '2-digit',
 });
 
+const getIngestedAt = (item = {}) => item.ingestedAt || item.publishedAt || '';
+const getDateKey = (item = {}) => getIngestedAt(item).slice(0, 10);
+const sortItems = (items = []) => [...items].sort((a, b) => new Date(getIngestedAt(b)) - new Date(getIngestedAt(a)));
+
 const esc = (value = '') => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -188,11 +192,11 @@ function renderChannelChips() {
 }
 
 function renderSidebarStatic() {
-  const dates = [...new Set(state.items.map((item) => item.publishedAt.slice(0, 10)))].sort().reverse().slice(0, 5);
+  const dates = [...new Set(state.items.map((item) => getDateKey(item)))].sort().reverse().slice(0, 5);
   els.dateLinks.innerHTML = dates.map((day) => `
     <a href="#/date/${day}">
       <span>${day}</span>
-      <span>${state.items.filter((item) => item.publishedAt.startsWith(day)).length} 条</span>
+      <span>${state.items.filter((item) => getDateKey(item) === day).length} 条</span>
     </a>
   `).join('');
 
@@ -233,12 +237,12 @@ function getRouteContext() {
     if (!item) return { kind: 'missing', title: '文章不存在', description: '请返回列表重新选择', items: [], baseItems: [] };
     state.activeChannel = item.channel;
     const baseItems = state.items.filter((entry) => entry.channel === item.channel);
-    return { kind: 'article', item, title: item.title, description: `${item.channel} · ${fmtDate(item.publishedAt)}`, items: [item], baseItems };
+    return { kind: 'article', item, title: item.title, description: `${item.channel} · 入站 ${fmtDate(getIngestedAt(item))}`, items: [item], baseItems };
   }
 
   let extraFilter = () => true;
   let title = '最新资讯';
-  let description = '默认按发布时间倒序';
+  let description = '默认按入站时间倒序';
   state.activeChannel = '全部';
 
   if (route === 'channel' && value) {
@@ -254,15 +258,14 @@ function getRouteContext() {
     description = '按标签查看';
   } else if (route === 'date' && value) {
     const day = decodeURIComponent(value);
-    extraFilter = (item) => item.publishedAt.startsWith(day);
+    extraFilter = (item) => getDateKey(item) === day;
     title = `归档：${day}`;
-    description = '按日期查看';
+    description = '按入站日期查看';
   }
 
-  const baseItems = state.items
+  const baseItems = sortItems(state.items
     .filter((item) => matchesQuery(item, state.query))
-    .filter(extraFilter)
-    .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+    .filter(extraFilter));
 
   const items = baseItems.filter((item) => matchesScore(item));
   return { kind: 'list', title, description, items, baseItems };
@@ -390,10 +393,7 @@ function renderMetaRow(item) {
       : `<span class="meta-pill">${esc(item.sourceName)} · ${esc(item.sourceType)}</span>`,
   ];
 
-  if (item.channel !== '招投标') {
-    parts.push(`<span class="meta-pill">${fmtDate(item.publishedAt)}</span>`);
-  }
-
+  parts.push(`<span class="meta-pill">入站 ${fmtDate(getIngestedAt(item))}</span>`);
   parts.push(renderScorePill(item));
   return parts.join('');
 }
@@ -449,7 +449,7 @@ function renderCards(title, description, items) {
 
 function renderArticle(item) {
   const facts = buildDisplayFacts(item);
-  renderRouteTitle(item.title, item.channel === '招投标' ? item.channel : `${item.channel} · ${fmtDate(item.publishedAt)}`, 1, 1);
+  renderRouteTitle(item.title, `${item.channel} · 入站 ${fmtDate(getIngestedAt(item))}`, 1, 1);
 
   els.root.innerHTML = `
     <article class="article" style="border-left:4px solid ${scoreColor(item.score)};">
@@ -496,6 +496,8 @@ function renderArticle(item) {
         <section class="article-section">
           <h3>来源</h3>
           <p class="source-line">${esc(item.sourceName)} · ${esc(item.sourceType)}</p>
+          <p class="source-line">入站时间 · ${esc(fmtDate(getIngestedAt(item)))}</p>
+          <p class="source-line">原始发布时间 · ${esc(fmtDate(item.publishedAt))}</p>
         </section>
       </div>
 
@@ -525,7 +527,7 @@ function renderRoute() {
 async function bootstrap() {
   initTheme();
   const response = await fetch('./data/news.json');
-  state.items = (await response.json()).sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+  state.items = sortItems(await response.json());
   renderSidebarStatic();
   renderRoute();
 

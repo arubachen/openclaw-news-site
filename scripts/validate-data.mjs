@@ -9,7 +9,7 @@ if (!Array.isArray(data)) {
   throw new Error('data/news.json must be an array');
 }
 
-const required = ['id', 'slug', 'channel', 'title', 'publishedAt', 'summary', 'judgment', 'tags', 'sourceName', 'sourceType', 'sourceUrl'];
+const required = ['id', 'slug', 'channel', 'title', 'publishedAt', 'ingestedAt', 'summary', 'judgment', 'tags', 'sourceName', 'sourceType', 'sourceUrl'];
 for (const [index, item] of data.entries()) {
   for (const field of required) {
     if (!(field in item)) {
