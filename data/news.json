@@ -1,6 +1,82 @@
 [
   {
     "channel": "市场快讯",
+    "title": "中国联通与华为发布Mobile AI智联上行倡议",
+    "score": 8.0,
+    "publishedAt": "2026-03-26T00:00:00+08:00",
+    "ingestedAt": "2026-03-27T00:35:39+08:00",
+    "summary": "中国联通与华为发布 Mobile AI 智联上行倡议，信号指向终端、网络和AI应用之间的协同继续加速。整体看，这是运营商围绕AI上行能力做的方向性动作，偏技术路线但不算重磅头条。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国联通、华为"
+      },
+      {
+        "label": "时",
+        "value": "2026-03-26"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露"
+      },
+      {
+        "label": "影",
+        "value": "AI终端与网络协同、运营商技术路线"
+      }
+    ],
+    "judgment": "这类倡议更像行业方向确认，不是立刻改变基本面的事件，但对运营商AI叙事有持续加成。市场上通常会把它当成通信+AI融合的边际利好。",
+    "tags": [
+      "中国联通",
+      "华为",
+      "Mobile AI",
+      "AI网络"
+    ],
+    "sourceName": "Google Alert - 中国联通",
+    "sourceType": "原文",
+    "sourceUrl": "https://www.donews.com/news/detail/4/6485327.html",
+    "id": "2026-03-26-3a1eac40a2654f83",
+    "slug": "中国联通与华为发布mobile-ai智联上行倡议"
+  },
+  {
+    "channel": "市场快讯",
+    "title": "诚迈科技发布面向OpenClaw的AI解决方案——“龙虾三件套”",
+    "score": 7.0,
+    "publishedAt": "2026-03-26T00:00:00+08:00",
+    "ingestedAt": "2026-03-27T00:35:39+08:00",
+    "summary": "诚迈科技围绕 OpenClaw 做出 AI 解决方案包装，说明行业交付正在继续向工具化和场景化延展。这个动作本身不算大，但能反映出软件公司在AI应用侧的持续试水。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "诚迈科技"
+      },
+      {
+        "label": "时",
+        "value": "2026-03-26"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露"
+      },
+      {
+        "label": "影",
+        "value": "AI解决方案、软件交付、工具链外溢"
+      }
+    ],
+    "judgment": "这条更偏行业应用层面的轻量更新，适合补充市场快讯而不是占头条。看点在于AI工具链继续被包装成可售卖方案。",
+    "tags": [
+      "诚迈科技",
+      "OpenClaw",
+      "AI解决方案",
+      "软件"
+    ],
+    "sourceName": "竞品RSS - 诚迈科技",
+    "sourceType": "RSS",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxONFhBZ3pVbHRQODUyc1A0Y20yLUlRVVlnZ0FVbjI3RWlseXloVVlPcjRiUHlwWkNlM3lSX2JFOHdPenQteWFpR3J4bmEtU2VtemVmZUN2dmVCNlhEVDYyOHBKZ0I4dVc0V2otY0lVLU1tdk5Pb1k4OXVQd19UV0l3TU1oRmdlN0tC?oc=5&hl=en-US&gl=US&ceid=US%3Aen",
+    "id": "2026-03-26-156436e08eec2288",
+    "slug": "诚迈科技发布面向openclaw的ai解决方案-龙虾三件套"
+  },
+  {
+    "channel": "市场快讯",
     "title": "中国电信转向Token服务：两年Token调用量暴涨千倍",
     "score": 8.0,
     "publishedAt": "2026-03-26T00:00:00+08:00",
