@@ -5,11 +5,11 @@
     "score": 8.4,
     "publishedAt": "2026-03-12T12:00:00+08:00",
     "ingestedAt": "2026-03-26T10:55:19+08:00",
-    "summary": "Palantir 与 NVIDIA 在 3 月 12 日联合推出 Sovereign AI Operating System Reference Architecture，试图把 AI 基础设施销售从单点软件升级到“硬件采购—AI 数据中心—平台部署”的一体化方案。Palantir 不再只卖 AIP/Foundry，而是把 Apollo、Rubix、AIP Hub 等能力和 NVIDIA Blackwell Ultra、Spectrum-X 等底座打成可复制的全栈参考架构，直接切入主权算力与大型组织 AI 建设预算。对国内厂商来说，这更像一条“把产品包装成参考架构和标准栈，再去撬更大预算盘子”的打法样本。",
+    "summary": "Palantir 与 NVIDIA 在 3 月 12 日联合推出 Sovereign AI Operating System Reference Architecture，试图把 AI 基础设施销售从单点软件升级到“硬件采购—AI 数据中心—平台部署”的一体化方案。Palantir 不再只卖 AIP、Foundry 这类单点平台能力，而是把 Apollo、Rubix、AIP Hub 等软件层和 NVIDIA 的算力底座绑成统一口径，直接去切更大的主权算力与大型组织 AI 建设预算。",
     "facts": [
       {
         "label": "主",
-        "value": "Palantir / NVIDIA / Sovereign AI Operating System Reference Architecture"
+        "value": "Palantir、NVIDIA、Sovereign AI Operating System Reference Architecture"
       },
       {
         "label": "动",
@@ -32,7 +32,7 @@
         "value": "把产品叙事从“AI 平台”继续抬升到“AI 基础设施标准层”，更容易撬动大额预算"
       }
     ],
-    "judgment": "这条最值得学的不是和 NVIDIA 结盟本身，而是它把产品卖点包装成“参考架构”和“操作系统”，让客户把预算从工具采购往更大的基础设施盘子里挪。对软通这类厂商，可借鉴点在于把算力、平台、交付与行业方案打成一套可复用模板，而不是只卖单点能力。看点：后续要盯它是否继续绑定政府、主权云或电信级客户落地。",
+    "judgment": "Palantir 这一步不是在扩一个功能点，而是在把平台能力包装成更容易采购、也更容易被高层拍板的标准栈。对软通可借鉴的是把算力、平台、交付和行业方案整理成一套成体系的对外口径，而不是各卖各的。后续重点盯它会不会继续落到政府、主权云或电信级客户。",
     "tags": [
       "国际对标",
       "Palantir",
@@ -52,11 +52,11 @@
     "score": 8.2,
     "publishedAt": "2026-03-12T12:00:00+08:00",
     "ingestedAt": "2026-03-26T10:55:19+08:00",
-    "summary": "3 月 12 日，GE Aerospace 与 Palantir 宣布扩展多年期合作，把 agentic AI 从早前围绕 T-38/J85 的保障试点继续推进到更广的军机 readiness、供应链、维修大修（MRO）和新发动机生产体系。GE 官方称，这套能力正在帮助其提前预测故障、疏通卡住的供应链，并提升美国空军机队可用率。对国内厂商来说，这是一条“贴着高责任、强结果指标的场景，把 AI 做成持续运营能力”的样本。",
+    "summary": "3 月 12 日，GE Aerospace 与 Palantir 宣布扩展多年期合作，把 agentic AI 从早前围绕 T-38/J85 的保障试点继续推进到更广的军机 readiness、供应链、维修大修（MRO）和新发动机生产体系。GE 官方给出的口径也很明确：这套能力正在帮助其提前预测故障、疏通卡住的供应链，并提升美国空军机队可用率。",
     "facts": [
       {
         "label": "主",
-        "value": "GE Aerospace / Palantir / 美国空军"
+        "value": "GE Aerospace、Palantir、美国空军"
       },
       {
         "label": "动",
@@ -79,7 +79,7 @@
         "value": "证明 Palantir 已能吃下高责任、长周期的工业与国防场景，并围绕“任务就绪率”卖结果"
       }
     ],
-    "judgment": "这条最有参考价值的点，是它不是做一个漂亮 PoC 就收工，而是把现场数据、供应商动作、维修和生产决策连成闭环，直接奔着“任务就绪率”这种硬指标去。对软通看，启发在于 AI 项目要尽量贴着客户最贵、最痛、最可量化的业务结果做，而不是停在通用平台展示。",
+    "judgment": "这单说明 Palantir 已经能把 AI 嵌进高责任、长周期的工业和国防流程，卖的是机队可用率、保障效率和供应链闭环，不是通用平台概念。对软通的启发是，AI 项目最好贴着客户最贵、最痛、最能量化的业务结果去做，PoC 才更容易往长期预算走。",
     "tags": [
       "国际对标",
       "Palantir",
@@ -103,7 +103,7 @@
     "facts": [
       {
         "label": "主",
-        "value": "LG CNS / Palantir / LG Group"
+        "value": "LG CNS、Palantir、LG Group"
       },
       {
         "label": "动",
@@ -126,7 +126,7 @@
         "value": "形成“SI 伙伴 + 平台 + 嵌入式团队”的规模化复制路径，提升集团级扩张概率"
       }
     ],
-    "judgment": "这条最值得学的不是又拿下一个大客户，而是它把交付组织本身做成了产品的一部分。对软通这类厂商，启发在于：如果只卖平台，天花板很快；但如果能把平台、伙伴网络和前线工程团队捆成一个打法，才更有机会把集团级项目从试点推成常态预算。",
+    "judgment": "这单值得盯的不是合作名头，而是 Palantir 把平台、SI 伙伴和前线工程团队绑成了同一套交付打法。如果软通也想把集团级 AI 项目做深，交付组织本身也得成为方案的一部分，而不是只把平台卖进去。后续看它能不能从 LG 体系复制到更多大型集团客户。",
     "tags": [
       "国际对标",
       "Palantir",
