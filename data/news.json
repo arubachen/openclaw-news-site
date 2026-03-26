@@ -1,6 +1,147 @@
 [
   {
     "channel": "竞品情报",
+    "title": "Palantir联手NVIDIA把AI平台升级成“主权AI操作系统”参考架构",
+    "score": 8.4,
+    "publishedAt": "2026-03-12T12:00:00+08:00",
+    "ingestedAt": "2026-03-26T10:55:19+08:00",
+    "summary": "Palantir 与 NVIDIA 在 3 月 12 日联合推出 Sovereign AI Operating System Reference Architecture，试图把 AI 基础设施销售从单点软件升级到“硬件采购—AI 数据中心—平台部署”的一体化方案。Palantir 不再只卖 AIP/Foundry，而是把 Apollo、Rubix、AIP Hub 等能力和 NVIDIA Blackwell Ultra、Spectrum-X 等底座打成可复制的全栈参考架构，直接切入主权算力与大型组织 AI 建设预算。对国内厂商来说，这更像一条“把产品包装成参考架构和标准栈，再去撬更大预算盘子”的打法样本。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Palantir / NVIDIA / Sovereign AI Operating System Reference Architecture"
+      },
+      {
+        "label": "动",
+        "value": "联合发布“主权 AI 操作系统”参考架构，主打软硬件一体化交付"
+      },
+      {
+        "label": "时",
+        "value": "3月12日，Palantir 官方投资者关系披露"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露合同金额与客户数量；方案绑定 Blackwell Ultra、Spectrum-X 与 Palantir 软件栈"
+      },
+      {
+        "label": "落",
+        "value": "覆盖硬件采购、AI 数据中心、平台部署与运营工具链，切入主权算力与大型组织 AI 建设"
+      },
+      {
+        "label": "影",
+        "value": "把产品叙事从“AI 平台”继续抬升到“AI 基础设施标准层”，更容易撬动大额预算"
+      }
+    ],
+    "judgment": "这条最值得学的不是和 NVIDIA 结盟本身，而是它把产品卖点包装成“参考架构”和“操作系统”，让客户把预算从工具采购往更大的基础设施盘子里挪。对软通这类厂商，可借鉴点在于把算力、平台、交付与行业方案打成一套可复用模板，而不是只卖单点能力。看点：后续要盯它是否继续绑定政府、主权云或电信级客户落地。",
+    "tags": [
+      "国际对标",
+      "Palantir",
+      "NVIDIA",
+      "主权AI",
+      "参考架构"
+    ],
+    "sourceName": "Palantir",
+    "sourceType": "新闻稿",
+    "sourceUrl": "https://investors.palantir.com/news-details/2026/Palantir-and-NVIDIA-Team-to-Deliver-Sovereign-AI-Operating-System-Reference-Architecture/",
+    "id": "2026-03-12-050778edc98c1c99",
+    "slug": "palantir联手nvidia把ai平台升级成-主权ai操作系统-参考架构"
+  },
+  {
+    "channel": "竞品情报",
+    "title": "GE Aerospace与Palantir把AI从试点推向军机保障与生产体系",
+    "score": 8.2,
+    "publishedAt": "2026-03-12T12:00:00+08:00",
+    "ingestedAt": "2026-03-26T10:55:19+08:00",
+    "summary": "3 月 12 日，GE Aerospace 与 Palantir 宣布扩展多年期合作，把 agentic AI 从早前围绕 T-38/J85 的保障试点继续推进到更广的军机 readiness、供应链、维修大修（MRO）和新发动机生产体系。GE 官方称，这套能力正在帮助其提前预测故障、疏通卡住的供应链，并提升美国空军机队可用率。对国内厂商来说，这是一条“贴着高责任、强结果指标的场景，把 AI 做成持续运营能力”的样本。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "GE Aerospace / Palantir / 美国空军"
+      },
+      {
+        "label": "动",
+        "value": "扩展多年期合作，把 agentic AI 用到军机保障、供应链和生产系统"
+      },
+      {
+        "label": "时",
+        "value": "3月12日，GE Aerospace 与 Palantir 同步披露"
+      },
+      {
+        "label": "数",
+        "value": "GE 称其发动机全球约每 2 秒起飞一次；原文未披露合同金额"
+      },
+      {
+        "label": "落",
+        "value": "从 T-38/J85 发动机保障试点，扩到维护维修、供应链与新发动机生产闭环"
+      },
+      {
+        "label": "影",
+        "value": "证明 Palantir 已能吃下高责任、长周期的工业与国防场景，并围绕“任务就绪率”卖结果"
+      }
+    ],
+    "judgment": "这条最有参考价值的点，是它不是做一个漂亮 PoC 就收工，而是把现场数据、供应商动作、维修和生产决策连成闭环，直接奔着“任务就绪率”这种硬指标去。对软通看，启发在于 AI 项目要尽量贴着客户最贵、最痛、最可量化的业务结果做，而不是停在通用平台展示。",
+    "tags": [
+      "国际对标",
+      "Palantir",
+      "GE Aerospace",
+      "国防AI",
+      "工业闭环"
+    ],
+    "sourceName": "GE Aerospace",
+    "sourceType": "新闻稿",
+    "sourceUrl": "https://www.geaerospace.com/news/press-releases/ge-aerospace-and-palantir-expand-partnership-transform-military-aircraft-readiness",
+    "id": "2026-03-12-c810eb4bd7f5bf7c",
+    "slug": "ge-aerospace与palantir把ai从试点推向军机保障与生产体系"
+  },
+  {
+    "channel": "竞品情报",
+    "title": "Palantir借LG CNS切入大型集团AX，嵌入式FDE团队成复制抓手",
+    "score": 7.9,
+    "publishedAt": "2026-03-12T07:00:00+08:00",
+    "ingestedAt": "2026-03-26T10:55:19+08:00",
+    "summary": "3 月 11 日，LG CNS 与 Palantir 宣布深化战略合作，目标不是单个 AI 试点，而是把 AX（AI Transformation）往整个 LG Group 推。公告里最值得盯的一句，不是 Foundry 或 AIP 本身，而是双方会组建一支嵌入 LG CNS 的 Forward Deployed Engineering（FDE）团队，专门去找高价值 use case 并现场落地。它本质上是在复制“伙伴 + 灯塔客户 + 嵌入式交付团队”的打法。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "LG CNS / Palantir / LG Group"
+      },
+      {
+        "label": "动",
+        "value": "深化战略合作，组建嵌入式 FDE 团队推动集团级 AX"
+      },
+      {
+        "label": "时",
+        "value": "3月11日，Business Wire 与韩媒同步披露"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露合同金额与项目规模"
+      },
+      {
+        "label": "落",
+        "value": "从单个 LG 关联公司成功案例，扩向制造、能源、电子、物流等集团级场景"
+      },
+      {
+        "label": "影",
+        "value": "形成“SI 伙伴 + 平台 + 嵌入式团队”的规模化复制路径，提升集团级扩张概率"
+      }
+    ],
+    "judgment": "这条最值得学的不是又拿下一个大客户，而是它把交付组织本身做成了产品的一部分。对软通这类厂商，启发在于：如果只卖平台，天花板很快；但如果能把平台、伙伴网络和前线工程团队捆成一个打法，才更有机会把集团级项目从试点推成常态预算。",
+    "tags": [
+      "国际对标",
+      "Palantir",
+      "LG CNS",
+      "企业AX",
+      "FDE"
+    ],
+    "sourceName": "Business Wire",
+    "sourceType": "新闻稿",
+    "sourceUrl": "https://www.businesswire.com/news/home/20260311478841/en/LG-CNS-and-Palantir-Announce-Strategic-Partnership-to-Accelerate-AI-Transformation",
+    "id": "2026-03-12-e8d175056bffb1c7",
+    "slug": "palantir借lg-cns切入大型集团ax-嵌入式fde团队成复制抓手"
+  },
+  {
+    "channel": "竞品情报",
     "title": "Palantir将 Maven 从试点推进为五角大楼长期项目",
     "score": 7.8,
     "publishedAt": "2026-03-25T15:00:00+08:00",
