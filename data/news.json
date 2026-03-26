@@ -1,6 +1,44 @@
 [
   {
     "channel": "市场快讯",
+    "title": "中国电信转向Token服务：两年Token调用量暴涨千倍",
+    "score": 8.0,
+    "publishedAt": "2026-03-26T00:00:00+08:00",
+    "ingestedAt": "2026-03-27T00:15:34+08:00",
+    "summary": "中国电信的 Token 服务讨论继续升温，核心看点是运营商正在把 AI 能力包装成可计量、可经营的服务。这个信号更偏商业模式变化，而不是单纯技术展示，适合低成本跟踪后续口径。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国电信"
+      },
+      {
+        "label": "时",
+        "value": "2026-03-26"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露"
+      },
+      {
+        "label": "影",
+        "value": "AI 计费与服务经营模式"
+      }
+    ],
+    "judgment": "这类信号的价值不在爆点，而在口径是否持续统一。若后续年报、发布会或地方公司都跟进，说明运营商 AI 商业化正在往 Token 化收敛。",
+    "tags": [
+      "中国电信",
+      "Token",
+      "AI服务",
+      "业务转型"
+    ],
+    "sourceName": "Google Alert - 中国电信",
+    "sourceType": "RSS",
+    "sourceUrl": "https://m.sohu.com/a/1001530612_610727%3Fscm%3D10001.325_13-325_13.0.0-0-0-0-0.5_1334",
+    "id": "https://www.google.com/url?rct=j&sa=t&url=https://m.sohu.com/a/1001530612_610727%3Fscm%3D10001.325_13-325_13.0.0-0-0-0-0.5_1334&ct=ga&cd=CAIyHWVmMDQ3MzIwMTAxZGNmODM6Y29tOnpoLUNOOlVT&usg=AOvAW0siO5UbOGFQvrcpWexsMGJ",
+    "slug": "中国电信转向token服务-两年token调用量暴涨千倍"
+  },
+  {
+    "channel": "市场快讯",
     "title": "【洁净青海·绿色算力】快速起跳！打响西宁绿色算力品牌",
     "score": 7.0,
     "publishedAt": "2026-03-26T00:00:00+08:00",
