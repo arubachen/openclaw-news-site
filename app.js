@@ -1,5 +1,6 @@
 const THEME_KEY = 'openclaw-news-site-theme-mode';
 const PAGE_SIZE = 20;
+const BACK_TO_TOP_THRESHOLD_FACTOR = 1;
 const themeModes = ['system', 'dark', 'light'];
 const themeMeta = {
   system: { icon: '◐', title: '主题：跟随系统（点击切换）' },
@@ -25,6 +26,7 @@ const els = {
   tagCloud: document.querySelector('#tag-cloud'),
   searchInput: document.querySelector('#search-input'),
   themeToggle: document.querySelector('#theme-toggle'),
+  backToTop: document.querySelector('#back-to-top'),
 };
 
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -115,6 +117,23 @@ function initTheme() {
   mediaDark.addEventListener('change', () => {
     if (state.themeMode === 'system') applyTheme();
   });
+}
+
+function updateBackToTopVisibility() {
+  if (!els.backToTop) return;
+  const threshold = window.innerHeight * BACK_TO_TOP_THRESHOLD_FACTOR;
+  const shouldShow = window.scrollY > threshold;
+  els.backToTop.classList.toggle('is-visible', shouldShow);
+}
+
+function initBackToTop() {
+  if (!els.backToTop) return;
+  els.backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+  window.addEventListener('resize', updateBackToTopVisibility);
+  updateBackToTopVisibility();
 }
 
 function buildDisplayFacts(item) {
@@ -526,6 +545,7 @@ function renderRoute() {
 
 async function bootstrap() {
   initTheme();
+  initBackToTop();
   const response = await fetch('./data/news.json');
   state.items = sortItems(await response.json());
   renderSidebarStatic();
