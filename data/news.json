@@ -32,8 +32,8 @@
       "业务转型"
     ],
     "sourceName": "Google Alert - 中国电信",
-    "sourceType": "RSS",
-    "sourceUrl": "https://m.sohu.com/a/1001530612_610727%3Fscm%3D10001.325_13-325_13.0.0-0-0-0-0.5_1334",
+    "sourceType": "原文",
+    "sourceUrl": "https://m.sohu.com/a/1001530612_610727?scm=10001.325_13-325_13.0.0-0-0-0-0.5_1334",
     "id": "https://www.google.com/url?rct=j&sa=t&url=https://m.sohu.com/a/1001530612_610727%3Fscm%3D10001.325_13-325_13.0.0-0-0-0-0.5_1334&ct=ga&cd=CAIyHWVmMDQ3MzIwMTAxZGNmODM6Y29tOnpoLUNOOlVT&usg=AOvAW0siO5UbOGFQvrcpWexsMGJ",
     "slug": "中国电信转向token服务-两年token调用量暴涨千倍"
   },
@@ -70,7 +70,7 @@
       "政策"
     ],
     "sourceName": "Google Alert - 中国联通",
-    "sourceType": "RSS",
+    "sourceType": "原文",
     "sourceUrl": "http://www.qinghai.gov.cn/zwgk/system/2026/03/26/030095656.shtml",
     "id": "2026-03-26-098f214c0a376960",
     "slug": "洁净青海-绿色算力-快速起跳-打响西宁绿色算力品牌"
@@ -146,7 +146,7 @@
       "项目推进"
     ],
     "sourceName": "权威源RSS - 国家发展改革委",
-    "sourceType": "RSS",
+    "sourceType": "原文",
     "sourceUrl": "https://www.ndrc.gov.cn/xxgk/zcfb/tz/202603/t20260326_1403681.html",
     "id": "https://www.ndrc.gov.cn/xxgk/zcfb/tz/202603/t20260326_1403681.html",
     "slug": "国家发展改革委向1000个项目单位发出投资-堵点-调查函-将加大对相关地方督促力度"
@@ -184,7 +184,7 @@
       "政策"
     ],
     "sourceName": "权威源RSS - 国家发展改革委",
-    "sourceType": "RSS",
+    "sourceType": "原文",
     "sourceUrl": "https://www.nea.gov.cn/2026-03/26/c_1312345678.htm",
     "id": "https://www.nea.gov.cn/2026-03/26/c_1312345678.htm",
     "slug": "国家能源局-我国电动汽车充电基础设施超2100万个"
@@ -376,7 +376,7 @@
     ],
     "sourceName": "软通动力官微",
     "sourceType": "官网公告",
-    "sourceUrl": "https://mp.weixin.qq.com/s?__biz=MzA4NTM1NTIzNg==&chksm=86ae651e44ff00a0eddf9d64ce77d62ed9b789079c8faa9c801dc2b157599c959c11997d6f69&idx=2&mid=2650503250&sn=5e5fc5e7b20956ffd93103faa15eac4e",
+    "sourceUrl": "https://mp.weixin.qq.com/s?__biz=MzA4NTM1NTIzNg%3D%3D&chksm=86ae651e44ff00a0eddf9d64ce77d62ed9b789079c8faa9c801dc2b157599c959c11997d6f69&idx=2&mid=2650503250&sn=5e5fc5e7b20956ffd93103faa15eac4e",
     "id": "2026-03-26-68c84f1e036cccf0",
     "slug": "鸿湖万联签约白云区-鸿蒙智城-合作-软通动力切入城市鸿蒙场景"
   },
@@ -606,7 +606,7 @@
       "AI体验"
     ],
     "sourceName": "Google Alert - 中国移动",
-    "sourceType": "RSS",
+    "sourceType": "原文",
     "sourceUrl": "https://www.pingwest.com/a/312475",
     "id": "2026-03-26-2e5bc9bbf40dadc3",
     "slug": "荣耀yoyo智能体携手中国移动灵犀智能体推动ai服务体验再进化"
