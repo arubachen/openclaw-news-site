@@ -147,8 +147,7 @@ def normalize_item(raw: dict[str, Any]) -> dict[str, Any]:
         "score": parse_score(raw.get("score")),
         "publishedAt": normalize_published_at(raw.get("publishedAt")),
         "ingestedAt": normalize_ingested_at(
-            raw.get("ingestedAt") or raw.get("sentAt") or raw.get("insertedAt"),
-            raw.get("publishedAt"),
+            raw.get("ingestedAt") or raw.get("sentAt") or raw.get("insertedAt")
         ),
         "summary": clean_text(raw.get("summary")),
         "facts": normalize_facts(raw.get("facts")),
