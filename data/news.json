@@ -1,5 +1,183 @@
 [
   {
+    "channel": "招投标",
+    "title": "2026年湖北数科某医院辅助系统运维服务采购项目（第二次）询比采购公告",
+    "score": 8.0,
+    "publishedAt": "2026-04-09T21:00:36+08:00",
+    "ingestedAt": "2026-04-09T21:18:36+08:00",
+    "summary": "联通数字科技有限公司湖北省分公司发布2026年湖北数科某医院辅助系统运维服务采购项目（第二次）询比采购公告，采购标的是1项医疗质量智能审核诊间辅助系统运维服务。项目预算为144371.33元（不含税），服务期自合同签订之日起一年，地点为湖北省武汉市采购人指定地点。公告明确，首次发布后因获取采购文件的潜在应答人不足三家而失败，现重新发布第二次询比采购公告。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "联通数字科技有限公司湖北省分公司"
+      },
+      {
+        "label": "时",
+        "value": "应答文件递交截止：2026年4月14日14时00分；文件获取：2026年4月10日09时00分至4月13日17时00分"
+      },
+      {
+        "label": "数",
+        "value": "预算144371.33元（不含税）；最高限价128902.97元（不含税）"
+      },
+      {
+        "label": "门",
+        "value": "应答人须为境内依法注册法人或其他组织；具备增值税专用发票能力；不接受联合体"
+      },
+      {
+        "label": "影",
+        "value": "医疗质量智能审核诊间辅助系统运维服务，属于医院业务系统运维、数字运营与应用支撑范畴"
+      }
+    ],
+    "judgment": "方向和软通的运维/系统支撑能力匹配，且是第二次公告，说明前轮竞争没跑满，继续跟进还有现实价值。门槛不算重，但原文对服务边界和具体交付写得比较清楚，后面重点看采购文件里的评分点和是否还有更细的运维范围。",
+    "tags": [
+      "联通",
+      "运维",
+      "医院信息化",
+      "系统支撑",
+      "第二次询比"
+    ],
+    "sourceName": "中国联通采购与招标网",
+    "sourceType": "公告原文",
+    "sourceUrl": "https://www.chinaunicombidding.cn/bidInformation/detail?id=2042226170956615680",
+    "id": "2026-04-09-d24c176cc4b570ba",
+    "slug": "2026年湖北数科某医院辅助系统运维服务采购项目-第二次-询比采购公告"
+  },
+  {
+    "channel": "招投标",
+    "title": "2025年深圳联通HM平安眼云视频维护服务采购项目询比采购公告",
+    "score": 7.5,
+    "publishedAt": "2026-04-09T20:45:44+08:00",
+    "ingestedAt": "2026-04-09T21:18:36+08:00",
+    "summary": "中国联合网络通信有限公司深圳市分公司发布2025年深圳联通HM平安眼云视频维护服务采购项目询比采购公告，采购内容是为深汕特别合作区鲘门街道下辖社区及行政村提供平安眼视频监控服务。公告列明了视频平台快速接入、监控点部署、视频本地保存及实时上传、摄像头状态反馈和7X24小时维护响应等要求。项目最高限价为52845.28元，服务期为2025年9月1日至2026年8月31日。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国联合网络通信有限公司深圳市分公司"
+      },
+      {
+        "label": "时",
+        "value": "应答文件递交截止：2026年4月14日9时30分；文件获取至2026年4月13日12时00分"
+      },
+      {
+        "label": "数",
+        "value": "最高限价52845.28元；服务期2025年9月1日至2026年8月31日"
+      },
+      {
+        "label": "门",
+        "value": "应答人须为合法注册法人或其他组织；不接受联合体；需满足联通及广东联通黑名单、失信名单约束"
+      },
+      {
+        "label": "影",
+        "value": "云视频维护、视频平台接入、视频监控与运维，属于视频平台运维和数字运营支撑"
+      }
+    ],
+    "judgment": "这是典型的云视频平台运维类项目，和软通可承接的系统维护、平台支撑方向贴得上。公告把时限、运维要求和黑名单约束写得比较完整，后面主要看文件里是否还有更细的服务范围和考核条款。",
+    "tags": [
+      "联通",
+      "云视频",
+      "平台运维",
+      "视频监控",
+      "维护服务"
+    ],
+    "sourceName": "中国联通采购与招标网",
+    "sourceType": "公告原文",
+    "sourceUrl": "https://www.chinaunicombidding.cn/bidInformation/detail?id=2042222430271803392",
+    "id": "2026-04-09-d8c470d8536ffe72",
+    "slug": "2025年深圳联通hm平安眼云视频维护服务采购项目询比采购公告"
+  },
+  {
+    "channel": "竞品情报",
+    "title": "华为推出新款AI加速卡：国内唯一支持FP4，算力是H20近三倍",
+    "score": 8.1,
+    "publishedAt": "2026-04-09T00:00:00+08:00",
+    "ingestedAt": "2026-04-09T20:47:30+08:00",
+    "summary": "华为在 4 月 9 日推出新款 AI 加速卡，标题直接点出其支持 FP4。报道同时给出“算力是 H20 近三倍”的对比口径，原文未披露具体客户、订单金额或出货量。标题来源为新浪财经转载，内容没有展开更多合作方。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "华为推出新款AI加速卡"
+      },
+      {
+        "label": "动",
+        "value": "主打FP4与H20近三倍算力"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-09"
+      },
+      {
+        "label": "数",
+        "value": "国内唯一支持FP4；算力约H20近三倍；原文未披露订单/出货"
+      },
+      {
+        "label": "落",
+        "value": "AI加速卡与服务器生态"
+      },
+      {
+        "label": "影",
+        "value": "抬高国产AI服务器/加速卡对标门槛，压住宝德计算、超聚变等厂商的宣传口径"
+      }
+    ],
+    "judgment": "这条先把性能话语权抢走了，短期对AI服务器厂商最直接的不是订单，而是客户开会时的对标基准被抬高。宝德、超聚变这类厂商后面如果还想讲国产替代，得拿出更像样的实测和场景，不然容易被一句 FP4 和三倍算力压住。看点：后面会不会补出合作伙伴、整机伙伴或行业场景。",
+    "tags": [
+      "华为",
+      "AI加速卡",
+      "AI服务器",
+      "算力卡"
+    ],
+    "sourceName": "新浪财经",
+    "sourceType": "行业资讯",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMisgVBVV95cUxOZk9xRzcwc0NQWFZZUEJfYWZDYWNlOWtnNFBjMFNxaVhwWDljRHJjd0V1dFY2REZxeFctTTJtWWp2VVM3NmI1X3kyMFB4T2dZcXNEaEtRSUU5VFN2d3o5UUs1Q0c2WW1IOHRTT04xYWdvU3JMUVVsMnQ5cUthZlNHV0xXR3JpWlhMVWNEMmNCclNIazY4ZzBzeFpBT2k5ME9hYVFXdkdDbjZhczRaNVRXb2VXNzBBTHdTLTNTZ3BMSTRjb2xzXzJJYXJES3lKNFhqeHBSQ3dwb1VXV0lqRmFUblUxN2M1SGNET1NfYW1EakJQUGJBUzNXX0J3X2hxOGFtMGNDV1diLWdIeUFwVmdxM2g5ZkFzRzVvSGdtNUpSMDZZSHZrSkIzMXFpNWdwZnJlOUh4b3lrWUtrQ3NHSHNkeHhublNZNWFEVHBvMnRFSEFvaWlGYThRMklyOFh4WDdoWW9BRHdvRk1PaEpOdll0RlJDX21KaVBVXzFmcFdENmZhY2lFVUF6N3JGem1fanFrM09pZy1GMXZpeEo2QzVOZHlqQlROQ2xsdm5RNmNyWUF4ZDFEWlFfc2tjTVNZZlhqUjRSbkdvMWhVZWM2TlYtd09KVHc1ZTdiYUh3allfanlZRzNJV0owODNmZkNBZHNzYnlPVlJjc2xWWlZmdWVOZHA2Y0d0OFhBa0lRSlhXVGFqWU02OHFRSnZJY1pyQmV3UlV5aTdlSDRaZ0NBc3U4OTF1eEdrSGNibHRaTnpmVjctM08yZTludWJhdFhwWENiQzdZU19zNV83ZjdmYy05RWZfZWlTX0N1NGY0d3AtVWtUVTRhVTB6YmtCdURVb2Z2aW93d3JySXFkUkFsQkkzckEtZ3BlVXIyeWRjZElsSzVGbUJmU1JRaXRNM1lxN1pPT0E?oc=5",
+    "id": "2026-04-09-6c70989ad4c64b35",
+    "slug": "华为推出新款ai加速卡-国内唯一支持fp4-算力是h20近三倍"
+  },
+  {
+    "channel": "竞品情报",
+    "title": "中软国际获董事会主席陈宇红增持100万股",
+    "score": 6.8,
+    "publishedAt": "2026-04-09T00:00:00+08:00",
+    "ingestedAt": "2026-04-09T20:47:30+08:00",
+    "summary": "4 月 9 日，市场报道显示中软国际董事会主席陈宇红增持公司 100 万股，每股作价约 3.43 港元。公开内容只披露了增持数量和价格，未写明对应业务合同、客户对象或新增项目。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中软国际董事会主席陈宇红增持公司股份"
+      },
+      {
+        "label": "动",
+        "value": "以每股约3.43港元买入100万股"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-09"
+      },
+      {
+        "label": "数",
+        "value": "100万股；每股约3.43港元；原文未披露业务订单"
+      },
+      {
+        "label": "落",
+        "value": "股权增持与市场信心释放"
+      },
+      {
+        "label": "影",
+        "value": "短期能稳预期，但对经营面订单和交付没有直接增量"
+      }
+    ],
+    "judgment": "这条更像管理层给市场递的信心票，不是业务突破。股价和情绪会有帮助，但对软通动力这种更看订单和交付的公司来说，参考价值主要在资本市场层面，不在业务层面。后面要盯的是中软国际有没有顺着这个动作再补业务端消息。",
+    "tags": [
+      "中软国际",
+      "管理层增持",
+      "港股",
+      "股权变动"
+    ],
+    "sourceName": "新浪财经",
+    "sourceType": "行业资讯",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNMzdhTTdWdml0eXZLb19obHM4TDR5UHdLcVBUZDUxVThJNE9RS3BFQnVsOEVOUE0tVjNvQUpiQ0J4b3hwaDF0WDlfdXUtRDNqZ0F6SjI0SUNxZ2p3dzlWR0ZraEpqcC05ZEtDbGpub2NZVU94dXlxUHRhMnZpTzhkdy1aRFFHWXJLOEE?oc=5",
+    "id": "2026-04-09-c696b90f1b74a6eb",
+    "slug": "中软国际获董事会主席陈宇红增持100万股"
+  },
+  {
     "channel": "竞品情报",
     "title": "中国电信数据标注技术研究中心在蓉正式启用",
     "score": 8.0,
