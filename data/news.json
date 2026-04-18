@@ -1,5 +1,81 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "Cloudflare 发布 Agent Memory，把代理记忆做成托管服务",
+    "score": 8.3,
+    "publishedAt": "2026-04-17T21:00:00+08:00",
+    "ingestedAt": "2026-04-18T17:35:54+08:00",
+    "summary": "Cloudflare 4月17日发布 Agent Memory 私测版，把代理长期运行中的记忆抽取、存储和按需召回做成托管服务，并同时提供 Workers 绑定和 REST API。官方把问题直接指向 1M token 级上下文仍会出现的 context rot，说明单靠扩大上下文窗口还不够。其方案采用 retrieval-based 架构，由平台负责 ingestion 和 retrieval，面向持续数周到数月、需要在代码库和生产系统里反复执行的 agent 工作负载。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Cloudflare 上线 Agent Memory 私测，把 AI agent 的长期记忆做成托管能力，支持 Workers 绑定和 REST API。"
+      },
+      {
+        "label": "时",
+        "value": "官方博客 2026-04-17 发布。"
+      },
+      {
+        "label": "数",
+        "value": "文中明确提到即便上下文窗口超过 1M tokens，context rot 仍未解决；目标场景是可运行数周到数月的 agent。"
+      },
+      {
+        "label": "影",
+        "value": "Agent 基础设施开始从拼大上下文，转向把记忆抽取、召回和生命周期管理单独做成平台层。"
+      }
+    ],
+    "judgment": "结论很直接：agent 基建开始拆层了，记忆不再只是应用侧外挂。接下来盯两件事就行——召回质量能不能稳住，以及这套托管接口会不会被更多 agent 框架直接接进去。",
+    "tags": [
+      "AI基础设施",
+      "Agent",
+      "记忆系统",
+      "Cloudflare"
+    ],
+    "sourceName": "Cloudflare Blog",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.cloudflare.com/introducing-agent-memory/",
+    "id": "2026-04-17-07e79d0c09e4b484",
+    "slug": "cloudflare-发布-agent-memory-把代理记忆做成托管服务"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "美国 AI 数据中心建设延误升温，电力和施工能力开始卡主节奏",
+    "score": 8.1,
+    "publishedAt": "2026-04-18T02:08:25+08:00",
+    "ingestedAt": "2026-04-18T17:35:54+08:00",
+    "summary": "Ars Technica 4月17日报道，Financial Times 结合 SynMax 卫星影像、无人机画面与 IIR Energy 的许可和项目资料，判断美国接近四成的数据中心项目今年可能无法按计划完工。报道点名微软、甲骨文和 OpenAI 相关项目，延期幅度可能超过三个月。公开访谈显示，拖慢建设的环节集中在电力、设备、施工劳动力和审批，连电工和管道工都成了瓶颈；部分开发商已经转向现场燃气轮机和移动式发电设备补位。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "美国 AI 数据中心建设开始大面积碰到电力、设备、施工和审批瓶颈。"
+      },
+      {
+        "label": "时",
+        "value": "Ars Technica 2026-04-17 18:08 UTC 报道。"
+      },
+      {
+        "label": "数",
+        "value": "近 40% 的美国数据中心项目今年可能无法按计划完工，部分项目预计要晚 3 个月以上；缅因州已通过对 20 兆瓦以上新数据中心审批暂停 18 个月的法案。"
+      },
+      {
+        "label": "影",
+        "value": "算力扩张的约束点正从 GPU 供给继续往电网、变压器、工程施工和地方许可链条外溢。"
+      }
+    ],
+    "judgment": "这条不是在说谁家项目慢了，而是算力扩张已经开始被土建和电力系统反向限速。后面要盯的就是，大厂会不会把自建供电和区域选址放到比芯片更前面。",
+    "tags": [
+      "数据中心",
+      "算力基础设施",
+      "电力",
+      "建设周期"
+    ],
+    "sourceName": "Ars Technica",
+    "sourceType": "媒体报道",
+    "sourceUrl": "https://arstechnica.com/ai/2026/04/construction-delays-hit-40-of-us-data-centers-planned-for-2026/",
+    "id": "2026-04-18-cbf44d2dcf1e8301",
+    "slug": "美国-ai-数据中心建设延误升温-电力和施工能力开始卡主节奏"
+  },
+  {
     "channel": "招投标",
     "title": "中国移动浙江公司2024及2025年算网能力三阶段项目大数据平台软件采购项目",
     "score": 7.8,
