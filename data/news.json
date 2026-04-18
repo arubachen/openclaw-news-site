@@ -1,6 +1,82 @@
 [
   {
     "channel": "技术趋势",
+    "title": "Google发布Gemini 3.1 Flash TTS，把可控语音生成推到70多种语言和原生水印",
+    "score": 8.3,
+    "publishedAt": "2026-04-15T08:00:00+08:00",
+    "ingestedAt": "2026-04-18T21:37:03+08:00",
+    "summary": "Google 4月15日发布 Gemini 3.1 Flash TTS，并把音频标签 audio tags 做成可直接嵌入文本的控制层。官方称该模型支持 70 多种语言、原生多说话人对话，并在 Artificial Analysis TTS 排行中拿到 1211 Elo。产品侧已经在 Gemini API、Google AI Studio、Vertex AI 和 Google Vids 预览上线，同时所有生成音频默认加入 SynthID 水印。此次更新把语音生成从单纯朗读，往可编排、可多角色、可安全识别继续推进。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google把 TTS 从读出来往可导演、可编排、可多角色推进，控制粒度直接落到音色、语速、语气和场景说明。"
+      },
+      {
+        "label": "时",
+        "value": "4月15日发布，当天进入 Gemini API、AI Studio、Vertex AI 和 Google Vids 预览。"
+      },
+      {
+        "label": "数",
+        "value": "支持 70+ 语言，Artificial Analysis TTS Elo 为 1211，全部生成音频默认带 SynthID 水印。"
+      },
+      {
+        "label": "影",
+        "value": "语音能力开始像文本模型一样进入统一模型栈，企业做客服、视频、教育和多语音交互时，不再只是在不同 TTS 厂商间拼组件。"
+      }
+    ],
+    "judgment": "这次往前拱的不是配音效果，而是把语音输出也做成可编程接口和统一安全标记。后面要盯的是 audio tags 会不会成为行业常用写法，以及多语言一致性在真实业务里能不能站住。",
+    "tags": [
+      "语音模型",
+      "Gemini",
+      "多模态",
+      "内容水印"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官网",
+    "sourceUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-tts/",
+    "id": "2026-04-15-e4eec7dd2e6f89f1",
+    "slug": "google发布gemini-3-1-flash-tts-把可控语音生成推到70多种语言和原生水印"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "NVIDIA把AI基础设施核算口径从FLOPS拉到cost per token，直接对准推理工厂产出",
+    "score": 8.0,
+    "publishedAt": "2026-04-15T08:00:00+08:00",
+    "ingestedAt": "2026-04-18T21:37:03+08:00",
+    "summary": "NVIDIA 4月15日发文重新定义 AI 基础设施 TCO，明确提出 cost per token 才是推理时代的核心口径，而不是 FLOPS per dollar。文中把数据中心定义为“AI token factories”，并给出 DeepSeek-R1 的对比数据：HGX H200 每 GPU 每秒 90 tokens，而 GB300 NVL72 每 GPU 每秒 6000 tokens；对应每百万 tokens 成本从 4.20 美元降到 0.12 美元。文章同时把网络、精度、推理运行时、KV-cache 和 MoE all-to-all 能力一起纳入核算框架。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "NVIDIA公开把 AI 基础设施评估口径从芯片参数转向 token 产出，硬件、网络和推理软件被放进同一个账本。"
+      },
+      {
+        "label": "时",
+        "value": "4月15日发布，延续 GTC 后对 AI factory 的口径统一。"
+      },
+      {
+        "label": "数",
+        "value": "文中给出 DeepSeek-R1 对比，H200 为 90 tokens/s/GPU，GB300 NVL72 为 6000 tokens/s/GPU；每百万 tokens 成本分别为 4.20 美元和 0.12 美元。"
+      },
+      {
+        "label": "影",
+        "value": "后续算力采购、云定价和企业自建集群评估，都会更快从买多强的卡切到单位产出多少钱。"
+      }
+    ],
+    "judgment": "这篇更像在给下一轮算力投资改考核表，谁再只讲 FLOPS 和单卡价格就容易被带偏。接下来要盯云厂商和服务器厂商会不会跟着把报价、基准测试和客户案例都换成 token 口径。",
+    "tags": [
+      "算力基础设施",
+      "推理",
+      "数据中心",
+      "TCO"
+    ],
+    "sourceName": "NVIDIA Blog",
+    "sourceType": "官网",
+    "sourceUrl": "https://blogs.nvidia.com/blog/lowest-token-cost-ai-factories/",
+    "id": "2026-04-15-c0aa45db6bdfd09e",
+    "slug": "nvidia把ai基础设施核算口径从flops拉到cost-per-token-直接对准推理工厂产出"
+  },
+  {
+    "channel": "技术趋势",
     "title": "Cloudflare 发布 Agent Memory，把代理记忆做成托管服务",
     "score": 8.3,
     "publishedAt": "2026-04-17T21:00:00+08:00",
