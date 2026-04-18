@@ -1,6 +1,44 @@
 [
   {
     "channel": "市场快讯",
+    "title": "Anthropic推出Claude Design，把原型、PPT和单页视觉稿直接做进Claude",
+    "score": 8.2,
+    "publishedAt": "2026-04-17T23:00:00+08:00",
+    "ingestedAt": "2026-04-18T23:47:17+08:00",
+    "summary": "Anthropic 4月17日宣布上线实验性产品 Claude Design，用户直接用自然语言就能在 Claude 里生成原型图、演示文稿、one-pager 等视觉内容。产品面向没有设计背景的创始人、产品经理等人群，先由 Claude 生成初版，再支持继续改颜色、字体、布局和深色模式。Anthropic 还说，这个工具可以读取团队代码库和设计文件，把公司的设计系统直接套进输出结果里。当前 Claude Design 由 Claude Opus 4.7 驱动，先向 Claude Pro、Max、Team 和 Enterprise 订阅用户开放 research preview。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Anthropic 发布 Claude Design，把视觉内容生成从聊天扩到原型、PPT、单页等具体交付物。"
+      },
+      {
+        "label": "时",
+        "value": "TechCrunch 披露时间为 2026-04-17 08:00 PDT；Anthropic 当日官宣。"
+      },
+      {
+        "label": "数",
+        "value": "当前由 Claude Opus 4.7 驱动，开放给 Pro、Max、Team、Enterprise 四类订阅用户；导出支持 PDF、URL、PPTX，并可发送到 Canva。"
+      },
+      {
+        "label": "影",
+        "value": "说明 Anthropic 正把 Claude 往企业内容生产和协作链路再推进一步，开始直接碰设计与文档生成入口。"
+      }
+    ],
+    "judgment": "这不是小功能补丁，是 Anthropic 继续往企业工作流里插入口子。先盯它能不能真的接住团队设计系统和多人协作，不然就还是演示味更重。",
+    "tags": [
+      "Anthropic",
+      "Claude",
+      "AI设计",
+      "企业软件"
+    ],
+    "sourceName": "TechCrunch",
+    "sourceType": "新闻稿",
+    "sourceUrl": "https://techcrunch.com/2026/04/17/anthropic-launches-claude-design-a-new-product-for-creating-quick-visuals/",
+    "id": "2026-04-17-cf3326365c4b99da",
+    "slug": "anthropic推出claude-design-把原型-ppt和单页视觉稿直接做进claude"
+  },
+  {
+    "channel": "市场快讯",
     "title": "Cursor据称接近完成新一轮融资：拟募资超20亿美元，融资前估值达500亿美元",
     "score": 8.8,
     "publishedAt": "2026-04-18T00:00:00+08:00",
