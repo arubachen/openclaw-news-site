@@ -1,6 +1,84 @@
 [
   {
     "channel": "技术趋势",
+    "title": "Cloudflare 推出 Agent Memory 托管服务，把长期上下文拆到 Worker 外面",
+    "score": 7.8,
+    "publishedAt": "2026-04-18T00:00:00+08:00",
+    "ingestedAt": "2026-04-19T17:35:45+08:00",
+    "summary": "Cloudflare 上线 Agent Memory 私测服务，核心是把 AI 对话里不必每轮都塞进上下文的信息异步存成可检索记忆，再按需回灌给模型。The Register 报道称，该服务既可作为 Cloudflare Workers 绑定使用，也提供 REST API，面向长期运行的 agent、真实代码库和生产系统场景。报道同时点出，大模型虽然上下文窗口变大，但系统提示词、工具、技能和消息缓冲会持续挤占有效 token，托管记忆开始走向平台层能力。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Cloudflare 把 agent 的长期记忆单独做成托管服务，支持 Worker binding 和 REST API。"
+      },
+      {
+        "label": "时",
+        "value": "4月18日报道，服务目前处于 private beta。"
+      },
+      {
+        "label": "数",
+        "value": "文中提到 Claude Opus 4.7 上下文窗口 100 万 token，Gemma 4 为 12.8 万到 25.6 万 token。"
+      },
+      {
+        "label": "影",
+        "value": "开发者开始把上下文管理拆成即时上下文加外部记忆层，agent 架构会更像有状态系统。"
+      }
+    ],
+    "judgment": "这条该看的不是 Cloudflare 又加了个 AI 功能，是 memory 正在从提示词技巧往平台层收。后面盯两件事：检索延迟和可迁移性，谁先把这两项做好，谁就更容易吃到企业 agent 托管。",
+    "tags": [
+      "AI Infra",
+      "Agent",
+      "Cloudflare",
+      "Memory",
+      "API"
+    ],
+    "sourceName": "The Register",
+    "sourceType": "媒体",
+    "sourceUrl": "https://www.theregister.com/2026/04/18/cloudflare_agent_memory/",
+    "id": "2026-04-18-b12d7551aaae4eba",
+    "slug": "cloudflare-推出-agent-memory-托管服务-把长期上下文拆到-worker-外面"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "中国电信福建建成市县镇三级量子城域网，并落地跨省量子 OTN 金融专线环网",
+    "score": 8.3,
+    "publishedAt": "2026-04-18T08:22:21+08:00",
+    "ingestedAt": "2026-04-19T17:35:45+08:00",
+    "summary": "央广网4月18日报道，中国电信福建公司宣布建成全国首张市、县、镇三级量子城域网，并落地全国首个跨省量子 OTN 金融专线环网。公开信息显示，该网络贯通福州、上海、成都三大节点，专线支持 400G 传输，量子密钥每 30 分钟动态更新，加解密时延低于 1 微秒；漳州侧已有 85 个财政系统接入单位完成全域加密改造。量子加密已经开始进入政务、金融和产业溯源这些可运营网络场景。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国电信福建把量子加密做进 OTN 专线和城域网，网络已下沉到市县镇三级。"
+      },
+      {
+        "label": "时",
+        "value": "4月18日披露，福建侧近期宣布建成并投入应用。"
+      },
+      {
+        "label": "数",
+        "value": "跨省环网连通福州、上海、成都，支持 400G 传输，量子密钥每 30 分钟更新，加解密时延低于 1 微秒，漳州已有 85 个单位接入。"
+      },
+      {
+        "label": "影",
+        "value": "量子安全通信开始从单点试验转向区域级网络和行业专网，运营商会更快把它包装成可复制产品。"
+      }
+    ],
+    "judgment": "这条不是单个示范项目，关键是运营商已经把量子加密往现网产品化推了。接下来盯复制速度：有没有第二个省跟进，以及金融、政务之外能不能跑出更多高价值专线场景。",
+    "tags": [
+      "量子通信",
+      "OTN",
+      "运营商",
+      "金融专线",
+      "数据安全"
+    ],
+    "sourceName": "央广网",
+    "sourceType": "媒体",
+    "sourceUrl": "https://www.cnr.cn/fj/jdt/20260418/t20260418_527589937.shtml",
+    "id": "2026-04-18-c6abb51a84e915f4",
+    "slug": "中国电信福建建成市县镇三级量子城域网-并落地跨省量子-otn-金融专线环网"
+  },
+  {
+    "channel": "技术趋势",
     "title": "C3安全大会联动防御系统升级到AI原生，多方同步组建智能体原生安全共同体",
     "score": 7.7,
     "publishedAt": "2026-04-19T00:00:00+08:00",
