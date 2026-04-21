@@ -1,5 +1,165 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "Anthropic与Amazon把算力绑定再往前推了一大步：10年AWS承诺换5GW新算力",
+    "score": 8.9,
+    "publishedAt": "2026-04-20T00:00:00+08:00",
+    "ingestedAt": "2026-04-21T09:41:27+08:00",
+    "summary": "Anthropic 4月20日披露，Amazon再投50亿美元，使其累计投资额达到130亿美元；作为交换，Anthropic承诺未来10年在AWS支出超过1000亿美元，并获得最多5GW新增算力，用于Claude训练和推理。这笔合作绑定了Amazon自研芯片路线，覆盖Trainium2到Trainium4，并保留后续芯片容量采购选项。结构上，这笔合作把模型公司、云厂商和芯片路线绑成了长期算力合约。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Anthropic与Amazon把合作从资金层面推进到长期算力供给，核心是5GW新增容量和Trainium路线绑定。"
+      },
+      {
+        "label": "时",
+        "value": "4月20日披露，协议周期为未来10年。"
+      },
+      {
+        "label": "数",
+        "value": "Amazon新增投资50亿美元，累计130亿美元；Anthropic承诺AWS支出超1000亿美元；可获得最多5GW新算力。"
+      },
+      {
+        "label": "影",
+        "value": "大模型公司和云厂商的合作正在从买卡租云，走向多年期、带芯片路线约束的算力包销。"
+      }
+    ],
+    "judgment": "这条最硬的不是融资额，是Anthropic把未来算力直接锁进AWS和Trainium路线里了。后面要盯两件事：Trainium实际交付节奏，和别家模型厂会不会被迫跟进这种长期包量合同。",
+    "tags": [
+      "AI",
+      "算力",
+      "云基础设施",
+      "Trainium",
+      "Anthropic",
+      "AWS"
+    ],
+    "sourceName": "TechCrunch AI",
+    "sourceType": "媒体",
+    "sourceUrl": "https://techcrunch.com/2026/04/20/anthropic-takes-5b-from-amazon-and-pledges-100b-in-cloud-spending-in-return/",
+    "id": "2026-04-20-0063ccf0111366ae",
+    "slug": "anthropic与amazon把算力绑定再往前推了一大步-10年aws承诺换5gw新算力"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "GitHub暂停Copilot个人新订阅，agent式编码把原有算力定价模型顶不住了",
+    "score": 8.3,
+    "publishedAt": "2026-04-20T00:00:00+08:00",
+    "ingestedAt": "2026-04-21T09:41:27+08:00",
+    "summary": "GitHub 4月20日暂停Copilot Pro、Pro+和Student新订阅，原因是agentic workflows显著抬高了Copilot的计算消耗。GitHub同时收紧session与weekly usage limits，并调整高端模型的premium multiplier；报道提到Opus 4.7在Pro+中的促销倍率达到7.5倍，而其token扩张让成本比前代高出20%到40%。这说明AI编程产品正在从按次订阅转向更精细的容量与token约束。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "GitHub开始用暂停新客、收紧限额的方式给Copilot控容量，直接原因是agent式工作流把单用户消耗抬高了。"
+      },
+      {
+        "label": "时",
+        "value": "4月20日披露，免费试用在前一周已先暂停。"
+      },
+      {
+        "label": "数",
+        "value": "Opus 4.7临时采用7.5倍premium multiplier；其token开销比前代高20%到40%。"
+      },
+      {
+        "label": "影",
+        "value": "AI编程平台的商业模式正在从平价包月，转向按容量、按token和按模型层级重新定价。"
+      }
+    ],
+    "judgment": "这不是普通限流，说明agent编码一旦跑成长会话和平行任务，原来那套包月价很快就亏穿。接下来要盯Copilot会不会正式改成更重的token计费，以及别家编码助手会不会同步收紧。",
+    "tags": [
+      "AI",
+      "开发工具",
+      "GitHub Copilot",
+      "Agent",
+      "算力成本",
+      "定价"
+    ],
+    "sourceName": "The Register AI",
+    "sourceType": "媒体",
+    "sourceUrl": "https://www.theregister.com/2026/04/20/microsofts_github_grounds_copilot_account/",
+    "id": "2026-04-20-a7ae4ff14209c0a9",
+    "slug": "github暂停copilot个人新订阅-agent式编码把原有算力定价模型顶不住了"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Google把AI Studio从免费试玩往订阅桥接推：AI Pro和Ultra直接给更高开发额度",
+    "score": 7.9,
+    "publishedAt": "2026-04-20T00:00:00+08:00",
+    "ingestedAt": "2026-04-21T09:41:27+08:00",
+    "summary": "Google 4月20日宣布，Google AI Pro和Ultra订阅用户可在AI Studio获得更高使用上限，并直接使用Nano Banana Pro与Gemini Pro模型。官方把这次调整定义为从免费层到正式API计费之间的billing bridge：开发者在原型和实验阶段可先用订阅额度，准备上线时再切换到API。平台策略上，这次调整把消费者订阅和开发者工具栈进一步打通。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google把AI订阅权益直接接进AI Studio，降低了开发者从体验到原型开发的入口门槛。"
+      },
+      {
+        "label": "时",
+        "value": "4月20日起向AI Pro和Ultra订阅用户滚动开放。"
+      },
+      {
+        "label": "数",
+        "value": "新增更高usage limits，并开放Nano Banana Pro与Gemini Pro模型；生产环境仍建议切到按API使用付费。"
+      },
+      {
+        "label": "影",
+        "value": "消费级AI订阅和开发者平台开始共用一套入口，原型开发阶段的获客和留存会更前置。"
+      }
+    ],
+    "judgment": "Google这步很像把订阅用户直接往开发者池里捞，先让你做起来，再把正式上线导向API。后面要盯它会不会继续把更多模型和调试能力塞进订阅层，冲击独立开发者的早期工具选择。",
+    "tags": [
+      "AI",
+      "开发者平台",
+      "Google AI Studio",
+      "Gemini",
+      "API",
+      "订阅策略"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/google-one-ai-studio/",
+    "id": "2026-04-20-ad1f1de625662d3d",
+    "slug": "google把ai-studio从免费试玩往订阅桥接推-ai-pro和ultra直接给更高开发额度"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "广西打通应急场景下5G异网漫游，四家基础电信企业开始做真正的一网托底",
+    "score": 7.8,
+    "publishedAt": "2026-04-20T14:45:00+08:00",
+    "ingestedAt": "2026-04-21T09:41:27+08:00",
+    "summary": "广西通信管理局4月20日披露，广西已实现应急场景下5G异网漫游。自今年1月启动以来，当地围绕网络改造、互联互通和联调测试推进建设，目前电信、移动、联通、广电共12条链路实现互联互通，跨大区数据对接完成，语音、视频、紧急呼叫、短消息和数据传输测试全部完成。现在四家基础电信企业的手机信号已可在应急场景下互相漫入。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "广西把5G异网漫游从部署要求做成了省级落地，四家运营商已经能在应急场景互相漫入。"
+      },
+      {
+        "label": "时",
+        "value": "4月20日发布进展，项目自今年1月启动。"
+      },
+      {
+        "label": "数",
+        "value": "电信、移动、联通、广电共12条链路完成互联互通，语音、视频、紧急呼叫、短消息和数据传输测试全部完成。"
+      },
+      {
+        "label": "影",
+        "value": "国内5G网络共享开始从共建共维，进一步走向跨运营商韧性保障和应急托底。"
+      }
+    ],
+    "judgment": "这条不是地方新闻小修小补，关键是四家网开始在应急场景下真正互认互通。后面要盯别的省会不会快速复制，以及异网漫游会不会从应急场景往更多公共保障场景扩。",
+    "tags": [
+      "5G",
+      "运营商",
+      "网络基础设施",
+      "异网漫游",
+      "应急通信",
+      "广电"
+    ],
+    "sourceName": "工信部新闻发布",
+    "sourceType": "官方发布",
+    "sourceUrl": "https://www.miit.gov.cn/xwfb/gxdt/dfdt/art/2026/art_7ed18b7a735a40faa8fd4446339859c8.html",
+    "id": "2026-04-20-7c2583899f00eaab",
+    "slug": "广西打通应急场景下5g异网漫游-四家基础电信企业开始做真正的一网托底"
+  },
+  {
     "channel": "招投标",
     "title": "2026清远联通某智慧服务平台采购项目公告",
     "score": 7.6,
