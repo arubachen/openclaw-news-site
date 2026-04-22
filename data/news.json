@@ -1,5 +1,232 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "Google发布Gemini Enterprise Agent Platform，统一企业级Agent开发、治理和接入",
+    "score": 8.8,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T21:37:27+08:00",
+    "summary": "Google在Cloud Next '26发布Gemini Enterprise Agent Platform，把Vertex AI里的模型构建与调优能力，和新的agent集成、安全、DevOps、治理能力放到同一平台里。平台同时连接面向员工入口的Gemini Enterprise应用，覆盖企业内部Agent的开发、发布、管理和使用流程。官方披露首批可接入Gemini 3.1 Pro、Gemini 3.1 Flash Image（Nano Banana 2）、Lyria 3，也支持Anthropic Claude Opus、Sonnet、Haiku。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google在Cloud Next '26发布Gemini Enterprise Agent Platform，整合模型、agent集成、安全、DevOps与治理能力。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22，Google官方博客披露。"
+      },
+      {
+        "label": "数",
+        "value": "首批覆盖Gemini 3.1 Pro、Gemini 3.1 Flash Image、Lyria 3，并支持Claude Opus、Sonnet、Haiku共6个代表性模型版本。"
+      },
+      {
+        "label": "影",
+        "value": "企业做Agent时，模型选择、权限治理和员工入口开始收敛到同一平台层。"
+      }
+    ],
+    "judgment": "Google这次不是再加一个模型，而是先把企业里最乱的那层平台座搭起来。接下来要盯它的治理、权限和多模型编排到底能不能真落到生产，而不是只停在演示层。",
+    "tags": [
+      "AI",
+      "Agent",
+      "企业平台",
+      "Google Cloud"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-enterprise-agent-platform/",
+    "id": "2026-04-22-18de20dc7625ac1c",
+    "slug": "google发布gemini-enterprise-agent-platform-统一企业级agent开发-治理和接入"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Google推出TPU 8t与TPU 8i，分别押注大模型训练与Agent推理",
+    "score": 9.0,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T21:37:27+08:00",
+    "summary": "Google宣布推出两款面向不同AI负载的新TPU：TPU 8i主打让AI agent更快完成多步推理与执行，TPU 8t则面向训练，强调可在单个超大内存池上运行更复杂模型。官方把这两款芯片与自家网络、数据中心和节能运营一起打包，作为agentic AI底层基础设施的一部分。发布内容明确把训练和推理区分为两条硬件路径。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google发布两款新TPU，其中TPU 8i偏Agent推理，TPU 8t偏大模型训练。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22，Google官方博客发布。"
+      },
+      {
+        "label": "数",
+        "value": "本次一口气推出2款专用TPU，并明确按训练与推理两类负载拆分定位。"
+      },
+      {
+        "label": "影",
+        "value": "云上AI算力开始更细地按场景切分，Agent推理芯片会从通用加速器里单独长出来。"
+      }
+    ],
+    "judgment": "这条最该看的就是Google把Agent推理单独做成芯片方向了，说明交互时延已经压过了单纯堆参数。接下来要盯8i和8t的真实规格、价格和上线节奏，看看它会不会逼着别家也把训练卡和推理卡彻底拆开。",
+    "tags": [
+      "AI芯片",
+      "TPU",
+      "推理",
+      "训练"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/tpus-8t-8i-cloud-next/",
+    "id": "2026-04-22-255a6004cb99d37d",
+    "slug": "google推出tpu-8t与tpu-8i-分别押注大模型训练与agent推理"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "NVIDIA与Google Cloud把AI基础设施合作推到Rubin一代，集群规模和成本指标同步抬高",
+    "score": 9.2,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T21:37:27+08:00",
+    "summary": "NVIDIA披露与Google Cloud在Cloud Next期间推进新一轮AI基础设施合作，核心包括基于Vera Rubin NVL72的A5X裸金属实例、Google Distributed Cloud上运行Gemini与Blackwell/Blackwell Ultra的预览、以及带保密计算的Blackwell GPU虚机。文中给出了一组具体规格：A5X号称可把单token推理成本压到上一代的1/10、每兆瓦token吞吐提升10倍，单站点可扩到8万块Rubin GPU，多站点集群可扩到96万块。Google还将A4、A4X、A4X Max到fractional G4等多层GPU形态并行铺开。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "NVIDIA与Google Cloud联合推进Rubin一代A5X、分布式云Gemini、保密计算Blackwell GPU等AI基础设施能力。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22，NVIDIA官方博客发布，场景对应Google Cloud Next。"
+      },
+      {
+        "label": "数",
+        "value": "A5X宣称单token推理成本降至上一代1/10、每兆瓦token吞吐提升10倍，单站点集群最多8万块Rubin GPU，多站点最多96万块。"
+      },
+      {
+        "label": "影",
+        "value": "超大规模AI工厂的竞争开始从有没有GPU，转到谁能把网络、机房、保密计算和多站点调度一起做出来。"
+      }
+    ],
+    "judgment": "这条不是单纯联名发稿，关键是Google和NVIDIA把下一代超大集群的口径先报出来了。后面要盯A5X实际商用时间和客户可拿到的规模，看看这些数字是路线图还是马上可买的供给。",
+    "tags": [
+      "算力",
+      "数据中心",
+      "GPU",
+      "Google Cloud",
+      "NVIDIA"
+    ],
+    "sourceName": "NVIDIA Blog",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blogs.nvidia.com/blog/google-cloud-agentic-physical-ai-factories/",
+    "id": "2026-04-22-b8f378d8ceb8a781",
+    "slug": "nvidia与google-cloud把ai基础设施合作推到rubin一代-集群规模和成本指标同步抬高"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "中国移动发布5G-A超级上行白皮书并落地中试基地，上行能力开始从指标走向网络改造",
+    "score": 8.4,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T21:37:27+08:00",
+    "summary": "中国移动4月22日在杭州发布《5G-A超级上行技术演进及规划白皮书》，并宣布成立全国首个5G-A超级上行中试基地。报道提到其采用“3+2+3”上行增强技术体系，浙江已建成连续覆盖网络，基站超过2万站、用户超过1250万，西溪湿地示范区单用户上行峰值达到1Gbps。中国移动将这套能力指向AI智能体、具身智能、高清直播等高上行场景。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国移动发布5G-A超级上行白皮书，并启动全国首个超级上行中试基地。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22，杭州大会现场披露。"
+      },
+      {
+        "label": "数",
+        "value": "浙江已建成超2万站连续覆盖网络、用户超1250万，示范区单用户上行峰值1Gbps。"
+      },
+      {
+        "label": "影",
+        "value": "运营商后续做5G-A网络建设时，上行覆盖和时延能力会比过去更靠前，面向直播、智能终端和边缘AI的网络指标会被重新排。"
+      }
+    ],
+    "judgment": "这条要看的是运营商终于把上行短板拿出来单独补了，5G-A不再只是宣传下行更快。后面盯白皮书后的设备、终端和业务侧有没有同步跟上，不然1Gbps上行还是示范点里的数字。",
+    "tags": [
+      "5G-A",
+      "运营商",
+      "网络基础设施",
+      "中国移动"
+    ],
+    "sourceName": "DoNews",
+    "sourceType": "媒体转述",
+    "sourceUrl": "https://www.donews.com/news/detail/8/6524303.html",
+    "id": "2026-04-22-60383a1fa70c53c6",
+    "slug": "中国移动发布5g-a超级上行白皮书并落地中试基地-上行能力开始从指标走向网络改造"
+  },
+  {
+    "channel": "市场快讯",
+    "title": "工业和信息化部召开未来产业企业座谈会",
+    "score": 9.0,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T21:35:33+08:00",
+    "summary": "工业和信息化部召开未来产业企业座谈会，主题直接围绕未来产业的推进节奏和落地安排。会议把企业方拉进来对接，说明这条线还在往具体政策和项目层面往下走。原文目前给出的信息以会议本身为主，暂时没有披露更细的项目名单或配套文件。后面可以继续盯会后有没有点名具体方向、试点或支持措施。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "工业和信息化部召开未来产业企业座谈会"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露"
+      },
+      {
+        "label": "影",
+        "value": "未来产业、产业政策、项目落地节奏"
+      }
+    ],
+    "judgment": "这类会谈通常看后续会不会落到具体方向和试点，不然就只是把企业先拉到台面上。先盯会后有没有点名项目、名单或者配套政策。",
+    "tags": [
+      "工信部",
+      "未来产业",
+      "企业座谈会"
+    ],
+    "sourceName": "miit.gov.cn",
+    "sourceType": "official",
+    "sourceUrl": "https://www.miit.gov.cn/xwfb/bldhd/art/2026/art_5df37c8c6c99464694873048cc180a92.html",
+    "id": "2026-04-22-4c62cb86e3406cf5",
+    "slug": "工业和信息化部召开未来产业企业座谈会"
+  },
+  {
+    "channel": "市场快讯",
+    "title": "Google Maps is about to get a big dose of AI",
+    "score": 6.0,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T21:35:33+08:00",
+    "summary": "Google Maps 准备加入一批 AI 功能，入口型产品又往智能化方向挪了一步。这个变化落在地图这种高频场景里，后面如果真上线，影响的不只是体验，也会牵到本地生活、广告和推荐逻辑。Google 正在把 AI 往更大的用户入口里塞。后面主要看它是不是只做小修小补，还是会带出产品结构变化。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google Maps 计划加入 AI 功能"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露"
+      },
+      {
+        "label": "影",
+        "value": "地图入口、广告、本地生活产品逻辑"
+      }
+    ],
+    "judgment": "先看它有没有真上线到地图主入口，不然只是把 AI 名字贴上去。要是范围铺开，本地生活和广告产品线都会被带着动。",
+    "tags": [
+      "Google",
+      "地图",
+      "AI应用"
+    ],
+    "sourceName": "techcrunch.com",
+    "sourceType": "media",
+    "sourceUrl": "https://techcrunch.com/2026/04/22/google-maps-is-about-to-get-a-big-dose-of-ai/",
+    "id": "2026-04-22-12ddc06d309f1748",
+    "slug": "google-maps-is-about-to-get-a-big-dose-of-ai"
+  },
+  {
     "channel": "市场快讯",
     "title": "Mass data awakening highlights importance of scaling AI infrastructure",
     "score": 6.8,
