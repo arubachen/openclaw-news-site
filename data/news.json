@@ -1,5 +1,81 @@
 [
   {
+    "channel": "市场快讯",
+    "title": "Mass data awakening highlights importance of scaling AI infrastructure",
+    "score": 6.8,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T18:56:05+08:00",
+    "summary": "The Register 这篇讨论的是数据量继续放大后，AI 基础设施要怎么跟上。文章把数据中心扩容、算力供给和配套资源放在一起看，指向的是后面谁先把机柜、电力和成本卡住。稿子没有给出具体公司动作，但主题很直接，就是基础设施扩容节奏不能再拖。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "The Register 报道 AI 基础设施扩容"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露"
+      },
+      {
+        "label": "影",
+        "value": "数据中心、算力、供电与机柜扩容"
+      }
+    ],
+    "judgment": "先看数据中心和算力供应链会不会继续往上加单，电力和机柜拿不下来就会拖慢落地。对做 IDC、服务器和配套电源的公司更直接，接下来盯扩容计划和资本开支口径。",
+    "tags": [
+      "AI",
+      "算力",
+      "数据中心",
+      "基础设施"
+    ],
+    "sourceName": "The Register",
+    "sourceType": "原文",
+    "sourceUrl": "https://www.theregister.com/2026/04/22/mass_data_awakening_highlights/",
+    "id": "2026-04-22-797b45a318c24a5e",
+    "slug": "mass-data-awakening-highlights-importance-of-scaling-ai-infrastructure"
+  },
+  {
+    "channel": "市场快讯",
+    "title": "Database world trying to build natural language query systems again – this time with LLMs",
+    "score": 6.2,
+    "publishedAt": "2026-04-22T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T18:56:05+08:00",
+    "summary": "这篇在讲数据库厂商又开始推自然语言查数，这次换成 LLM 来做。文章指向的是企业软件里最常见的查询入口，数据库、BI 和业务系统都会被一起卷进去。它没有展开具体产品细节，但信息本身已经足够说明厂商还在抢这个入口。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "数据库厂商重新推自然语言查询"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-22"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露"
+      },
+      {
+        "label": "影",
+        "value": "企业软件、数据库、BI 查询入口"
+      }
+    ],
+    "judgment": "先看这个能力是停在演示层，还是开始进到日常查询和交付里。真要落地，最先受影响的是数据库和企业软件厂商的产品节奏，接下来盯客户侧有没有把它写进采购和上线清单。",
+    "tags": [
+      "AI",
+      "企业数字化",
+      "数据库",
+      "自然语言查询"
+    ],
+    "sourceName": "The Register",
+    "sourceType": "原文",
+    "sourceUrl": "https://www.theregister.com/2026/04/22/llms_natural_langauge_systems_new/",
+    "id": "2026-04-22-a1a12f56af190d1a",
+    "slug": "database-world-trying-to-build-natural-language-query-systems-again-this-time-wi"
+  },
+  {
     "channel": "技术趋势",
     "title": "工信部把算力、5G-A、万兆光网放到同一张推进表里",
     "score": 8.6,
