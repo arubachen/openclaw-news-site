@@ -1,5 +1,83 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "工信部把算力、5G-A、万兆光网放到同一张推进表里",
+    "score": 8.6,
+    "publishedAt": "2026-04-21T10:00:00+08:00",
+    "ingestedAt": "2026-04-22T17:44:04+08:00",
+    "summary": "4月21日，工信部在国新办发布会上集中披露一季度信息基础设施和算力产业进展。发布口径把智能算力、算力网络、5G-A、万兆光网和6G前沿研发放进同一组基础设施安排里。会上给出的关键数字包括：截至3月底我国智能算力规模1882 EFLOPS（FP16），近两年围绕算力枢纽建成超70条算力大通道，5G基站总数495.8万个，10G PON端口3201万个，5G-A已覆盖330个城市，86个城市的168个小区、工厂和园区已开展万兆光网试点。工信部同时明确后续会推进“毫秒用算”网络、完善中国算力平台、推动双千兆向双万兆演进，并支持太空算力前瞻研究。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "工信部把算力供给、算力传输、5G-A、万兆光网和6G前沿研发并列成基础设施主线。"
+      },
+      {
+        "label": "时",
+        "value": "4月21日国新办发布会披露，一季度数据截至2026年3月底。"
+      },
+      {
+        "label": "数",
+        "value": "智能算力1882 EFLOPS（FP16）；超70条算力大通道；5G基站495.8万个；10G PON端口3201万个；5G-A覆盖330城；万兆光网试点落在86城168个点位。"
+      },
+      {
+        "label": "影",
+        "value": "算力网络和接入网络被一起提速，后续设备、传输、边缘节点和行业专网会被放到同一轮建设节奏里。"
+      }
+    ],
+    "judgment": "这条不是例行报数，工信部已经把‘算力+传输+接入’连成一条线了。接下来要盯的是毫秒用算网络和双万兆试点会不会很快落成更细的标准、节点和投资口径。",
+    "tags": [
+      "算力网络",
+      "5G-A",
+      "万兆光网",
+      "6G",
+      "工信部"
+    ],
+    "sourceName": "工信部新闻发布",
+    "sourceType": "官网",
+    "sourceUrl": "https://www.miit.gov.cn/xwfb/bldhd/art/2026/art_9e461fb26c75403f822cef394e0ad2d1.html",
+    "id": "2026-04-21-ae0d7eb7fca815c6",
+    "slug": "工信部把算力-5g-a-万兆光网放到同一张推进表里"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Google把研究型Agent从搜网页升级到连企业私有数据一起跑",
+    "score": 8.4,
+    "publishedAt": "2026-04-21T00:00:00+08:00",
+    "ingestedAt": "2026-04-22T17:44:04+08:00",
+    "summary": "Google DeepMind 4月21日发布Deep Research和Deep Research Max新版研究代理，底座升级到Gemini 3.1 Pro，并在Gemini API付费预览中开放。新版本最大的变化有两块：一是支持MCP，可把远程MCP、文件上传、连接文件库、URL Context、Code Execution、File Search等工具一起接进同一条研究流程；二是原生生成图表和信息图，不再只输出文本报告。Google把两个档位分开：Deep Research主打低延迟和更低成本，适合交互式场景；Deep Research Max主打更长测试时算力和更高综合质量，适合异步后台研究任务。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google把研究型Agent做成了可接企业数据源和多工具链的通用研究引擎。"
+      },
+      {
+        "label": "时",
+        "value": "4月21日发布，当天在Gemini API付费预览开放。"
+      },
+      {
+        "label": "数",
+        "value": "底座升级到Gemini 3.1 Pro；新增Deep Research与Deep Research Max两档；可同时联动Google Search、远程MCP、URL Context、Code Execution、File Search。"
+      },
+      {
+        "label": "影",
+        "value": "研究型Agent的门槛从‘会不会搜’抬到‘能不能接私有源、跑多工具、直接出可用分析件’。"
+      }
+    ],
+    "judgment": "这次关键不是又多了个研究Agent名字，而是MCP和多工具接法已经进了正式产品层。接下来要盯企业数据源接入后的稳定性、成本，以及金融和生命科学这些高要求行业会不会先跑出来。",
+    "tags": [
+      "Google DeepMind",
+      "Gemini API",
+      "Deep Research Max",
+      "MCP",
+      "Agent"
+    ],
+    "sourceName": "Google AI Blog",
+    "sourceType": "官网",
+    "sourceUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/next-generation-gemini-deep-research/",
+    "id": "2026-04-21-c02756e98d7688c6",
+    "slug": "google把研究型agent从搜网页升级到连企业私有数据一起跑"
+  },
+  {
     "channel": "招投标",
     "title": "2026年联通一汽通信政企某客户某公司IT基础运维询比采购项目公告",
     "score": 8.0,
