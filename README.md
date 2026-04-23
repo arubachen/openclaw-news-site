@@ -19,13 +19,15 @@
 - 关键词搜索
 - 详情页（Hash 路由，天然兼容 GitHub Pages）
 - GitHub Pages Actions 部署工作流
+- 渐进式数据加载（首屏优先，剩余内容后台补齐）
 
 ## 目录结构
 
 ```text
-news-site/
+<repo-root>/
 ├─ .github/workflows/pages.yml   # GitHub Pages 发布
-├─ data/news.json                # 资讯数据源
+├─ data/news.json                # 资讯数据源（源数据）
+├─ scripts/build-data.mjs        # 生成渐进式加载数据分片
 ├─ scripts/validate-data.mjs     # 数据校验脚本
 ├─ index.html                    # 站点入口
 ├─ app.js                        # 前端逻辑
@@ -36,15 +38,22 @@ news-site/
 ## 本地预览
 
 ```bash
-cd /Users/arubachen/.openclaw/workspace/news-site
+git clone https://github.com/<your-account>/<your-repo>.git
+cd <your-repo>
 npm run serve
 # 打开 http://localhost:4173
 ```
 
+> 如果你想本地预览“首屏先出、后台补齐”的分片加载模式，可以先执行一次：
+>
+> ```bash
+> npm run build
+> ```
+
 ## 校验数据
 
 ```bash
-cd /Users/arubachen/.openclaw/workspace/news-site
+cd <your-repo>
 npm run validate
 ```
 
@@ -52,7 +61,7 @@ npm run validate
 
 ### 推荐方式
 
-把 `news-site/` 作为一个独立仓库根目录使用，然后直接推到 GitHub。
+把当前目录作为一个独立仓库根目录使用，然后直接推到 GitHub。
 
 仓库需要开启：
 - **Settings → Pages → Build and deployment → GitHub Actions**
@@ -61,6 +70,14 @@ npm run validate
 ```text
 .github/workflows/pages.yml
 ```
+
+部署时会自动执行：
+
+```bash
+npm run build
+```
+
+它会先校验 `data/news.json`，再生成部署用的分片数据文件，首屏只加载前一批资讯，剩余内容在后台继续补齐。
 
 ## 数据格式
 
@@ -99,8 +116,8 @@ data/news.json
 已经准备好的写入脚本：
 
 ```bash
-python3 /Users/arubachen/.openclaw/workspace/news-site/scripts/upsert_news.py \
-  --input /Users/arubachen/.openclaw/workspace/news-site/scripts/sample-import.json
+python3 scripts/upsert_news.py \
+  --input scripts/sample-import.json
 ```
 
 脚本会：
@@ -119,7 +136,7 @@ python3 /Users/arubachen/.openclaw/workspace/news-site/scripts/upsert_news.py \
 
 它们会在**成功发送 Discord 卡片后**，再把本轮实际发送的条目批量写入：
 ```text
-/Users/arubachen/.openclaw/workspace/news-site/data/news.json
+data/news.json
 ```
 
 ## 下一步最值得做的事

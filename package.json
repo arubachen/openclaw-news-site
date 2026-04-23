@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "python3 -m http.server 4173 -d .",
     "validate": "node scripts/validate-data.mjs",
-    "build": "npm run validate"
+    "build:data": "node scripts/build-data.mjs",
+    "build": "npm run validate && npm run build:data"
   }
 }

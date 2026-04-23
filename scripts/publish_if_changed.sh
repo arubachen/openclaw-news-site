@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+export SITE_DIR="$REPO_ROOT"
+
 python3 - <<'PY'
 from __future__ import annotations
 
@@ -12,7 +16,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-SITE_DIR = Path('/Users/arubachen/.openclaw/workspace/news-site')
+SITE_DIR = Path(os.environ['SITE_DIR']).resolve()
 WHITELIST = [
     'data/news.json',
 ]
@@ -72,7 +76,18 @@ with open(LOCK_FILE, 'a+', encoding='utf-8') as lock_fp:
         sys.exit(0)
 
     stamp = datetime.now().astimezone().strftime('%Y-%m-%d %H:%M:%S %z')
-    run('git', 'commit', '-m', f'chore: sync news-site content ({stamp})', '--', *WHITELIST, quiet=True)
+    commit_message = f'''Keep published site data aligned with the latest sync batch ({stamp})
+
+Automated content sync staged updated site data after validation
+so the public site reflects the newest processed records.
+
+Constraint: Only generated site data is auto-published by this helper
+Confidence: medium
+Scope-risk: narrow
+Directive: Keep the whitelist limited to generated content files
+Tested: npm run validate
+'''
+    run('git', 'commit', '-m', commit_message, '--', *WHITELIST, quiet=True)
     run('git', 'push', 'origin', 'main', quiet=True)
 
     emit(True, True, 'published')

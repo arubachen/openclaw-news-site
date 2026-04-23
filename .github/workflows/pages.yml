@@ -24,8 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate data
-        run: node scripts/validate-data.mjs
+      - name: Build site data assets
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

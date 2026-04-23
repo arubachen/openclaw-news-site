@@ -13,12 +13,13 @@ from pathlib import Path
 from typing import Any
 
 TZ_SH = timezone(timedelta(hours=8))
+DEFAULT_SITE_DATA = Path(__file__).resolve().parents[1] / 'data' / 'news.json'
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Upsert news/intel records into news-site/data/news.json")
+    parser = argparse.ArgumentParser(description="Upsert news/intel records into the site data store")
     parser.add_argument("--input", help="Path to a JSON file containing one item or an array of items")
-    parser.add_argument("--site-data", default="/Users/arubachen/.openclaw/workspace/news-site/data/news.json")
+    parser.add_argument("--site-data", default=str(DEFAULT_SITE_DATA))
     parser.add_argument("--max-items", type=int, default=2000)
     return parser.parse_args()
 
