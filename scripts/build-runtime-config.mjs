@@ -16,7 +16,7 @@ function resolveBuildId() {
 const outputFile = path.resolve('runtime-config.js');
 const config = {
   buildId: resolveBuildId(),
-  cloudflareWebAnalyticsToken: String(process.env.CF_WEB_ANALYTICS_TOKEN || '').trim(),
+  cloudflareWebAnalyticsToken: String(process.env.CF_WEB_ANALYTICS_TOKEN || 'ada8c7e49f9c46bd97e3dd02ed2f3900').trim(),
   cloudflareWebAnalyticsSpa: false,
 };
 
