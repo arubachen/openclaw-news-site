@@ -3,6 +3,8 @@ const PAGE_SIZE = 20;
 const BACK_TO_TOP_THRESHOLD_FACTOR = 1;
 const SEARCH_INPUT_DEBOUNCE_MS = 220;
 const DATA_REQUEST_OPTIONS = { cache: 'no-cache' };
+const AUTO_LOAD_SCROLL_THRESHOLD_PX = 520;
+const AUTO_LOAD_COOLDOWN_MS = 280;
 const BACKGROUND_CHUNK_IMMEDIATE_DELAY_MS = 140;
 const BACKGROUND_CHUNK_FALLBACK_DELAY_MS = 260;
 const BACKGROUND_COMPLETE_BADGE_MS = 2400;
@@ -26,6 +28,8 @@ const state = {
   isFullyLoaded: false,
   backgroundError: '',
   backgroundCompleteVisible: false,
+  currentRouteKind: 'list',
+  currentRouteItemCount: 0,
 };
 
 const loadedChunkIds = new Set();
@@ -37,6 +41,7 @@ let backgroundLoaderHandle = null;
 let backgroundCompleteTimer = null;
 let searchDebounceTimer = null;
 let legacyHydrationPromise = null;
+let lastAutoLoadAt = 0;
 
 const els = {
   root: document.querySelector('#content-root'),
@@ -644,21 +649,56 @@ function renderArticle(item) {
   `;
 }
 
+function hasMoreItemsInCurrentRoute() {
+  return state.currentRouteKind === 'list' && state.currentRouteItemCount > state.visibleCount;
+}
+
+function requestNextPage() {
+  if (!hasMoreItemsInCurrentRoute()) return;
+  state.visibleCount = Math.min(state.visibleCount + PAGE_SIZE, state.currentRouteItemCount);
+  renderRoute();
+}
+
+function maybeAutoLoadNextPage() {
+  if (!hasMoreItemsInCurrentRoute()) return;
+  const now = Date.now();
+  if (now - lastAutoLoadAt < AUTO_LOAD_COOLDOWN_MS) return;
+
+  const scrollTop = window.scrollY || window.pageYOffset || 0;
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+  const documentHeight = Math.max(
+    document.body?.scrollHeight || 0,
+    document.documentElement?.scrollHeight || 0,
+  );
+  const distanceToBottom = documentHeight - (scrollTop + viewportHeight);
+
+  if (distanceToBottom > AUTO_LOAD_SCROLL_THRESHOLD_PX) return;
+
+  lastAutoLoadAt = now;
+  requestNextPage();
+}
+
 function renderRoute() {
   const context = getRouteContext();
   renderChannelChips();
   renderScoreSummary(context.baseItems || state.items);
 
   if (context.kind === 'article') {
+    state.currentRouteKind = 'article';
+    state.currentRouteItemCount = 1;
     renderArticle(context.item);
     return;
   }
 
   if (context.kind === 'missing') {
+    state.currentRouteKind = 'missing';
+    state.currentRouteItemCount = 0;
     renderCards(context.title, context.description, []);
     return;
   }
 
+  state.currentRouteKind = 'list';
+  state.currentRouteItemCount = context.items.length;
   renderCards(context.title, context.description, context.items);
 }
 
@@ -869,6 +909,8 @@ async function bootstrap() {
   initBackToTop();
   bindSearchInput();
   bindRouteChange();
+  window.addEventListener('scroll', maybeAutoLoadNextPage, { passive: true });
+  window.addEventListener('resize', maybeAutoLoadNextPage);
 
   try {
     await bootstrapProgressive();
