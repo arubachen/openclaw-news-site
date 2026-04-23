@@ -1,5 +1,145 @@
 [
   {
+    "channel": "竞品情报",
+    "title": "东软集团2025年净利润亏损3.58亿元",
+    "score": 7.6,
+    "publishedAt": "2026-04-23T09:51:40+08:00",
+    "ingestedAt": "2026-04-23T16:11:40+08:00",
+    "summary": "东软集团在4月23日披露2025年年报相关信息，东方财富给出的标题直接写明归母净利润亏损3.58亿元。同期市场摘要显示，2025年营收微增4.14%，但利润已经转负。公开标题里没有再拆分业务和订单结构。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "东软集团披露2025年年报，净利润转亏"
+      },
+      {
+        "label": "动",
+        "value": "营收微增但利润掉头"
+      },
+      {
+        "label": "时",
+        "value": "4月23日"
+      },
+      {
+        "label": "数",
+        "value": "归母净利润-3.58亿元；营收+4.14%"
+      },
+      {
+        "label": "落",
+        "value": "年报摘要和多家财经渠道同步转述"
+      },
+      {
+        "label": "影",
+        "value": "利润和回款压力一起摆到台面上"
+      }
+    ],
+    "judgment": "这不是单纯的利润回撤，是它今年先把压力暴露出来。对软通来说，这种时候更容易打价格战和抢项目，东软自己也会更看重现金和回款。后面盯它能不能把收入增速和利润修复拆开，别只看表面营收。",
+    "tags": [
+      "东软集团",
+      "年报",
+      "亏损",
+      "利润"
+    ],
+    "sourceName": "东方财富",
+    "sourceType": "行业资讯",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFByX00wQTFUOHc0ZWQyRDlqandJd096bFZxUzAzT1hjQzVmbWVLSEh0d2Z6NUJudGRnVi1ISGZYWHlTWUdpbHg1UXBsVnZZU0duTTlRS1VqXy0zQy1IUlh3b3FXUnc?oc=5",
+    "id": "2026-04-23-f7b687dd5e633fd0",
+    "slug": "东软集团2025年净利润亏损3-58亿元"
+  },
+  {
+    "channel": "竞品情报",
+    "title": "亚信科技联手多方成立 Physical AI 联盟",
+    "score": 7.5,
+    "publishedAt": "2026-04-23T13:17:15+08:00",
+    "ingestedAt": "2026-04-23T16:11:40+08:00",
+    "summary": "4月23日，搜狐转述的消息显示，亚信安全、亚信科技、阿里云、ABB机器人、德勤中国共同成立 Physical AI 联盟。标题没有给出资金、订单或客户规模，能确认的就是这几家公司把联盟先搭了起来。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "亚信科技联合亚信安全、阿里云、ABB机器人、德勤中国成立联盟"
+      },
+      {
+        "label": "动",
+        "value": "发布 Physical AI 联盟"
+      },
+      {
+        "label": "时",
+        "value": "4月23日"
+      },
+      {
+        "label": "数",
+        "value": "原文未披露关键数字"
+      },
+      {
+        "label": "落",
+        "value": "把云、机器人、咨询和运营商软件放到同一条线上"
+      },
+      {
+        "label": "影",
+        "value": "先在实体AI话题里占位，后面看客户场景能不能落下来"
+      }
+    ],
+    "judgment": "先别把它看成马上会出单，但这几家名字凑在一起，说明亚信想把 AI 往机器人和实体场景里推。对软通来说，先盯后面有没有具体客户和落地场景；没有的话，就是一轮联合亮相。",
+    "tags": [
+      "亚信科技",
+      "PhysicalAI",
+      "阿里云",
+      "ABB机器人",
+      "德勤中国"
+    ],
+    "sourceName": "搜狐网",
+    "sourceType": "行业资讯",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPUTZSSEdwNXRuU3FReDEtVWo1MXN4anNBM2RGcUxEdUhEZlBpWWVIWWN3OXJWeFAzemxfYkJCUVRfN3Z5SlgtS2t5R0JHLWlCOXBiMjBadzV4NGpDNFVWN1JHeWxOc29VSlA5WkotMHdSOVVvUElTenBUUk5CVk9mOGwzY0YxVEJvX2ljYQ?oc=5",
+    "id": "2026-04-23-67bd1e3b3584ba65",
+    "slug": "亚信科技联手多方成立-physical-ai-联盟"
+  },
+  {
+    "channel": "竞品情报",
+    "title": "润和软件2025年净利润9697.23万元，拟10派0.7元",
+    "score": 7.1,
+    "publishedAt": "2026-04-22T18:25:36+08:00",
+    "ingestedAt": "2026-04-23T16:11:40+08:00",
+    "summary": "4月22日，东方财富转述润和软件2025年年报信息，核心数字是归母净利润9697.23万元，拟每10股派0.7元。证券之星同日的年报简析把这份报告概括成“增收不增利”，并提到应收账款体量较大。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "润和软件披露2025年年报摘要"
+      },
+      {
+        "label": "动",
+        "value": "公布利润和分红方案"
+      },
+      {
+        "label": "时",
+        "value": "4月22日"
+      },
+      {
+        "label": "数",
+        "value": "归母净利润9697.23万元；拟10派0.7元"
+      },
+      {
+        "label": "落",
+        "value": "年报摘要和年报简析同日出现"
+      },
+      {
+        "label": "影",
+        "value": "利润有了，但回款和资产质量压力还在"
+      }
+    ],
+    "judgment": "这条不能只看成分红消息，利润和应收账款一起出来，说明它今年还是得盯回款。对软通来说，这种客户结构和交付节奏，后面会直接影响项目现金流和利润厚度。",
+    "tags": [
+      "润和软件",
+      "年报",
+      "分红",
+      "应收账款",
+      "利润质量"
+    ],
+    "sourceName": "东方财富",
+    "sourceType": "行业资讯",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE81NjFtWWttc3R3U21HdWF4S1BXWlFfNXdEOE5ILVdNdTRVbzRucTZFNXoyV21lQ25SdHlDT3BsaW10UFlvT3o5ejFZNTJEcnZHM0ZLQ2xCWDRRMmdDb09GMHJtWm8?oc=5",
+    "id": "2026-04-22-33a56cfe9b22b33e",
+    "slug": "润和软件2025年净利润9697-23万元-拟10派0-7元"
+  },
+  {
     "channel": "招投标",
     "title": "2026年产互公司地质环境监测数据分析软件系统项目公告",
     "score": 8.1,
