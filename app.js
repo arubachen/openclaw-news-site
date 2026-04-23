@@ -23,6 +23,8 @@ const siteConfig = Object.freeze({
   ...defaultSiteConfig,
   ...(window.__SITE_CONFIG__ && typeof window.__SITE_CONFIG__ === 'object' ? window.__SITE_CONFIG__ : {}),
 });
+const debugModeEnabled = new URLSearchParams(window.location.search).get('debug') === '1'
+  || ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
 const state = {
   items: [],
@@ -39,6 +41,17 @@ const state = {
   backgroundCompleteVisible: false,
   currentRouteKind: 'list',
   currentRouteItemCount: 0,
+  runtimeDebug: {
+    hostname: window.location.hostname,
+    secureContext: window.isSecureContext,
+    buildId: siteConfig.buildId,
+    analyticsConfigured: Boolean(String(siteConfig.cloudflareWebAnalyticsToken || '').trim()),
+    analyticsScriptLoaded: false,
+    serviceWorkerSupported: 'serviceWorker' in navigator,
+    serviceWorkerController: false,
+    serviceWorkerScope: '',
+    serviceWorkerState: '未检测',
+  },
 };
 
 const loadedChunkIds = new Set();
@@ -172,6 +185,16 @@ function initBackToTop() {
   updateBackToTopVisibility();
 }
 
+function initDebugLauncher() {
+  if (!debugModeEnabled || document.querySelector('.debug-launcher')) return;
+  const link = document.createElement('a');
+  link.className = 'debug-launcher';
+  link.href = '#/status';
+  link.textContent = '运行状态';
+  link.setAttribute('aria-label', '查看运行状态');
+  document.body.append(link);
+}
+
 function queueNonCriticalTask(task, { timeout = 1500, delay = 320 } = {}) {
   if ('requestIdleCallback' in window) {
     return window.requestIdleCallback(task, { timeout });
@@ -193,6 +216,47 @@ async function registerServiceWorker() {
   }
 }
 
+async function refreshRuntimeDebugInfo() {
+  state.runtimeDebug = {
+    ...state.runtimeDebug,
+    hostname: window.location.hostname,
+    secureContext: window.isSecureContext,
+    buildId: siteConfig.buildId,
+    analyticsConfigured: Boolean(String(siteConfig.cloudflareWebAnalyticsToken || '').trim()),
+    analyticsScriptLoaded: Boolean(document.querySelector('script[src*="static.cloudflareinsights.com/beacon.min.js"]')),
+    serviceWorkerSupported: 'serviceWorker' in navigator,
+    serviceWorkerController: Boolean(navigator.serviceWorker?.controller),
+  };
+
+  if (!('serviceWorker' in navigator) || !window.isSecureContext) {
+    state.runtimeDebug = {
+      ...state.runtimeDebug,
+      serviceWorkerScope: '',
+      serviceWorkerState: '当前环境不可用',
+    };
+    if (readHash().startsWith('/status')) renderRoute();
+    return;
+  }
+
+  try {
+    const registration = await navigator.serviceWorker.getRegistration();
+    const activeWorker = registration?.active || registration?.waiting || registration?.installing || null;
+    state.runtimeDebug = {
+      ...state.runtimeDebug,
+      serviceWorkerScope: registration?.scope || '',
+      serviceWorkerState: activeWorker?.state || (registration ? '已注册' : '未注册'),
+    };
+  } catch (error) {
+    state.runtimeDebug = {
+      ...state.runtimeDebug,
+      serviceWorkerScope: '',
+      serviceWorkerState: `检测失败：${error.message || '未知错误'}`,
+    };
+  }
+
+  if (readHash().startsWith('/status')) renderRoute();
+}
+
 function shouldEnableCloudflareAnalytics() {
   const token = String(siteConfig.cloudflareWebAnalyticsToken || '').trim();
   if (!token) return false;
@@ -212,15 +276,20 @@ function initCloudflareAnalytics() {
     token,
     spa: Boolean(siteConfig.cloudflareWebAnalyticsSpa),
   }));
+  script.addEventListener('load', () => {
+    void refreshRuntimeDebugInfo();
+  }, { once: true });
   document.head.append(script);
+  void refreshRuntimeDebugInfo();
 }
 
 function initRuntimeEnhancements() {
   if (nonCriticalWorkHandle !== null) return;
-  nonCriticalWorkHandle = queueNonCriticalTask(() => {
+  nonCriticalWorkHandle = queueNonCriticalTask(async () => {
     nonCriticalWorkHandle = null;
-    void registerServiceWorker();
+    await registerServiceWorker();
     initCloudflareAnalytics();
+    await refreshRuntimeDebugInfo();
   }, { timeout: 1800, delay: 640 });
 }
 
@@ -419,6 +488,16 @@ function getRouteContext() {
     state.activeChannel = item.channel;
     const baseItems = state.items.filter((entry) => entry.channel === item.channel);
     return { kind: 'article', item, title: item.title, description: `${item.channel} · 入站 ${fmtDate(getIngestedAt(item))}`, items: [item], baseItems };
+  }
+
+  if (route === 'status') {
+    return {
+      kind: 'status',
+      title: '运行状态',
+      description: debugModeEnabled ? '仅调试模式可见的站点运行信息' : '未启用调试模式',
+      items: [],
+      baseItems: [],
+    };
   }
 
   let extraFilter = () => true;
@@ -711,6 +790,70 @@ function renderArticle(item) {
   `;
 }
 
+function renderStatusPage() {
+  const info = state.runtimeDebug;
+  const maskedToken = info.analyticsConfigured
+    ? `${String(siteConfig.cloudflareWebAnalyticsToken).slice(0, 6)}…${String(siteConfig.cloudflareWebAnalyticsToken).slice(-4)}`
+    : '未配置';
+
+  renderRouteTitle('运行状态', debugModeEnabled ? '仅调试模式可见的站点运行信息' : '未启用调试模式', 1, 1);
+
+  if (!debugModeEnabled) {
+    els.root.innerHTML = `
+      <div class="empty">
+        <h3>调试入口未开启</h3>
+        <p>在地址后加上 <code>?debug=1</code> 再访问即可，例如：<code>${esc(`${window.location.origin}${window.location.pathname}?debug=1#/status`)}</code></p>
+      </div>
+    `;
+    return;
+  }
+
+  els.root.innerHTML = `
+    <article class="article status-article">
+      <div class="article-head">
+        <div class="article-title-row">
+          <h2>站点运行状态</h2>
+          <a class="headline-link" href="#/all">返回首页</a>
+        </div>
+        <div class="meta-row">
+          <span class="meta-pill primary">Build ${esc(info.buildId || 'dev')}</span>
+          <span class="meta-pill">${esc(info.hostname)}</span>
+        </div>
+      </div>
+
+      <div class="article-grid">
+        <section class="article-section">
+          <h3>Cloudflare Web Analytics</h3>
+          <div class="facts-block">
+            <div class="fact-row"><span class="fact-key">配置</span><div class="fact-value">${info.analyticsConfigured ? '已配置 token' : '未配置 token'}</div></div>
+            <div class="fact-row"><span class="fact-key">脚本</span><div class="fact-value">${info.analyticsScriptLoaded ? '已加载 beacon.min.js' : '未检测到 beacon.min.js'}</div></div>
+            <div class="fact-row"><span class="fact-key">Token</span><div class="fact-value">${esc(maskedToken)}</div></div>
+          </div>
+        </section>
+
+        <section class="article-section">
+          <h3>Service Worker</h3>
+          <div class="facts-block">
+            <div class="fact-row"><span class="fact-key">支持</span><div class="fact-value">${info.serviceWorkerSupported ? '浏览器支持' : '浏览器不支持'}</div></div>
+            <div class="fact-row"><span class="fact-key">状态</span><div class="fact-value">${esc(info.serviceWorkerState)}</div></div>
+            <div class="fact-row"><span class="fact-key">控制</span><div class="fact-value">${info.serviceWorkerController ? '当前页面已受 SW 控制' : '当前页面尚未受 SW 控制（首次访问常见）'}</div></div>
+            <div class="fact-row"><span class="fact-key">Scope</span><div class="fact-value">${esc(info.serviceWorkerScope || '未检测到 scope')}</div></div>
+          </div>
+        </section>
+
+        <section class="article-section">
+          <h3>当前环境</h3>
+          <div class="facts-block">
+            <div class="fact-row"><span class="fact-key">域名</span><div class="fact-value">${esc(info.hostname)}</div></div>
+            <div class="fact-row"><span class="fact-key">HTTPS</span><div class="fact-value">${info.secureContext ? '安全上下文已启用' : '当前不是安全上下文'}</div></div>
+            <div class="fact-row"><span class="fact-key">说明</span><div class="fact-value">如果 Analytics 已配置且脚本已加载，Cloudflare 后台通常会在几分钟后开始出数。</div></div>
+          </div>
+        </section>
+      </div>
+    </article>
+  `;
+}
+
 function hasMoreItemsInCurrentRoute() {
   return state.currentRouteKind === 'list' && state.currentRouteItemCount > state.visibleCount;
 }
@@ -749,6 +892,13 @@ function renderRoute() {
     state.currentRouteKind = 'article';
     state.currentRouteItemCount = 1;
     renderArticle(context.item);
+    return;
+  }
+
+  if (context.kind === 'status') {
+    state.currentRouteKind = 'status';
+    state.currentRouteItemCount = 1;
+    renderStatusPage();
     return;
   }
 
@@ -969,6 +1119,7 @@ function bindRouteChange() {
 async function bootstrap() {
   initTheme();
   initBackToTop();
+  initDebugLauncher();
   bindSearchInput();
   bindRouteChange();
   window.addEventListener('scroll', maybeAutoLoadNextPage, { passive: true });

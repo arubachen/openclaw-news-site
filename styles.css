@@ -227,6 +227,28 @@ h1 {
   box-shadow: 0 18px 34px rgba(20, 20, 20, 0.18);
 }
 
+.debug-launcher {
+  position: fixed;
+  left: 18px;
+  bottom: 20px;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  background: color-mix(in srgb, var(--panel-strong) 94%, var(--accent) 6%);
+  color: var(--text);
+  box-shadow: 0 12px 26px rgba(20, 20, 20, 0.12);
+  font-size: 12px;
+}
+
+.debug-launcher:hover {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--panel-strong));
+}
+
 .type-tabs-row {
   min-width: 0;
 }
@@ -736,6 +758,13 @@ h1 {
     bottom: 18px;
     width: 46px;
     height: 46px;
+  }
+
+  .debug-launcher {
+    left: 12px;
+    bottom: 14px;
+    min-height: 34px;
+    padding: 0 12px;
   }
 
   .back-to-top-icon {
