@@ -5,3 +5,4 @@ data/*.lock
 
 data/chunks/
 data/manifest.json
+runtime-config.js

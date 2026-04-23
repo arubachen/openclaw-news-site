@@ -79,6 +79,14 @@ npm run build
 
 它会先校验 `data/news.json`，再生成部署用的分片数据文件，首屏只加载前一批资讯，剩余内容在后台继续补齐。
 
+如果你要启用 **Cloudflare Web Analytics** 的手动注入方式，可以在仓库里配置 GitHub Actions Secret：
+
+```text
+CF_WEB_ANALYTICS_TOKEN
+```
+
+构建时会自动生成 `runtime-config.js` 并按需注入 Cloudflare 的统计 beacon；未配置时不会加载统计脚本。
+
 ## 数据格式
 
 所有内容来自：

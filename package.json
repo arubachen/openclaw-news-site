@@ -7,6 +7,7 @@
     "serve": "python3 -m http.server 4173 -d .",
     "validate": "node scripts/validate-data.mjs",
     "build:data": "node scripts/build-data.mjs",
-    "build": "npm run validate && npm run build:data"
+    "build:runtime": "node scripts/build-runtime-config.mjs",
+    "build": "npm run validate && npm run build:data && npm run build:runtime"
   }
 }

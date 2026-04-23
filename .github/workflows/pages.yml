@@ -25,6 +25,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build site data assets
+        env:
+          SITE_BUILD_ID: ${{ github.sha }}
+          CF_WEB_ANALYTICS_TOKEN: ${{ secrets.CF_WEB_ANALYTICS_TOKEN }}
         run: npm run build
 
       - name: Setup Pages

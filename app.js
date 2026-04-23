@@ -14,6 +14,15 @@ const themeMeta = {
   dark: { icon: '☾', title: '主题：深色（点击切换）' },
   light: { icon: '☀︎', title: '主题：浅色（点击切换）' },
 };
+const defaultSiteConfig = Object.freeze({
+  buildId: 'dev',
+  cloudflareWebAnalyticsToken: '',
+  cloudflareWebAnalyticsSpa: false,
+});
+const siteConfig = Object.freeze({
+  ...defaultSiteConfig,
+  ...(window.__SITE_CONFIG__ && typeof window.__SITE_CONFIG__ === 'object' ? window.__SITE_CONFIG__ : {}),
+});
 
 const state = {
   items: [],
@@ -42,6 +51,7 @@ let backgroundCompleteTimer = null;
 let searchDebounceTimer = null;
 let legacyHydrationPromise = null;
 let lastAutoLoadAt = 0;
+let nonCriticalWorkHandle = null;
 
 const els = {
   root: document.querySelector('#content-root'),
@@ -160,6 +170,58 @@ function initBackToTop() {
   window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
   window.addEventListener('resize', updateBackToTopVisibility);
   updateBackToTopVisibility();
+}
+
+function queueNonCriticalTask(task, { timeout = 1500, delay = 320 } = {}) {
+  if ('requestIdleCallback' in window) {
+    return window.requestIdleCallback(task, { timeout });
+  }
+
+  return window.setTimeout(task, delay);
+}
+
+async function registerServiceWorker() {
+  if (!('serviceWorker' in navigator) || !window.isSecureContext) return;
+
+  const buildId = encodeURIComponent(String(siteConfig.buildId || 'dev'));
+  const serviceWorkerUrl = `./service-worker.js?v=${buildId}`;
+
+  try {
+    await navigator.serviceWorker.register(serviceWorkerUrl);
+  } catch (error) {
+    console.warn('Service Worker 注册失败', error);
+  }
+}
+
+function shouldEnableCloudflareAnalytics() {
+  const token = String(siteConfig.cloudflareWebAnalyticsToken || '').trim();
+  if (!token) return false;
+  if (['localhost', '127.0.0.1'].includes(window.location.hostname)) return false;
+  return true;
+}
+
+function initCloudflareAnalytics() {
+  if (!shouldEnableCloudflareAnalytics()) return;
+  if (document.querySelector('script[data-cf-beacon]')) return;
+
+  const token = String(siteConfig.cloudflareWebAnalyticsToken || '').trim();
+  const script = document.createElement('script');
+  script.defer = true;
+  script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  script.setAttribute('data-cf-beacon', JSON.stringify({
+    token,
+    spa: Boolean(siteConfig.cloudflareWebAnalyticsSpa),
+  }));
+  document.head.append(script);
+}
+
+function initRuntimeEnhancements() {
+  if (nonCriticalWorkHandle !== null) return;
+  nonCriticalWorkHandle = queueNonCriticalTask(() => {
+    nonCriticalWorkHandle = null;
+    void registerServiceWorker();
+    initCloudflareAnalytics();
+  }, { timeout: 1800, delay: 640 });
 }
 
 function buildDisplayFacts(item) {
@@ -918,6 +980,8 @@ async function bootstrap() {
     console.warn('渐进式加载不可用，回退到完整数据加载。', error);
     await hydrateFromLegacy();
   }
+
+  initRuntimeEnhancements();
 }
 
 bootstrap().catch((error) => {
