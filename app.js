@@ -3,6 +3,9 @@ const PAGE_SIZE = 20;
 const BACK_TO_TOP_THRESHOLD_FACTOR = 1;
 const SEARCH_INPUT_DEBOUNCE_MS = 220;
 const DATA_REQUEST_OPTIONS = { cache: 'no-cache' };
+const BACKGROUND_CHUNK_IMMEDIATE_DELAY_MS = 140;
+const BACKGROUND_CHUNK_FALLBACK_DELAY_MS = 260;
+const BACKGROUND_COMPLETE_BADGE_MS = 2400;
 const themeModes = ['system', 'dark', 'light'];
 const themeMeta = {
   system: { icon: '◐', title: '主题：跟随系统（点击切换）' },
@@ -22,6 +25,7 @@ const state = {
   progressiveEnabled: false,
   isFullyLoaded: false,
   backgroundError: '',
+  backgroundCompleteVisible: false,
 };
 
 const loadedChunkIds = new Set();
@@ -29,6 +33,8 @@ const loadingChunkPromises = new Map();
 const seenItemIds = new Set();
 let renderQueued = false;
 let backgroundLoaderStarted = false;
+let backgroundLoaderHandle = null;
+let backgroundCompleteTimer = null;
 let searchDebounceTimer = null;
 let legacyHydrationPromise = null;
 
@@ -216,9 +222,44 @@ function isDefaultAllRoute() {
   return route === 'all' && !value && !state.query;
 }
 
-function getLoadProgressText() {
-  if (!state.progressiveEnabled || state.isFullyLoaded || !state.totalItems) return '';
-  return `已加载 ${state.items.length}/${state.totalItems} 条，后台同步中`;
+function shouldShowBackgroundStatus() {
+  const { route } = getRouteParts();
+  return route !== 'article';
+}
+
+function getRouteStatusMeta() {
+  if (!shouldShowBackgroundStatus()) return null;
+
+  if (state.backgroundError) {
+    return { tone: 'error', label: '后台补齐异常，已自动回退完整加载' };
+  }
+
+  if (state.backgroundCompleteVisible) {
+    return { tone: 'done', label: '全部内容已就绪' };
+  }
+
+  if (!state.progressiveEnabled || state.isFullyLoaded || !state.totalItems) return null;
+
+  const loadedCount = state.items.length;
+  if (state.query) {
+    return { tone: 'loading', label: `检索结果持续补齐中 · 已同步 ${loadedCount}/${state.totalItems}` };
+  }
+
+  if (loadedCount <= PAGE_SIZE) {
+    return { tone: 'loading', label: `首屏先看前 ${Math.min(PAGE_SIZE, state.totalItems)} 条，其余后台补齐` };
+  }
+
+  return { tone: 'loading', label: `后台已补齐 ${loadedCount}/${state.totalItems}` };
+}
+
+function showBackgroundCompleteBadge() {
+  window.clearTimeout(backgroundCompleteTimer);
+  state.backgroundCompleteVisible = true;
+  scheduleRenderRoute();
+  backgroundCompleteTimer = window.setTimeout(() => {
+    state.backgroundCompleteVisible = false;
+    scheduleRenderRoute();
+  }, BACKGROUND_COMPLETE_BADGE_MS);
 }
 
 function getChannelEntries() {
@@ -416,8 +457,7 @@ function bindRouteFilterActions() {
 
 function renderRouteTitle(title, description = '', totalCount = 0, visibleCount = totalCount) {
   const subtitleParts = [description].filter(Boolean);
-  const loadingText = getLoadProgressText();
-  if (loadingText) subtitleParts.push(loadingText);
+  const routeStatus = getRouteStatusMeta();
 
   if (state.isFullyLoaded) {
     if (visibleCount < totalCount) subtitleParts.push(`已显示 ${visibleCount}/${totalCount}`);
@@ -431,7 +471,10 @@ function renderRouteTitle(title, description = '', totalCount = 0, visibleCount 
   const pills = getRouteFilterPills();
 
   els.routeTitle.innerHTML = `
-    <strong>${esc(title)}</strong>
+    <div class="route-title-head">
+      <strong>${esc(title)}</strong>
+      ${routeStatus ? `<span class="route-status is-${esc(routeStatus.tone)}">${esc(routeStatus.label)}</span>` : ''}
+    </div>
     ${subtitleParts.length ? `<span class="route-subtitle">${esc(subtitleParts.join(' · '))}</span>` : ''}
     ${pills.length ? `<div class="route-filters">${pills.map((item) => `
       <button type="button" class="filter-pill" data-clear-filter="${esc(item.key)}">
@@ -513,9 +556,6 @@ function renderCards(title, description, items) {
   }
 
   const hasMore = items.length > visibleItems.length;
-  const streamStatus = state.progressiveEnabled && !state.isFullyLoaded
-    ? `<p class="stream-status">正在后台加载剩余内容（${state.items.length}/${state.totalItems}）…</p>`
-    : '';
 
   els.root.innerHTML = `${
     `<div class="cards">${visibleItems.map((item) => `
@@ -533,10 +573,9 @@ function renderCards(title, description, items) {
         ${renderTagRow(item)}
       </article>
     `).join('')}</div>`
-  }${hasMore || streamStatus ? `
+  }${hasMore ? `
     <div class="load-more-wrap">
-      ${hasMore ? `<button id="load-more" class="load-more-btn" type="button">加载更多（${visibleItems.length}/${items.length}）</button>` : ''}
-      ${streamStatus}
+      <button id="load-more" class="load-more-btn" type="button">加载更多（${visibleItems.length}/${items.length}）</button>
     </div>
   ` : ''}`;
 
@@ -712,27 +751,74 @@ async function ensureRouteData() {
   }
 }
 
-async function startBackgroundLoading() {
-  if (backgroundLoaderStarted || !state.manifest) return;
-  backgroundLoaderStarted = true;
+function clearBackgroundLoaderHandle() {
+  if (backgroundLoaderHandle === null) return;
+  if (typeof backgroundLoaderHandle === 'number') {
+    window.clearTimeout(backgroundLoaderHandle);
+  } else if ('cancelIdleCallback' in window) {
+    window.cancelIdleCallback(backgroundLoaderHandle);
+  }
+  backgroundLoaderHandle = null;
+}
 
-  for (let index = 0; index < state.manifest.chunks.length; index += 1) {
-    if (loadedChunkIds.has(index)) continue;
+function scheduleBackgroundLoad({ immediate = false } = {}) {
+  if (!backgroundLoaderStarted || !state.manifest || backgroundLoaderHandle !== null || state.isFullyLoaded) return;
 
-    try {
-      await loadChunk(index);
-    } catch (error) {
-      console.error(error);
-      state.backgroundError = error.message || '未知错误';
-      await hydrateFromLegacy();
-      return;
-    }
+  const run = () => {
+    backgroundLoaderHandle = null;
+    void stepBackgroundLoading();
+  };
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
+  if (immediate) {
+    backgroundLoaderHandle = window.setTimeout(run, BACKGROUND_CHUNK_IMMEDIATE_DELAY_MS);
+    return;
   }
 
-  state.isFullyLoaded = true;
-  scheduleRenderRoute();
+  if ('requestIdleCallback' in window) {
+    backgroundLoaderHandle = window.requestIdleCallback(run, { timeout: 1200 });
+    return;
+  }
+
+  backgroundLoaderHandle = window.setTimeout(run, BACKGROUND_CHUNK_FALLBACK_DELAY_MS);
+}
+
+async function stepBackgroundLoading() {
+  if (!state.manifest) return;
+
+  const nextChunk = state.manifest.chunks.find((chunk) => !loadedChunkIds.has(chunk.id));
+  if (!nextChunk) {
+    const justCompleted = !state.isFullyLoaded;
+    state.isFullyLoaded = true;
+    if (justCompleted) showBackgroundCompleteBadge();
+    scheduleRenderRoute();
+    return;
+  }
+
+  try {
+    await loadChunk(nextChunk.id);
+  } catch (error) {
+    console.error(error);
+    state.backgroundError = error.message || '未知错误';
+    await hydrateFromLegacy();
+    return;
+  }
+
+  if (document.visibilityState === 'hidden') {
+    const resumeWhenVisible = () => {
+      document.removeEventListener('visibilitychange', resumeWhenVisible);
+      scheduleBackgroundLoad();
+    };
+    document.addEventListener('visibilitychange', resumeWhenVisible);
+    return;
+  }
+
+  scheduleBackgroundLoad();
+}
+
+function startBackgroundLoading() {
+  if (backgroundLoaderStarted || !state.manifest) return;
+  backgroundLoaderStarted = true;
+  scheduleBackgroundLoad({ immediate: true });
 }
 
 async function bootstrapProgressive() {
@@ -744,12 +830,13 @@ async function bootstrapProgressive() {
   state.manifest = manifest;
   state.progressiveEnabled = true;
   state.totalItems = Number(manifest.totalItems || 0);
+  state.backgroundError = '';
   renderSidebarStatic();
 
   await loadChunk(0);
   await ensureRouteData();
   renderRoute();
-  void startBackgroundLoading();
+  startBackgroundLoading();
 }
 
 function bindSearchInput() {
