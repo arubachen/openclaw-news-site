@@ -1,5 +1,81 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "DeepMind公开Decoupled DiLoCo，把大模型训练往跨地域算力池推进",
+    "score": 8.8,
+    "publishedAt": "2026-04-23T00:00:00+08:00",
+    "ingestedAt": "2026-04-24T09:42:39+08:00",
+    "summary": "Google DeepMind 4月23日公开Decoupled DiLoCo分布式训练架构，核心做法是把训练拆成多个彼此解耦的compute islands，用异步数据流连接，降低跨数据中心同步对网络和硬件一致性的要求。官方称，这套方法在Gemma 4实验中，在硬件故障情况下仍能维持更高goodput，且最终模型效果与传统训练方式相当。更关键的是，它已经在4个美国区域上完成12B参数模型预训练，广域网只用2-5 Gbps，并称训练效率比传统同步方法快20倍以上。该架构还支持不同代际硬件混训，例如TPU v6e和TPU v5p同跑。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "DeepMind把跨数据中心大模型训练从强同步改成解耦异步，目标是让远距离算力也能拼成可用训练池。"
+      },
+      {
+        "label": "时",
+        "value": "4月23日随论文一起公布，实验对象包括Gemma 4和一个12B参数预训练模型。"
+      },
+      {
+        "label": "数",
+        "value": "12B模型跨4个美国区域训练，广域网带宽需求为2-5 Gbps；官方称比传统同步方法快20倍以上，并可混用TPU v6e与TPU v5p。"
+      },
+      {
+        "label": "影",
+        "value": "训练基础设施的瓶颈开始从单机房堆卡，转向怎么把分散算力、旧卡和新卡一起编排起来。"
+      }
+    ],
+    "judgment": "这条最硬的点是它把“算力不在一个地方”从问题变成了可设计的系统形态。后面要盯两件事：一是这套架构会不会进到更大参数量的正式训练，二是混代硬件和公网级带宽能不能稳定复现。",
+    "tags": [
+      "算力",
+      "分布式训练",
+      "数据中心",
+      "Google DeepMind"
+    ],
+    "sourceName": "Google DeepMind",
+    "sourceType": "官网",
+    "sourceUrl": "https://deepmind.google/blog/decoupled-diloco/",
+    "id": "2026-04-23-5ab548783d96ee8a",
+    "slug": "deepmind公开decoupled-diloco-把大模型训练往跨地域算力池推进"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "NVIDIA披露GB200 NVL72承载GPT-5.5 Codex，开始把Agent推理做成企业级基础设施",
+    "score": 8.4,
+    "publishedAt": "2026-04-23T00:00:00+08:00",
+    "ingestedAt": "2026-04-24T09:42:39+08:00",
+    "summary": "NVIDIA 4月23日披露，OpenAI最新GPT-5.5驱动的Codex运行在GB200 NVL72机柜级系统上，并已在NVIDIA内部大规模使用。官方给出的基础设施口径覆盖算力、企业级安全和可审计部署：为员工统一分配云端VM，Agent通过SSH接入，生产系统默认只读，配套零数据保留策略。NVIDIA称，GB200 NVL72相较上一代可把每百万token成本压低35倍、单位兆瓦token吞吐提高50倍。文中还提到双方已完成首个GB200 NVL72十万卡集群bring-up，并跑过多轮大规模训练。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "NVIDIA把GPT-5.5 Codex的落地重点放在GB200 NVL72和企业内网可审计部署，不再只是展示模型能力。"
+      },
+      {
+        "label": "时",
+        "value": "4月23日披露，文中称已有超过1万名NVIDIA员工在内部使用。"
+      },
+      {
+        "label": "数",
+        "value": "GB200 NVL72号称每百万token成本较上一代低35倍、每兆瓦token输出高50倍；双方还完成了首个GB200 NVL72十万卡集群bring-up。"
+      },
+      {
+        "label": "影",
+        "value": "Agent推理的竞争点开始落到机柜级系统效率、审计隔离和企业内网接入方案，而不只是模型本身。"
+      }
+    ],
+    "judgment": "这条不是普通客户案例，它把下一阶段Agent基础设施该怎么进企业网说得更具体了。后面要盯这种“每人一台云端代理机”的架构，会不会变成大厂部署企业Agent的标准做法。",
+    "tags": [
+      "NVIDIA",
+      "GB200",
+      "Agent基础设施",
+      "企业部署"
+    ],
+    "sourceName": "NVIDIA Blog",
+    "sourceType": "官网",
+    "sourceUrl": "https://blogs.nvidia.com/blog/openai-codex-gpt-5-5-ai-agents/",
+    "id": "2026-04-23-5e151867330ecff6",
+    "slug": "nvidia披露gb200-nvl72承载gpt-5-5-codex-开始把agent推理做成企业级基础设施"
+  },
+  {
     "channel": "招投标",
     "title": "大理龙潭乡和美乡村数字振兴询比采购项目公告",
     "score": 7.4,
