@@ -61,6 +61,7 @@ with open(LOCK_FILE, 'a+', encoding='utf-8') as lock_fp:
         emit(True, False, 'data-lock-busy')
         sys.exit(0)
 
+    run('git', 'pull', '--rebase', '--autostash', 'origin', 'main', quiet=True)
     run('npm', 'run', 'validate', quiet=True)
 
     status = run('git', 'status', '--porcelain', '--', *WHITELIST, capture=True)
@@ -88,7 +89,11 @@ Directive: Keep the whitelist limited to generated content files
 Tested: npm run validate
 '''
     run('git', 'commit', '-m', commit_message, '--', *WHITELIST, quiet=True)
-    run('git', 'push', 'origin', 'main', quiet=True)
+    try:
+        run('git', 'push', 'origin', 'main', quiet=True)
+    except subprocess.CalledProcessError:
+        run('git', 'pull', '--rebase', '--autostash', 'origin', 'main', quiet=True)
+        run('git', 'push', 'origin', 'main', quiet=True)
 
     emit(True, True, 'published')
 PY
