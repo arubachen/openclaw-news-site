@@ -1,5 +1,204 @@
 [
   {
+    "channel": "软通动态",
+    "title": "软通华方完成对 DeepSeek V4 模型的全栈适配与部署支持",
+    "score": 7.6,
+    "publishedAt": "2026-04-25T17:44:00+08:00",
+    "ingestedAt": "2026-04-25T17:46:45+08:00",
+    "summary": "4 月 24 日，软通动力旗下软通华方宣布，已经基于“鲲鹏+昇腾”双引擎架构，在超强 A800T A3 与 A800I A3 超节点服务器上完成 DeepSeek V4-Flash 和 V4-Pro 的全栈适配与验证，并同步给出训练参考实现。这次不是单纯说兼容，而是把训练、推理部署和软件栈一起打通，企业用户拿到机器后更容易直接落到国产算力环境里。原文点名的目标场景是互联网、金融等高并发推理需求，业务口径算比较实。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "软通华方完成 DeepSeek V4-Flash、V4-Pro 在 A800T A3 / A800I A3 超节点上的全栈适配"
+      },
+      {
+        "label": "动",
+        "value": "同步提供基于超节点的训练参考实现，并推进推理部署优化"
+      },
+      {
+        "label": "时",
+        "value": "4 月 24 日随 DeepSeek V4 正式开源同步公布"
+      },
+      {
+        "label": "数",
+        "value": "单卡 Decode 吞吐 2000+ TPS；点对点互联带宽 784GB/s；规格覆盖 32 至 384 卡；模型上下文由 128K 扩至 1M"
+      },
+      {
+        "label": "落",
+        "value": "已落在软通华方超节点服务器、vLLM 推理引擎及华为 CANN / PyPTO / TileLang 软件栈"
+      },
+      {
+        "label": "影",
+        "value": "先把国产算力上的新模型适配做成现成能力，后面更容易去接私有化部署和行业推理项目"
+      }
+    ],
+    "judgment": "这条有用，软通华方现在卖的不只是服务器，而是新模型一开源就能部署的整套能力。要是真能把 DeepSeek 的热度接进金融、互联网客户的私有化项目，后面项目签单会更顺。看点：接下来盯客户案例、交付节点和订单规模，只有适配口径还不够。",
+    "tags": [
+      "软通动力",
+      "软通华方",
+      "DeepSeekV4",
+      "国产算力",
+      "昇腾"
+    ],
+    "sourceName": "ZAKER",
+    "sourceType": "行业资讯",
+    "sourceUrl": "https://www.myzaker.com/article/69ec4bc5b15ec0744f0b3ec8",
+    "id": "2026-04-25-98ec4bc14ea0d829",
+    "slug": "软通华方完成对-deepseek-v4-模型的全栈适配与部署支持"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Google Cloud Next '26发布企业Agent平台、TPU 8与Virgo数据中心网络",
+    "score": 8.9,
+    "publishedAt": "2026-04-24T00:00:00+08:00",
+    "ingestedAt": "2026-04-25T17:42:19+08:00",
+    "summary": "Google在Cloud Next '26集中发布Gemini Enterprise Agent Platform、Gemini Enterprise应用与Agentic Data Cloud，把企业Agent的构建、治理、运行和数据层打包到一套平台里。会上同时推出第八代TPU产品线，区分训练用TPU 8t和推理用TPU 8i，后者宣称每美元性能提升80%。Google还公布Virgo megascale data center fabric，以及Managed Lustre最高10TB/s的数据搬运能力，明显在补齐大规模Agent运行所需的互联和存储底座。平台层面还引入Anthropic Claude Opus 4.7，继续押注多模型企业栈。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google把企业Agent平台、数据云、TPU和数据中心网络放到同一轮发布里，开始按整套基础设施卖Agent能力。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-24，Google Cloud Next '26。"
+      },
+      {
+        "label": "数",
+        "value": "TPU 8i宣称每美元性能提升80%；Managed Lustre最高可搬运10TB/s数据。"
+      },
+      {
+        "label": "影",
+        "value": "企业买Agent不再只是买模型接口，算力、数据层、治理和互联开始被一起打包。"
+      }
+    ],
+    "judgment": "Google这次不是补一个模型功能，而是把企业Agent栈从模型、编排、数据到机房互联一次性铺平了。接下来就盯两件事：TPU 8i的推理性价比能不能真把企业流量从GPU上拉走，和多模型平台会不会把Anthropic这类外部模型变成云厂商的标配。",
+    "tags": [
+      "AI基础设施",
+      "企业Agent",
+      "TPU",
+      "数据中心网络"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/google-cloud-next-26-recap/",
+    "id": "2026-04-24-369a16872e4b96f6",
+    "slug": "google-cloud-next-26发布企业agent平台-tpu-8与virgo数据中心网络"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "DeepSeek V4预览版上线，新增Flash/Pro双模型并验证适配华为Ascend",
+    "score": 8.7,
+    "publishedAt": "2026-04-25T05:25:00+08:00",
+    "ingestedAt": "2026-04-25T17:42:19+08:00",
+    "summary": "DeepSeek发布V4预览版，提供2840亿参数、130亿激活参数的Flash模型，以及1.6万亿参数、490亿激活参数的Pro模型。公开资料称，V4-Pro基于33万亿token训练，并引入Compressed Sparse Attention与Heavy Compressed Attention的混合注意力机制，使模型在100万token上下文下，KV cache内存占用较V3.2下降9.5到13.7倍。新版本继续使用FP8与FP4混合精度，并明确验证可在NVIDIA GPU和华为Ascend NPU上部署；API定价上，Flash输入0.14美元/百万token、输出0.28美元/百万token，Pro输入1.74美元/百万token、输出3.48美元/百万token。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "DeepSeek V4一边压低推理成本，一边把部署面从NVIDIA扩到华为Ascend，模型和国产算力开始一起往前走。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-24 21:25 UTC，预览版发布。"
+      },
+      {
+        "label": "数",
+        "value": "Pro模型1.6万亿参数、490亿激活参数；支持100万token上下文；KV cache内存占用较V3.2降9.5至13.7倍。"
+      },
+      {
+        "label": "影",
+        "value": "高上下文模型的推理门槛继续往下掉，国产NPU在大模型服务侧的可用性被往前推了一步。"
+      }
+    ],
+    "judgment": "这条最硬的地方不在榜单分数，而在它把长上下文推理的内存账和芯片兼容账一起往下压了。后面要看两件事：Ascend上的真实吞吐能不能跟纸面说法对上，以及这套压缩KV和混合精度会不会被更多开源模型抄作业。",
+    "tags": [
+      "大模型",
+      "推理优化",
+      "华为Ascend",
+      "开源模型"
+    ],
+    "sourceName": "The Register",
+    "sourceType": "技术媒体",
+    "sourceUrl": "https://www.theregister.com/2026/04/24/deepseek_v4/",
+    "id": "2026-04-25-28a315219c4dfbc2",
+    "slug": "deepseek-v4预览版上线-新增flash-pro双模型并验证适配华为ascend"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Intel把AI推理和边缘代理当成CPU重回中心的主战场",
+    "score": 7.9,
+    "publishedAt": "2026-04-24T20:50:00+08:00",
+    "ingestedAt": "2026-04-25T17:42:19+08:00",
+    "summary": "Intel在2026年Q1业绩沟通中把AI推理、agentic workload、机器人和边缘设备列为CPU重新抬头的核心机会，管理层判断AI芯片总可寻址市场正逼近1万亿美元。公司披露Q1营收136亿美元，其中AI相关业务占比60%，同比增长40%。Intel还强调Xeon 6已进入NVIDIA DGX Rubin NVL8主机CPU配置，并提到与Google联合开发基础设施处理器IPU，认为训练阶段常见的8:1 GPU/CPU配比，在推理阶段会降到3-4:1，多Agent场景甚至可能反过来。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Intel公开把AI推理而不是训练，定成CPU翻身的主战场。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-24，Intel Q1 2026业绩沟通。"
+      },
+      {
+        "label": "数",
+        "value": "Q1营收136亿美元；AI相关业务占比60%，同比增40%；训练场景CPU/GPU配比约1:8，推理场景约1:3到1:4。"
+      },
+      {
+        "label": "影",
+        "value": "如果多Agent和边缘推理继续上量，AI基础设施的采购重心会从单看GPU，转成重新评估CPU、IPU和系统级配比。"
+      }
+    ],
+    "judgment": "Intel这次讲得很直白：它不跟NVIDIA抢训练王座，改去吃推理和边缘那口更分散、更看系统架构的饭。要盯的是Xeon 6和后续14A节点能不能把这套说法变成稳定出货，不然这还是财报电话会上的路线图。",
+    "tags": [
+      "芯片",
+      "AI推理",
+      "CPU",
+      "边缘计算"
+    ],
+    "sourceName": "The Register",
+    "sourceType": "技术媒体",
+    "sourceUrl": "https://www.theregister.com/2026/04/24/intel_expects_ai_inference_to/",
+    "id": "2026-04-24-fed8e44156e8af25",
+    "slug": "intel把ai推理和边缘代理当成cpu重回中心的主战场"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "中国联通天通卫星通信全国上线，40余款手机已适配",
+    "score": 7.8,
+    "publishedAt": "2026-04-25T13:45:00+08:00",
+    "ingestedAt": "2026-04-25T17:42:19+08:00",
+    "summary": "中国联通宣布天通卫星通信服务全国上线，面向无地面网络区域和灾害导致地面通信中断场景，提供语音、短信和位置一体化服务。联通称用户无需换卡换号，支持卫星功能的普通手机即可在地面网络与卫星通信之间切换，当前已适配华为、荣耀、小米、OPPO、vivo等品牌40余款机型。公司同时把该服务放到6G空天地一体通信布局里，提出继续做更广覆盖、更低时延的专属卫星通信，并服务应急救援、远洋航运、林业巡检等场景。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国联通把天通卫星通信从单点能力推到全国上线，开始把卫星直连手机做成运营商标准服务。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-25 13:45，全国上线。"
+      },
+      {
+        "label": "数",
+        "value": "已适配40余款手机；服务覆盖语音、短信、位置三项能力。"
+      },
+      {
+        "label": "影",
+        "value": "卫星通信开始从应急专用能力走向大众终端可办理业务，运营商的空天地一体网络会更快进入实际运营阶段。"
+      }
+    ],
+    "judgment": "这条不是又多了一个卫星功能宣传页，而是运营商开始把卫星直连手机往全国标准产品上收。后面就看两点：资费和终端适配扩张速度，以及低时延和场景化服务能不能从应急兜底走到常规行业使用。",
+    "tags": [
+      "卫星互联网",
+      "运营商",
+      "6G",
+      "空天地一体"
+    ],
+    "sourceName": "中国联通",
+    "sourceType": "转载官方稿",
+    "sourceUrl": "https://news.bjd.com.cn/2026/04/25/11710550.shtml",
+    "id": "2026-04-25-16844de9ce8e0d7e",
+    "slug": "中国联通天通卫星通信全国上线-40余款手机已适配"
+  },
+  {
     "channel": "招投标",
     "title": "视频监控系统运维服务项目-2026年基础运维（第二次）询比采购公告",
     "score": 8.0,
