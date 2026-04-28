@@ -1,5 +1,157 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "Google将Agent Payments Protocol捐给FIDO并发布AP2 v0.2",
+    "score": 8.9,
+    "publishedAt": "2026-04-28T00:00:00+08:00",
+    "ingestedAt": "2026-04-28T21:48:46+08:00",
+    "summary": "Google宣布把 Agent Payments Protocol（AP2）移交给 FIDO Alliance 推进标准化，并同步开源 AP2 v0.2。新版加入“Human Not Present”支付能力，允许代理在用户预授权边界内自主完成交易。FIDO 同日成立 Agentic Authentication 技术工作组，并在 Payments 工作组内接收 Google 的 AP2 和 Mastercard 的 Verifiable Intent 作为初始技术贡献。这条线已经从单个平台接口往跨平台协议栈推进。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google把 AP2 捐给 FIDO，FIDO 同步启动 agent 身份认证与支付标准工作组。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-28。"
+      },
+      {
+        "label": "数",
+        "value": "AP2 发布 v0.2，新增 Human Not Present 自主支付能力；FIDO 提到 agentic commerce 到 2030 年或达 5 万亿美元。"
+      },
+      {
+        "label": "影",
+        "value": "代理支付的授权、验真、留痕开始从平台私有接口转向行业公共标准。"
+      }
+    ],
+    "judgment": "真正该看的是支付和身份联盟开始一起接手 agent 交易这套底层规则。接下来要盯 FIDO 后续规格里，用户授权颗粒度、撤销机制和跨钱包跨终端兼容怎么定。",
+    "tags": [
+      "AI Agent",
+      "支付协议",
+      "FIDO",
+      "标准"
+    ],
+    "sourceName": "Google AI / FIDO Alliance",
+    "sourceType": "官网",
+    "sourceUrl": "https://blog.google/products-and-platforms/platforms/google-pay/agent-payments-protocol-fido-alliance/",
+    "id": "2026-04-28-fa961952cbc88d71",
+    "slug": "google将agent-payments-protocol捐给fido并发布ap2-v0-2"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "NVIDIA把制造业物理AI叙事推进到simulation-first，OpenUSD/SimReady被抬成内容标准",
+    "score": 8.4,
+    "publishedAt": "2026-04-28T00:00:00+08:00",
+    "ingestedAt": "2026-04-28T21:48:46+08:00",
+    "summary": "NVIDIA最新制造业文章把 OpenUSD 和 SimReady 明确抬成物理 AI 的底层内容标准，主张用高保真仿真先训练、再落地生产。文中给了几组落地数字：ABB 的仿真版本与真实产线可做到 99% 精度，产品导入周期最多缩短 50%，调试时间最多降 80%。JLR 把单次气动仿真从 4 小时压到 1 分钟。OpenUSD 正在从图形资产格式继续往工业 AI 通用底座挪。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "NVIDIA把 OpenUSD 与 SimReady 定义为制造业物理 AI 的内容与仿真基础。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-28。"
+      },
+      {
+        "label": "数",
+        "value": "ABB 报 99% 仿真精度、导入周期最多缩短 50%、调试时间最多降 80%；JLR 将 4 小时气动仿真压到 1 分钟。"
+      },
+      {
+        "label": "影",
+        "value": "工业 AI 的竞争点开始往统一资产标准、仿真闭环和数据可复用能力转。"
+      }
+    ],
+    "judgment": "这条有意思的地方在于，NVIDIA正把“仿真先行”做成标准叙事，想把工业资产入口卡在 OpenUSD 这一层。接下来要盯主机厂和机器人厂商是不是继续跟同一套格式，不然这条链路还是容易断。",
+    "tags": [
+      "物理AI",
+      "OpenUSD",
+      "工业软件",
+      "数字孪生"
+    ],
+    "sourceName": "NVIDIA Blog",
+    "sourceType": "官网",
+    "sourceUrl": "https://blogs.nvidia.com/blog/manufacturing-simulation-first/",
+    "id": "2026-04-28-c38bf994d68c22d3",
+    "slug": "nvidia把制造业物理ai叙事推进到simulation-first-openusd-simready被抬成内容标准"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Tenstorrent Galaxy Blackhole AI服务器正式开售，低价高密度路线更清楚了",
+    "score": 8.1,
+    "publishedAt": "2026-04-28 12:30 UTC",
+    "ingestedAt": "2026-04-28T21:48:46+08:00",
+    "summary": "The Register 报道，Tenstorrent 宣布 Galaxy Blackhole AI 计算平台正式商用。单台 6U 机箱塞入 32 颗 Blackhole 加速器，节点内互联总带宽 100Tbps，整机给出 1TB GDDR6、16TB/s 内存带宽和 23 PFLOPS dense FP8 性能，报价 11 万美元。它的四节点基础超集群售价 44 万美元，可继续扩展到 32 节点、超过 1000 颗芯片。Tenstorrent想打的是更低的单机成本带。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Tenstorrent 正式卖 Galaxy Blackhole 服务器，主打 32 卡高密度 RISC-V AI 节点。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-28 12:30 UTC 报道。"
+      },
+      {
+        "label": "数",
+        "value": "单机 6U/32 颗加速器/100Tbps/1TB GDDR6/16TB每秒/23 PFLOPS FP8/11 万美元；超集群 4 节点起，可扩到 32 节点超 1000 颗芯片。"
+      },
+      {
+        "label": "影",
+        "value": "AI 服务器开始多出一条先拼成本和密度的产品线。"
+      }
+    ],
+    "judgment": "这里最值得盯的是价格和密度，不是它现在能不能正面赢 DGX。要是软件栈真能把 Hugging Face 模型大面积跑顺，二线云和托管机房会很愿意拿它试推理成本。",
+    "tags": [
+      "AI服务器",
+      "芯片",
+      "推理基础设施",
+      "RISC-V"
+    ],
+    "sourceName": "The Register AI",
+    "sourceType": "媒体",
+    "sourceUrl": "https://www.theregister.com/2026/04/28/tenstorrent_galaxy_blackhole_ai_servers_ga/",
+    "id": "2026-04-28-06b245dc49ce77f2",
+    "slug": "tenstorrent-galaxy-blackhole-ai服务器正式开售-低价高密度路线更清楚了"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "欧盟拟要求Google向第三方AI开放Android深度能力，手机侧AI分发规则要改",
+    "score": 8.0,
+    "publishedAt": "2026-04-28 12:30 UTC",
+    "ingestedAt": "2026-04-28T21:48:46+08:00",
+    "summary": "欧盟委员会依据 DMA 向 Google 提出初步措施，要求 Android 为第三方 AI 服务开放更深层的系统能力。按提议，竞品助手需要能像 Gemini 一样调用应用、在设备上执行任务，还应支持用户以自定义唤醒词激活。欧盟把公开征求意见窗口开到 5 月 13 日，Google 则称这会迫使其开放敏感硬件和权限。手机侧 AI 的竞争点正在外延到系统入口和默认分发权。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "欧盟拟按 DMA 要求 Google 向第三方 AI 开放 Android 关键设备能力。"
+      },
+      {
+        "label": "时",
+        "value": "2026-04-28 12:30 UTC 报道，公开征询截至 2026-05-13。"
+      },
+      {
+        "label": "数",
+        "value": "措施覆盖应用交互、任务执行与自定义唤醒词等多项深度接入能力。"
+      },
+      {
+        "label": "影",
+        "value": "Android 端 AI 助手的竞争将从应用层往系统权限、默认入口和唤醒路径延伸。"
+      }
+    ],
+    "judgment": "这事要紧在于，手机里的 AI 入口可能不再默认留给系统自家助手。后面得盯 Google 最终让出到什么层级：只是表层调用，还是连权限、后台执行和默认唤醒一起放开。",
+    "tags": [
+      "Android",
+      "AI助手",
+      "DMA",
+      "互操作"
+    ],
+    "sourceName": "The Register AI",
+    "sourceType": "媒体",
+    "sourceUrl": "https://www.theregister.com/2026/04/28/ai_competition_in_android_phones/",
+    "id": "2026-04-28-69b6acdc0a581453",
+    "slug": "欧盟拟要求google向第三方ai开放android深度能力-手机侧ai分发规则要改"
+  },
+  {
     "channel": "招投标",
     "title": "2026年OneNET物联市政采购项目",
     "score": 7.8,
