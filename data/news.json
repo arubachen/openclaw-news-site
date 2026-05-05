@@ -1,5 +1,44 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "Gemini API加入Webhook，长时任务从轮询改成事件驱动回调",
+    "score": 8.2,
+    "publishedAt": "2026-05-04T00:00:00+08:00",
+    "ingestedAt": "2026-05-05T17:36:39+08:00",
+    "summary": "Google宣布Gemini API新增事件驱动Webhook，用来处理Deep Research、长视频生成、批量高并发处理等长时任务。新机制改掉开发者反复调用GET轮询任务状态的做法，在任务完成时由Gemini API直接向开发者服务端推送HTTP POST回调。Google称实现遵循Standard Webhooks规范，带有webhook-signature、webhook-id和webhook-timestamp三类签名头，并提供最多24小时的自动重试与至少一次送达保证。该能力支持项目级全局配置，也支持按单次请求动态覆盖。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Gemini API把长时任务通知从轮询改成Webhook回调，直接推送完成事件。"
+      },
+      {
+        "label": "时",
+        "value": "5月4日发布，面向Deep Research、长视频生成和Batch API等场景开放。"
+      },
+      {
+        "label": "数",
+        "value": "支持最多24小时自动重试，并承诺at-least-once送达；签名头包含3项安全字段。"
+      },
+      {
+        "label": "影",
+        "value": "agent工作流开始补齐任务编排层，开发者可以更省资源地接长链路、异步型AI任务。"
+      }
+    ],
+    "judgment": "这条看着像接口小改动，实际是在给长时agent任务补基础设施。后面要看两件事：一是更多异步任务是否统一走这条通道，二是企业侧会不会顺着它把AI流程直接接进现有事件总线和作业系统。",
+    "tags": [
+      "Gemini API",
+      "Webhook",
+      "Agent",
+      "开发者平台",
+      "异步任务"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官网",
+    "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/event-driven-webhooks/",
+    "id": "2026-05-04-9f7227e2ae2d22fa",
+    "slug": "gemini-api加入webhook-长时任务从轮询改成事件驱动回调"
+  },
+  {
     "channel": "市场快讯",
     "title": "中国移动预告将在移动云大会发布 AI-eSIM，瞄准 AI 终端连接与设备身份管理",
     "score": 7.8,
