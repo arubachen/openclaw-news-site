@@ -1,5 +1,83 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "NVIDIA与ServiceNow扩展合作，推进带治理和沙箱执行层的企业自治Agent",
+    "score": 8.4,
+    "publishedAt": "2026-05-05T00:00:00+08:00",
+    "ingestedAt": "2026-05-06T17:40:44+08:00",
+    "summary": "NVIDIA与ServiceNow在Knowledge 2026宣布把合作从模型和算力往企业自治Agent全栈推进。ServiceNow推出的Project Arc被定义为一个长时运行、可自我演进的桌面自治Agent，面向开发、IT和管理员等知识工作者，能直接操作本地文件系统、终端和安装应用，但动作要经过ServiceNow Action Fabric、AI Control Tower以及NVIDIA OpenShell的联合治理。NVIDIA同时把Nemotron开源模型、Agent Toolkit、AI-Q Blueprint和AI Factory验证设计一起接进这套方案，目标是让企业Agent既能在真实工作流里干活，也能把执行权限、观察性和token成本一起管起来。文中还提到，Blackwell平台相对Hopper可带来超过50倍每瓦token输出和近35倍每百万token成本下降。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "NVIDIA和ServiceNow把合作扩到企业自治Agent执行栈，Project Arc接入OpenShell、Action Fabric和AI Control Tower。"
+      },
+      {
+        "label": "时",
+        "value": "2026-05-05在ServiceNow Knowledge 2026公布。"
+      },
+      {
+        "label": "数",
+        "value": "官方称Blackwell相对Hopper可实现50倍以上每瓦token产出、近35倍每百万token成本下降。"
+      },
+      {
+        "label": "影",
+        "value": "企业Agent开始从单点问答工具转向可落地的受控执行系统，治理层、沙箱层和算力层被一起产品化。"
+      }
+    ],
+    "judgment": "真正有分量的不是又多了一个Agent演示，而是企业侧开始把执行权限、审计和成本一起打包成标准件，说明自治Agent已经往生产环境走。后面要看这套栈能不能摆脱厂商绑定，尤其OpenShell和评测基准会不会真长成行业共用底座。",
+    "tags": [
+      "NVIDIA",
+      "ServiceNow",
+      "自治Agent",
+      "企业AI",
+      "AI Factory"
+    ],
+    "sourceName": "NVIDIA Blog",
+    "sourceType": "原文",
+    "sourceUrl": "https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/",
+    "id": "2026-05-05-c5ebba206d50630d",
+    "slug": "nvidia与servicenow扩展合作-推进带治理和沙箱执行层的企业自治agent"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "工信部批复国电高科开展卫星物联网商用试验，试验期两年",
+    "score": 8.1,
+    "publishedAt": "2026-05-06T16:26:00+08:00",
+    "ingestedAt": "2026-05-06T17:40:44+08:00",
+    "summary": "工信部信息通信管理局5月6日披露，已批复北京国电高科科技有限公司开展卫星物联网业务商用试验，试验期两年。国电高科可依托“天启星座”依法试点经营卫星物联网业务，面向海洋渔业、能源水利、交通物流等场景提供广覆盖、低功耗、高可靠连接，并支持全天候数据采集和远程控制。工信部把这次批复放在《关于优化业务准入促进卫星通信产业发展的指导意见》和卫星物联网商用试验通知框架下推进，明确把卫星物联网定位为宽带卫星互联网的重要补充。下一步监管方向则是继续优化卫星通信市场准入，同时强化全链条监管和安全保障。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "工信部批复国电高科开展卫星物联网业务商用试验，依托天启星座提供连接服务。"
+      },
+      {
+        "label": "时",
+        "value": "2026-05-06披露，试验期为两年。"
+      },
+      {
+        "label": "数",
+        "value": "商用试验期2年，覆盖海洋渔业、能源水利、交通物流等多类场景。"
+      },
+      {
+        "label": "影",
+        "value": "卫星物联网开始从试验星座能力往正式准入和商用运营衔接，低轨窄带连接被纳入国家卫星通信产业序列。"
+      }
+    ],
+    "judgment": "这次不是单纯放一家企业试试水，而是卫星物联网开始有了明确的业务准入出口，后面产业链会更敢投终端、星座和行业方案。接下来要盯两件事：其他试点批复会不会跟上，以及全链条监管细则能不能把商业化边界说清楚。",
+    "tags": [
+      "卫星互联网",
+      "卫星物联网",
+      "商业航天",
+      "工信部",
+      "天启星座"
+    ],
+    "sourceName": "工业和信息化部",
+    "sourceType": "原文",
+    "sourceUrl": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_45085d6f5b9646f8b26a42620583a408.html",
+    "id": "2026-05-06-fa65d3c5a53c6780",
+    "slug": "工信部批复国电高科开展卫星物联网商用试验-试验期两年"
+  },
+  {
     "channel": "招投标",
     "title": "中国移动四川公司广安分公司2026年智能常客运营支撑服务项目",
     "score": 8.0,
