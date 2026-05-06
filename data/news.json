@@ -1,5 +1,119 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "我国数据基础设施已覆盖15个行业和43个城市",
+    "score": 8.8,
+    "publishedAt": "2026-05-05T00:00:00+08:00",
+    "ingestedAt": "2026-05-06T09:45:00+08:00",
+    "summary": "国家数据局5月5日披露，我国包括可信数据空间、数联网在内的多类数据基础设施，已经覆盖交通运输、医疗卫生等15个行业，以及北京、上海等43个城市。公开信息点名了可信数据空间和数联网两类底座。覆盖范围已经从单点试验扩到跨行业、跨城市。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "国家数据局披露数据基础设施覆盖范围已扩到15个行业、43个城市。"
+      },
+      {
+        "label": "时",
+        "value": "5月5日发布。"
+      },
+      {
+        "label": "数",
+        "value": "15个行业、43个城市。"
+      },
+      {
+        "label": "影",
+        "value": "可信数据空间、数联网这类底座已进入更大范围复制阶段。"
+      }
+    ],
+    "judgment": "**评：** 这条不是在说又建了几个机房，而是在说数据流通底座开始成网了。后面要盯覆盖行业会不会继续往工业、金融这些高价值场景加深，不然容易停在展示层。",
+    "tags": [
+      "数据基础设施",
+      "可信数据空间",
+      "数联网",
+      "国家数据局"
+    ],
+    "sourceName": "国家数据局",
+    "sourceType": "官方转载",
+    "sourceUrl": "https://www.nda.gov.cn/sjj/swdt/mtsy/0505/20260505201110696271432_pc.html",
+    "id": "2026-05-05-fd1dd7798cb1c2a5",
+    "slug": "我国数据基础设施已覆盖15个行业和43个城市"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Gemini API File Search升级多模态检索与页级引用",
+    "score": 8.5,
+    "publishedAt": "2026-05-05T00:00:00+08:00",
+    "ingestedAt": "2026-05-06T09:45:00+08:00",
+    "summary": "Google 5月5日扩展Gemini API的File Search工具，新增多模态检索、自定义元数据过滤和页级引用三块能力。新版本基于Gemini Embedding 2，让同一套RAG链路可以同时处理文本和图像，并在检索结果里给出页码级出处。官方把检索、过滤和可验证性一起塞进了托管工具链。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Gemini API File Search新增多模态检索、元数据过滤和页级引用。"
+      },
+      {
+        "label": "时",
+        "value": "5月5日发布。"
+      },
+      {
+        "label": "数",
+        "value": "一次补齐3项核心能力，并由Gemini Embedding 2支撑图文混合检索。"
+      },
+      {
+        "label": "影",
+        "value": "企业RAG系统能少做一层自建检索编排，把验证链路直接压进官方工具。"
+      }
+    ],
+    "judgment": "**评：** 这一步很实在，Google是在抢RAG基础设施层，不只是发个新模型名。接下来要看页级引用和过滤能力会不会进入更多默认SDK和托管流程，那会直接改开发门槛。",
+    "tags": [
+      "Google AI",
+      "Gemini API",
+      "RAG",
+      "多模态检索"
+    ],
+    "sourceName": "Google AI Blog",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/expanded-gemini-api-file-search-multimodal-rag/",
+    "id": "2026-05-05-d812415fa24abefe",
+    "slug": "gemini-api-file-search升级多模态检索与页级引用"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Gemma 4发布MTP drafter推理加速方案",
+    "score": 8.4,
+    "publishedAt": "2026-05-05T00:00:00+08:00",
+    "ingestedAt": "2026-05-06T09:45:00+08:00",
+    "summary": "Google 5月5日为Gemma 4家族发布Multi-Token Prediction（MTP）drafter，通过speculative decoding给开源模型推理提速。官方称，这套方案在不降低输出质量和推理逻辑的前提下，最高可实现3倍速度提升；26B MoE模型在Apple Silicon本地多请求场景下可达约2.2倍提速。配套实现覆盖LiteRT-LM、MLX、Transformers、vLLM、SGLang和Ollama。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Gemma 4新增MTP drafter，用投机解码给开源模型推理加速。"
+      },
+      {
+        "label": "时",
+        "value": "5月5日发布。"
+      },
+      {
+        "label": "数",
+        "value": "最高3倍提速，26B MoE在Apple Silicon本地多请求场景约2.2倍提速。"
+      },
+      {
+        "label": "影",
+        "value": "开源模型的本地部署和Agent多步调用成本会继续往下压。"
+      }
+    ],
+    "judgment": "**评：** 这里好看的不是又快了一点，而是Google把推理优化从论文招式推到了现成分发链路。后面要盯社区框架接入速度，谁先把这套能力变成默认选项，谁就先吃到本地推理红利。",
+    "tags": [
+      "Gemma 4",
+      "推理加速",
+      "Speculative Decoding",
+      "开源模型"
+    ],
+    "sourceName": "Google AI Blog",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/",
+    "id": "2026-05-05-7bc1c5aab23be308",
+    "slug": "gemma-4发布mtp-drafter推理加速方案"
+  },
+  {
     "channel": "市场快讯",
     "title": "中国移动官宣将推AI-eSIM产品",
     "score": 7.2,
