@@ -1,5 +1,85 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "OpenAI联合多家芯片与云厂商开源MRC训练网络协议",
+    "score": 9.3,
+    "publishedAt": "2026-05-05T08:00:00+08:00",
+    "ingestedAt": "2026-05-07T21:41:33+08:00",
+    "summary": "OpenAI 5月5日发布MRC（Multipath Reliable Connection）网络协议，并通过Open Compute Project对外开放规范，合作方包括AMD、Broadcom、Intel、Microsoft和NVIDIA。MRC基于RoCE扩展，配合SRv6源路由与多平面网络设计，让单条传输可同时分散到数百条路径，直接面向超大规模AI训练集群。OpenAI披露，该协议已部署在其最大规模的NVIDIA GB200训练集群中，包括OCI在得州Abilene建设的Stargate站点，以及微软Fairwater超算。协议面向最新800Gb/s网卡，目标是把链路抖动、交换机重启和局部故障对同步训练的影响压到微秒级。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "OpenAI把MRC训练网络协议开源，并已在Stargate与微软Fairwater等超大训练集群实装。"
+      },
+      {
+        "label": "时",
+        "value": "5月5日发布，协议规范同步交给Open Compute Project。"
+      },
+      {
+        "label": "数",
+        "value": "面向800Gb/s网卡；单次传输可分散到数百条路径；两级交换网络可覆盖约13.1万块GPU。"
+      },
+      {
+        "label": "影",
+        "value": "大模型训练网络从单路径RoCE，往多路径、源路由、可容错的以太网方案继续走。"
+      }
+    ],
+    "judgment": "这条不是普通网络优化，它把大模型训练的瓶颈直接从算力扩到了传输层。后面要盯两件事：一是别家云和交换机厂会不会跟进兼容，二是这套协议能不能把十万卡级训练做成行业通用底座。",
+    "tags": [
+      "AI基础设施",
+      "数据中心网络",
+      "超算",
+      "OpenAI",
+      "RoCE",
+      "SRv6"
+    ],
+    "sourceName": "海外技术RSS - OpenAI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://openai.com/index/mrc-supercomputer-networking/",
+    "id": "2026-05-05-32441071163ba4ed",
+    "slug": "openai联合多家芯片与云厂商开源mrc训练网络协议"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "NVIDIA将Spectrum-X与MRC绑定为AI原生以太网方案",
+    "score": 8.9,
+    "publishedAt": "2026-05-06T08:00:00+08:00",
+    "ingestedAt": "2026-05-07T21:41:33+08:00",
+    "summary": "NVIDIA 5月6日发文，把Spectrum-X定位为面向gigascale AI的开放式以太网底座，并明确将MRC作为其最新网络栈的重要能力。NVIDIA称，MRC已在OpenAI、Microsoft和Oracle使用的AI工厂中运行，能把单条RDMA连接分散到多条网络路径上，在拥塞和故障下维持吞吐与可用性。文中还强调，Spectrum-X的多平面网络设计、硬件级故障绕行与多路径负载均衡，是支撑数十万GPU级AI集群的核心条件。与此同时，MRC规范已经通过Open Compute Project公开，NVIDIA把这套路径描述为开放标准下的AI网络平台竞争。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "NVIDIA把Spectrum-X和MRC一起打包成AI训练网络方案，主打开放以太网路线。"
+      },
+      {
+        "label": "时",
+        "value": "5月6日发文，MRC规范已同步进入Open Compute Project。"
+      },
+      {
+        "label": "数",
+        "value": "目标场景是数十万GPU级AI工厂；故障绕行响应做到微秒级；单条RDMA连接可同时走多条路径。"
+      },
+      {
+        "label": "影",
+        "value": "AI集群互联开始从单纯拼带宽，转向拼多路径调度、硬件绕障和开放协议栈。"
+      }
+    ],
+    "judgment": "NVIDIA现在卖的不只是交换机和网卡，而是在抢AI数据中心的话语权。接下来要看运营商云、国产交换机和服务器厂会不会押注这条以太网路线，不然训练网络还是会被少数封闭体系卡住。",
+    "tags": [
+      "AI网络",
+      "以太网",
+      "NVIDIA",
+      "Spectrum-X",
+      "数据中心",
+      "RDMA"
+    ],
+    "sourceName": "海外技术RSS - NVIDIA Blog",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blogs.nvidia.com/blog/spectrum-x-ethernet-mrc/",
+    "id": "2026-05-06-1ee050793b7cef34",
+    "slug": "nvidia将spectrum-x与mrc绑定为ai原生以太网方案"
+  },
+  {
     "channel": "招投标",
     "title": "凤城市数字农业创新基地建设项目（蓝莓）-蓝莓产销数字化设施建设询比采购公告",
     "score": 8.1,
