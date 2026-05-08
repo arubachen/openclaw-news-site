@@ -1,5 +1,83 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "OpenAI 在 API 推出三款实时语音模型",
+    "score": 8.9,
+    "publishedAt": "2026-05-07T08:00:00+08:00",
+    "ingestedAt": "2026-05-08T13:37:41+08:00",
+    "summary": "OpenAI 5月7日发布三款面向开发者的实时语音模型，包括带 GPT-5 级推理能力的 GPT-Realtime-2、支持 70 多种输入语言和 13 种输出语言的 GPT-Realtime-Translate，以及流式语音转文字模型 GPT-Realtime-Whisper。新版实时语音栈把上下文窗口从 32K 提到 128K，并新增多工具并行调用、可配置推理强度、前置提示语和更强的中断恢复能力。OpenAI 披露，GPT-Realtime-2 在 Big Bench Audio 上较 1.5 版提升 15.2%，在 Audio MultiChallenge 上提升 13.8%。这次更新直接把语音接口从单轮应答推到了可持续执行任务的 agent 形态。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "OpenAI 在 API 一次放出三款实时语音模型，核心是让语音 agent 能边聊边推理、调工具、接着办事。"
+      },
+      {
+        "label": "时",
+        "value": "5 月 7 日发布。"
+      },
+      {
+        "label": "数",
+        "value": "支持 70+ 输入语言、13 种输出语言；上下文窗口从 32K 提到 128K；两项音频评测分别提升 15.2% 和 13.8%。"
+      },
+      {
+        "label": "影",
+        "value": "开发者做客服、翻译、出行助手这类语音产品时，能把实时理解、转写、翻译和工具调用放进同一条链路。"
+      }
+    ],
+    "judgment": "**评：** 这次不是单纯把语音做得更顺，而是把实时语音正式推成 agent 入口了。接下来要盯的是定价、延迟和多语种稳定性，真要跑进生产环境这三件事最先卡人。",
+    "tags": [
+      "AI",
+      "语音模型",
+      "API",
+      "Agent",
+      "实时交互"
+    ],
+    "sourceName": "OpenAI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/",
+    "id": "2026-05-07-471ed7db34489dd0",
+    "slug": "openai-在-api-推出三款实时语音模型"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Google 披露 AlphaEvolve 落地到基础设施与科研优化",
+    "score": 7.9,
+    "publishedAt": "2026-05-07T23:00:00+08:00",
+    "ingestedAt": "2026-05-08T13:37:41+08:00",
+    "summary": "Google 5月7日更新 AlphaEvolve 一年来的落地进展。这个由 Gemini 驱动的进化算法 agent 已从数学与研究实验，扩展到 DNA 测序纠错、灾害预测、分子模拟、神经科学分析以及电网稳定性模拟，并开始用于 Google 自身基础设施效率优化。Google 同时表示，Google Cloud 客户已用它改进机器学习模型、药物发现、供应链和仓储设计。AlphaEvolve 的变化不在单个模型能力，而在自优化算法 agent 开始从研究工具变成基础设施层的通用优化器。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google 把 AlphaEvolve 从研究型算法 agent 推到了基础设施和科研生产场景。"
+      },
+      {
+        "label": "时",
+        "value": "5 月 7 日披露一年来的落地进展。"
+      },
+      {
+        "label": "数",
+        "value": "已覆盖 DNA 测序纠错、灾害预测、电网模拟、分子模拟、神经科学、供应链和仓储设计等多类场景。"
+      },
+      {
+        "label": "影",
+        "value": "算法自动优化开始往云基础设施和行业建模里渗，后面可能先改掉一批高成本、低频改造的人肉调参流程。"
+      }
+    ],
+    "judgment": "**评：** 这条要看的不是 AlphaEvolve 又解了什么题，而是算法优化 agent 开始碰基础设施效率了。要是后面 Google 愿意把接口和交付方式产品化，这类系统会比单个大模型更快进企业核心链路。",
+    "tags": [
+      "AI",
+      "Google DeepMind",
+      "算法优化",
+      "基础设施",
+      "科研计算"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/alphaevolve-updates/",
+    "id": "2026-05-07-44c2ccbc4960469e",
+    "slug": "google-披露-alphaevolve-落地到基础设施与科研优化"
+  },
+  {
     "channel": "招投标",
     "title": "中国移动贵州公司智算中心2026至2028年（24个月）综合配套核心机房技术支持服务项目",
     "score": 8.0,
