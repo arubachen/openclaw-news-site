@@ -1,5 +1,45 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "Google DeepMind 把 AlphaEvolve 从研究项目推进到基础设施和行业应用",
+    "score": 8.9,
+    "publishedAt": "2026-05-07T08:00:00+08:00",
+    "ingestedAt": "2026-05-09T09:42:29+08:00",
+    "summary": "Google DeepMind 5月7日更新 AlphaEvolve 进展，称这套 Gemini 驱动的算法发现代理已经从数学与计算机科学研究，扩展到 Google 自身算力基础设施、科研计算和多行业商用优化。官方披露，它已被常态化用于下一代 TPU 设计、缓存替换策略和编译器优化，还把 Google Spanner 的 LSM 压实启发式改进到写放大下降 20%。对外部场景，Google 列出了 Klarna、Substrate、FM Logistic、WPP 和 Schrödinger 等案例，覆盖训练提速、半导体仿真、物流路线、广告模型和生命科学计算。科研侧也给出硬数字，包括 DNA 测序变异检测误差下降 30%、电网 AC Optimal Power Flow 可行解命中率从 14% 提到 88% 以上、自然灾害风险预测总体准确率提升 5%。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "AlphaEvolve 已从算法研究工具走到 Google 基础设施和多行业优化场景，核心形态是 Gemini 驱动的算法发现代理"
+      },
+      {
+        "label": "时",
+        "value": "Google DeepMind 于 2026-05-07 发布最新进展，回顾其上线一年来的部署结果"
+      },
+      {
+        "label": "数",
+        "value": "Spanner 写放大下降 20%；DNA 测序变异检测误差下降 30%；电网可行解命中率从 14% 提到 88% 以上；灾害预测准确率提升 5%"
+      },
+      {
+        "label": "影",
+        "value": "算法优化开始直接落到芯片、数据库、编译器和行业仿真链路，不再只是给模型调参或做论文演示"
+      }
+    ],
+    "judgment": "这条最硬的地方，是代理已经开始改底层系统指标，不只是帮人写点代码。后面要盯两件事：一是这种算法发现能力会不会进入更多云和数据库产品，二是外部客户能拿到多深的可控权限。",
+    "tags": [
+      "Google DeepMind",
+      "AlphaEvolve",
+      "算法发现",
+      "TPU",
+      "Spanner",
+      "科研计算"
+    ],
+    "sourceName": "Google DeepMind",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://deepmind.google/blog/alphaevolve-impact/",
+    "id": "2026-05-07-09400dbd37e5a028",
+    "slug": "google-deepmind-把-alphaevolve-从研究项目推进到基础设施和行业应用"
+  },
+  {
     "channel": "招投标",
     "title": "2026年联通数字科技有限公司陕西分公司矿业AI视频监控系统集成服务项目（第二次）公告",
     "score": 7.5,
