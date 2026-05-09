@@ -104,37 +104,6 @@ const scoreTone = (score = 0) => score >= 8 ? '高匹配' : score >= 7 ? '中匹
 const scoreColor = (score = 0) => score >= 8 ? 'var(--high)' : score >= 7 ? 'var(--warn)' : 'var(--good)';
 const scoreClass = (score = 0) => score >= 8 ? 'score-high' : score >= 7 ? 'score-mid' : 'score-low';
 
-function stripCommentPrefix(value = '') {
-  return String(value)
-    .replace(/^\*\*(?:评|点评)：\*\*\s*/u, '')
-    .replace(/^(?:评|点评)：\s*/u, '')
-    .trim();
-}
-
-function humanizeComment(value = '') {
-  let text = stripCommentPrefix(value);
-  const firstSentence = text.split(/[。！？]/u)[0] || text;
-
-  if (/^(?:这条|这类|这则|这波)/u.test(text) && /(?:不是|不在于)/u.test(firstSentence) && /(?:而是|而在于)/u.test(firstSentence)) {
-    const idx = text.search(/(?:而是|而在于)/u);
-    if (idx !== -1) text = text.slice(idx).replace(/^(?:而是|而在于)\s*/u, '');
-  }
-
-  const patterns = [
-    /^(?:真正|更)?值得看的是\s*/u,
-    /^(?:真正|更)?值得盯的是\s*/u,
-    /^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:的)?(?:重点|看点|价值|核心|关键)(?:是|在于)\s*/u,
-    /^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?(?:释放出的信号是|说明了)\s*/u,
-    /^(?:核心|关键|重点)(?:在于|是)\s*/u,
-    /^(?:这条|这类|这则|这波)(?:消息|信息|内容|动态|情报)?[，,]\s*/u,
-    /^(?:这不只是|这不单是)\s*[^，。；]+(?:，|,|、)?(?:更是|更意味着)\s*/u,
-  ];
-
-  for (const pattern of patterns) text = text.replace(pattern, '');
-  text = text.replace(/^(?:而是|而在于|意味着|说明)\s*/u, '');
-  text = text.replace(/^[，,。；、\s]+/u, '');
-  return text.trim();
-}
 
 function getActualTheme(mode = state.themeMode) {
   return mode === 'system' ? (mediaDark.matches ? 'dark' : 'light') : mode;
@@ -463,7 +432,6 @@ function matchesQuery(item, query) {
     item.title,
     item.channel,
     item.summary,
-    item.judgment,
     item.sourceName,
     item.sourceType,
     ...(item.tags || []),
@@ -654,11 +622,9 @@ function renderFactRows(item) {
 
 function renderCommentBox(item) {
   const facts = buildDisplayFacts(item);
-  const judgment = humanizeComment(item.judgment || '');
   const lines = [];
   if (facts.impact) lines.push(`<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>`);
-  if (judgment) lines.push(`<p class="comment-line"><strong>点评：</strong>${esc(judgment)}</p>`);
-  return `<div class="comment-box">${lines.join('')}</div>`;
+  return lines.length ? `<div class="comment-box">${lines.join('')}</div>` : '';
 }
 
 function renderScorePill(item) {
@@ -769,12 +735,6 @@ function renderArticle(item) {
               </div>
             `).join('')}
           </div>
-        </section>
-
-        <section class="article-section">
-          <h3>点评</h3>
-          ${facts.impact ? `<p class="comment-line"><strong>影响：</strong>${esc(facts.impact)}</p>` : ''}
-          <p class="comment-line"><strong>点评：</strong>${esc(humanizeComment(item.judgment || ''))}</p>
         </section>
 
         <section class="article-section">

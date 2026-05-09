@@ -600,7 +600,6 @@ h1 {
   line-height: 1.65;
 }
 
-.comment-box,
 .article-section {
   margin-top: 12px;
   padding: 12px 13px;
@@ -609,17 +608,8 @@ h1 {
   border: 1px solid var(--line);
 }
 
-.comment-box p,
 .article-section p { margin: 0; }
 
-.comment-line {
-  color: color-mix(in srgb, var(--text) 90%, var(--muted));
-  line-height: 1.7;
-  font-size: 14px;
-}
-
-.comment-line + .comment-line { margin-top: 8px; }
-.comment-line strong,
 .article-section h3 { color: var(--text); }
 
 .article-section h3 {
@@ -861,15 +851,9 @@ h1 {
     line-height: 1.6;
   }
 
-  .comment-box,
   .article-section {
     margin-top: 10px;
     padding: 10px 11px;
-  }
-
-  .comment-line {
-    font-size: 13px;
-    line-height: 1.6;
   }
 
   .tag-row {

@@ -11,7 +11,6 @@
       { "label": "数", "value": "示例数字" },
       { "label": "影", "value": "示例影响" }
     ],
-    "judgment": "这是示例判断。",
     "tags": ["示例", "导入"],
     "sourceName": "OpenClaw",
     "sourceType": "原文",

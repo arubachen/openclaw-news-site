@@ -152,7 +152,6 @@ def normalize_item(raw: dict[str, Any]) -> dict[str, Any]:
         ),
         "summary": clean_text(raw.get("summary")),
         "facts": normalize_facts(raw.get("facts")),
-        "judgment": clean_text(raw.get("judgment")),
         "tags": normalize_tags(raw.get("tags")),
         "sourceName": clean_text(raw.get("sourceName")),
         "sourceType": clean_text(raw.get("sourceType")) or "原文",

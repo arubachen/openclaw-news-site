@@ -111,7 +111,6 @@ data/news.json
     { "label": "数", "value": "..." },
     { "label": "影", "value": "..." }
   ],
-  "judgment": "...",
   "tags": ["算力", "政策"],
   "sourceName": "国家数据局",
   "sourceType": "政策公告",
