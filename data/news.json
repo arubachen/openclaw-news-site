@@ -1,5 +1,119 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "Google发布Gemini 3.5 Flash，并把Agent开发与多子代理能力推到前台",
+    "score": 9.2,
+    "publishedAt": "2026-05-19T00:00:00+08:00",
+    "ingestedAt": "2026-05-22T09:39:46+08:00",
+    "summary": "Google在I/O 2026发布Gemini 3.5系列，首发3.5 Flash，并把它接入Gemini应用、Search AI Mode、Google AI Studio、Android Studio和Antigravity平台。官方披露，3.5 Flash在Terminal-Bench 2.1上达到76.2%，GDPval-AA为1656 Elo，MCP Atlas为83.6%，输出速度称为其他前沿模型的4倍。Google同时把subagents、hooks、异步任务管理和托管Linux沙箱能力打包进Antigravity与Managed Agents，模型发布和开发平台架构是一起升级的。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Google发布Gemini 3.5 Flash，并同步升级Antigravity、AI Studio和Managed Agents能力"
+      },
+      {
+        "label": "时",
+        "value": "2026-05-19，Google I/O 2026期间发布"
+      },
+      {
+        "label": "数",
+        "value": "Terminal-Bench 2.1为76.2%，GDPval-AA为1656 Elo，MCP Atlas为83.6%，官方称输出速度为其他前沿模型4倍"
+      },
+      {
+        "label": "影",
+        "value": "Agent开发开始从单模型调用转向子代理协作、托管执行环境和统一开发平台"
+      }
+    ],
+    "tags": [
+      "AI模型",
+      "Agent",
+      "开发平台",
+      "Google",
+      "算力与软件栈"
+    ],
+    "sourceName": "Google AI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+    "id": "2026-05-19-ab5b1ce36b2dba2c",
+    "slug": "google发布gemini-3-5-flash-并把agent开发与多子代理能力推到前台"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "OpenAI把C2PA、SynthID和公开验证工具并到一套内容溯源链路里",
+    "score": 8.9,
+    "publishedAt": "2026-05-19T00:00:00+08:00",
+    "ingestedAt": "2026-05-22T09:39:46+08:00",
+    "summary": "OpenAI宣布其内容溯源体系升级为多层方案：一方面成为C2PA Conforming Generator Product，让外部平台可稳定读取和传递其Content Credentials；另一方面开始为ChatGPT、Codex和API生成的图片加入Google DeepMind的SynthID隐形水印。OpenAI同时预览公开验证工具，可检查上传图片是否包含Content Credentials和SynthID信号。内容标记从单一元数据走向元数据加像素级水印的双层架构，重点是跨平台保留和可验证性。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "OpenAI升级AI内容溯源方案，叠加C2PA元数据、SynthID水印和公开验证工具"
+      },
+      {
+        "label": "时",
+        "value": "2026-05-19发布"
+      },
+      {
+        "label": "数",
+        "value": "适用范围已覆盖ChatGPT、Codex和OpenAI API生成图片，验证工具初期仅支持OpenAI内容"
+      },
+      {
+        "label": "影",
+        "value": "AI生成内容识别开始从单平台标签转向跨平台互认、保留和校验链路"
+      }
+    ],
+    "tags": [
+      "AI安全",
+      "内容溯源",
+      "C2PA",
+      "SynthID",
+      "OpenAI"
+    ],
+    "sourceName": "OpenAI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://openai.com/index/advancing-content-provenance/",
+    "id": "2026-05-19-daa2d8b49153d337",
+    "slug": "openai把c2pa-synthid和公开验证工具并到一套内容溯源链路里"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "算力网被纳入国家“六张网”建设，Token调用正被往公用基础设施口径上靠",
+    "score": 8.7,
+    "publishedAt": "2026-05-22T00:00:00+08:00",
+    "ingestedAt": "2026-05-22T09:39:46+08:00",
+    "summary": "南方日报援引政策与产业信息称，国务院常务会议已将算力网纳入国家“六张网”重点基础设施，国家发展改革委透露相关领域今年投资总额预计超过7万亿元。报道同时给出国家数据局口径：今年3月我国日均Token调用量已超过140万亿，较2024年初增长1000多倍。文章把算力网定义为统一调度超算、智算和数据中心的“算力版国家电网”，并把Token与按量付费的调用体系放到同一基础设施语境下。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "算力网进入国家“六张网”建设框架，算力调度与Token调用被放进统一基础设施口径"
+      },
+      {
+        "label": "时",
+        "value": "2026-05-22见报，文中引用今年3月与近期政策信息"
+      },
+      {
+        "label": "数",
+        "value": "相关领域今年投资预计超7万亿元；我国日均Token调用量已超140万亿，较2024年初增超1000倍"
+      },
+      {
+        "label": "影",
+        "value": "算力资源调度、按量调用和地方算力券政策开始往公共基础设施模式收拢"
+      }
+    ],
+    "tags": [
+      "算力网",
+      "数据中心",
+      "Token",
+      "基础设施",
+      "政策与调度"
+    ],
+    "sourceName": "南方日报",
+    "sourceType": "媒体报道",
+    "sourceUrl": "https://epaper.nfnews.com/nfdaily/html/202605/22/content_10171089.html",
+    "id": "2026-05-22-bb0450b708d9a220",
+    "slug": "算力网被纳入国家-六张网-建设-token调用正被往公用基础设施口径上靠"
+  },
+  {
     "channel": "招投标",
     "title": "2026年江苏产互WXCH023某软件开发项目（WXCH-G-K1-2026-21）询比采购公告",
     "score": 7.8,
@@ -8283,43 +8397,6 @@
   {
     "channel": "市场快讯",
     "title": "中国电信实现40Tbps量子-经典空芯共纤传输，刷新全球纪录",
-    "score": 8.3,
-    "publishedAt": "2026-05-11T20:05:17+08:00",
-    "ingestedAt": "2026-05-12T04:47:53+08:00",
-    "summary": "中国电信研究院披露，其依托云网融合新型基础设施中试平台和大科创装置，联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。项目在百公里空芯光纤上实现40Tbps（50×800Gbps）超大容量经典光通信与商用量子密钥分发（QKD）系统稳定共传，并给出9.56kbps安全密钥率。中国电信称，该结果刷新全球量子-经典共传系统纪录，并解决了共纤条件下大容量传输与量子信号噪声抑制问题。原文同时指出，这项进展面向量子安全通信规模化商用部署的关键技术环节。",
-    "facts": [
-      {
-        "label": "主",
-        "value": "中国电信研究院联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。"
-      },
-      {
-        "label": "时",
-        "value": "原文发布时间为2026-05-11 20:05:17。"
-      },
-      {
-        "label": "数",
-        "value": "试验实现40Tbps（50×800Gbps）经典光通信与商用QKD在百公里空芯光纤稳定共传，安全密钥率达9.56kbps。"
-      },
-      {
-        "label": "影",
-        "value": "直接指向量子安全通信与现网大容量传输并行部署的技术可行性，为后续规模化商用部署提供基础。"
-      }
-    ],
-    "tags": [
-      "中国电信",
-      "量子通信",
-      "空芯光纤",
-      "光通信"
-    ],
-    "sourceName": "大河财立方",
-    "sourceType": "新闻稿",
-    "sourceUrl": "https://app.dahecube.com/nweb/spider/20260511/789041n20434c743af.htm",
-    "id": "2026-05-11-2aee30274e98987b",
-    "slug": "中国电信实现40tbps量子-经典空芯共纤传输-刷新全球纪录"
-  },
-  {
-    "channel": "市场快讯",
-    "title": "中国电信实现40Tbps量子-经典空芯共纤传输，刷新全球纪录",
     "score": 8.7,
     "publishedAt": "2026-05-12T00:00:00+08:00",
     "ingestedAt": "2026-05-12T04:47:53+08:00",
@@ -8352,6 +8429,43 @@
     "sourceType": "新闻稿",
     "sourceUrl": "https://www.stdaily.com/web/gdxw/2026-05/12/content_514979.html",
     "id": "2026-05-12-c72f345d8b24f651",
+    "slug": "中国电信实现40tbps量子-经典空芯共纤传输-刷新全球纪录"
+  },
+  {
+    "channel": "市场快讯",
+    "title": "中国电信实现40Tbps量子-经典空芯共纤传输，刷新全球纪录",
+    "score": 8.3,
+    "publishedAt": "2026-05-11T20:05:17+08:00",
+    "ingestedAt": "2026-05-12T04:47:53+08:00",
+    "summary": "中国电信研究院披露，其依托云网融合新型基础设施中试平台和大科创装置，联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。项目在百公里空芯光纤上实现40Tbps（50×800Gbps）超大容量经典光通信与商用量子密钥分发（QKD）系统稳定共传，并给出9.56kbps安全密钥率。中国电信称，该结果刷新全球量子-经典共传系统纪录，并解决了共纤条件下大容量传输与量子信号噪声抑制问题。原文同时指出，这项进展面向量子安全通信规模化商用部署的关键技术环节。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国电信研究院联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。"
+      },
+      {
+        "label": "时",
+        "value": "原文发布时间为2026-05-11 20:05:17。"
+      },
+      {
+        "label": "数",
+        "value": "试验实现40Tbps（50×800Gbps）经典光通信与商用QKD在百公里空芯光纤稳定共传，安全密钥率达9.56kbps。"
+      },
+      {
+        "label": "影",
+        "value": "直接指向量子安全通信与现网大容量传输并行部署的技术可行性，为后续规模化商用部署提供基础。"
+      }
+    ],
+    "tags": [
+      "中国电信",
+      "量子通信",
+      "空芯光纤",
+      "光通信"
+    ],
+    "sourceName": "大河财立方",
+    "sourceType": "新闻稿",
+    "sourceUrl": "https://app.dahecube.com/nweb/spider/20260511/789041n20434c743af.htm",
+    "id": "2026-05-11-2aee30274e98987b",
     "slug": "中国电信实现40tbps量子-经典空芯共纤传输-刷新全球纪录"
   },
   {
