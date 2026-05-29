@@ -1,5 +1,116 @@
 [
   {
+    "channel": "技术趋势",
+    "title": "OpenAI发布Frontier Governance Framework，对齐加州与欧盟前沿AI治理要求",
+    "score": 8.7,
+    "publishedAt": "2026-05-28T08:00:00+08:00",
+    "ingestedAt": "2026-05-29T09:39:57+08:00",
+    "summary": "OpenAI 5月28日发布 Frontier Governance Framework，用公开治理文件说明其安全与安保实践如何对应加州 Transparency in Frontier AI Act 及欧盟 AI Act 通用AI行为准则。文件延续 Preparedness Framework 的高风险管理方法，覆盖网络攻击、CBRN、操纵风险、失控风险、事件响应、外部专家参与和框架更新。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "OpenAI发布 Frontier Governance Framework，把前沿模型的风险评估、缓释、报告和事件响应要求整理成面向监管的公开治理文件。"
+      },
+      {
+        "label": "时",
+        "value": "5月28日发布，文件明确对齐加州 Transparency in Frontier AI Act 与欧盟 AI Act 的通用AI行为准则要求。"
+      },
+      {
+        "label": "数",
+        "value": "框架点名覆盖 4 类高风险方向，包括 cyber offense、CBRN、harmful manipulation、loss of control。"
+      },
+      {
+        "label": "影",
+        "value": "前沿模型厂商开始把内部安全框架拆成可对监管映射的公开文档，治理要求正从原则表述转向可核对的制度层。"
+      }
+    ],
+    "tags": [
+      "AI治理",
+      "监管框架",
+      "前沿模型",
+      "OpenAI"
+    ],
+    "sourceName": "OpenAI",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://openai.com/index/openai-frontier-governance-framework/",
+    "id": "2026-05-28-908ec7856c2fb8ec",
+    "slug": "openai发布frontier-governance-framework-对齐加州与欧盟前沿ai治理要求"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "Anthropic发布Claude Opus 4.8，并上线动态工作流与可调努力级别",
+    "score": 8.8,
+    "publishedAt": "2026-05-28T08:00:00+08:00",
+    "ingestedAt": "2026-05-29T09:39:57+08:00",
+    "summary": "Anthropic 5月28日发布 Claude Opus 4.8，称其在编码、Agent、推理和知识工作测试上较 4.7 提升，并维持原常规价格。同期上线 dynamic workflows，可在 Claude Code 单次会话中规划并运行数百个并行 subagents；claude.ai 与 Cowork 也新增 effort control。Messages API 还支持在 messages 数组中插入 system entries，便于开发者在任务中途调整权限、预算和环境上下文。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "Anthropic升级 Claude Opus 到 4.8，同步给 Claude Code 加上 dynamic workflows，并把 effort control 扩到 claude.ai 与 Cowork。"
+      },
+      {
+        "label": "时",
+        "value": "5月28日发布，模型当天全量可用。"
+      },
+      {
+        "label": "数",
+        "value": "新模型默认高努力档；fast mode 速度可到 2.5 倍，且官方称价格较此前同类模型降到三分之一；dynamic workflows 可在单会话里调度数百个并行 subagents。"
+      },
+      {
+        "label": "影",
+        "value": "模型能力升级开始和 Agent 编排、上下文控制、成本档位一起打包，开发接口正朝长任务和多代理协同场景收敛。"
+      }
+    ],
+    "tags": [
+      "大模型",
+      "Agent",
+      "Claude Code",
+      "Anthropic"
+    ],
+    "sourceName": "Anthropic",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://www.anthropic.com/news/claude-opus-4-8",
+    "id": "2026-05-28-b09b6cb10e8ac64c",
+    "slug": "anthropic发布claude-opus-4-8-并上线动态工作流与可调努力级别"
+  },
+  {
+    "channel": "技术趋势",
+    "title": "NVIDIA集中披露机器人sim-to-real研究进展，强化具身智能训练到实机迁移路径",
+    "score": 8.4,
+    "publishedAt": "2026-05-28T08:00:00+08:00",
+    "ingestedAt": "2026-05-29T09:39:57+08:00",
+    "summary": "NVIDIA 在 ICRA 相关发布中集中展示 8 篇 sim-to-real 机器人论文，覆盖多机械臂调度、跨机体导航、抓取、装配和视觉语言动作模型。多项结果给出明确实机迁移指标，例如 ScheduleStream 在多臂规划上实现 3 倍提速，COMPASS 在 20 次真实导航试验中约 80% 成功率，Grasp-MPC 在真实机器人上约 75% 抓取成功率，高于 41% 基线。发布同时强调 Isaac Lab、Isaac Sim 及开放数据集在训练与验证链路中的作用。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "NVIDIA把机器人 sim-to-real 研究作为一组系统成果披露，内容从调度、导航到抓取和精密装配都围绕‘先仿真、后实机迁移’展开。"
+      },
+      {
+        "label": "时",
+        "value": "5月28日结合 ICRA 2026 论文与研究发布对外集中展示。"
+      },
+      {
+        "label": "数",
+        "value": "ScheduleStream 多臂规划提速 3 倍；COMPASS 在 20 次真实导航试验中成功率约 80%；Grasp-MPC 在实机抓取上约 75%，基线为 41%；Refinery 在仿真装配任务成功率 91%。"
+      },
+      {
+        "label": "影",
+        "value": "具身智能的竞争点正在从单个演示效果转向可复用训练栈、仿真平台和公开数据集，sim-to-real 正被当作基础设施能力来建设。"
+      }
+    ],
+    "tags": [
+      "机器人",
+      "具身智能",
+      "仿真迁移",
+      "NVIDIA"
+    ],
+    "sourceName": "NVIDIA Blog",
+    "sourceType": "官方博客",
+    "sourceUrl": "https://blogs.nvidia.com/blog/icra-research-robotics-simulation-to-real-world/",
+    "id": "2026-05-28-2273274295f288f2",
+    "slug": "nvidia集中披露机器人sim-to-real研究进展-强化具身智能训练到实机迁移路径"
+  },
+  {
     "channel": "招投标",
     "title": "陕西移动2026年政企终端智能云盒采购项目",
     "score": 8.4,
@@ -11804,43 +11915,6 @@
   {
     "channel": "市场快讯",
     "title": "中国电信实现40Tbps量子-经典空芯共纤传输，刷新全球纪录",
-    "score": 8.3,
-    "publishedAt": "2026-05-11T20:05:17+08:00",
-    "ingestedAt": "2026-05-12T04:47:53+08:00",
-    "summary": "中国电信研究院披露，其依托云网融合新型基础设施中试平台和大科创装置，联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。项目在百公里空芯光纤上实现40Tbps（50×800Gbps）超大容量经典光通信与商用量子密钥分发（QKD）系统稳定共传，并给出9.56kbps安全密钥率。中国电信称，该结果刷新全球量子-经典共传系统纪录，并解决了共纤条件下大容量传输与量子信号噪声抑制问题。原文同时指出，这项进展面向量子安全通信规模化商用部署的关键技术环节。",
-    "facts": [
-      {
-        "label": "主",
-        "value": "中国电信研究院联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。"
-      },
-      {
-        "label": "时",
-        "value": "原文发布时间为2026-05-11 20:05:17。"
-      },
-      {
-        "label": "数",
-        "value": "试验实现40Tbps（50×800Gbps）经典光通信与商用QKD在百公里空芯光纤稳定共传，安全密钥率达9.56kbps。"
-      },
-      {
-        "label": "影",
-        "value": "直接指向量子安全通信与现网大容量传输并行部署的技术可行性，为后续规模化商用部署提供基础。"
-      }
-    ],
-    "tags": [
-      "中国电信",
-      "量子通信",
-      "空芯光纤",
-      "光通信"
-    ],
-    "sourceName": "大河财立方",
-    "sourceType": "新闻稿",
-    "sourceUrl": "https://app.dahecube.com/nweb/spider/20260511/789041n20434c743af.htm",
-    "id": "2026-05-11-2aee30274e98987b",
-    "slug": "中国电信实现40tbps量子-经典空芯共纤传输-刷新全球纪录"
-  },
-  {
-    "channel": "市场快讯",
-    "title": "中国电信实现40Tbps量子-经典空芯共纤传输，刷新全球纪录",
     "score": 8.7,
     "publishedAt": "2026-05-12T00:00:00+08:00",
     "ingestedAt": "2026-05-12T04:47:53+08:00",
@@ -11873,6 +11947,43 @@
     "sourceType": "新闻稿",
     "sourceUrl": "https://www.stdaily.com/web/gdxw/2026-05/12/content_514979.html",
     "id": "2026-05-12-c72f345d8b24f651",
+    "slug": "中国电信实现40tbps量子-经典空芯共纤传输-刷新全球纪录"
+  },
+  {
+    "channel": "市场快讯",
+    "title": "中国电信实现40Tbps量子-经典空芯共纤传输，刷新全球纪录",
+    "score": 8.3,
+    "publishedAt": "2026-05-11T20:05:17+08:00",
+    "ingestedAt": "2026-05-12T04:47:53+08:00",
+    "summary": "中国电信研究院披露，其依托云网融合新型基础设施中试平台和大科创装置，联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。项目在百公里空芯光纤上实现40Tbps（50×800Gbps）超大容量经典光通信与商用量子密钥分发（QKD）系统稳定共传，并给出9.56kbps安全密钥率。中国电信称，该结果刷新全球量子-经典共传系统纪录，并解决了共纤条件下大容量传输与量子信号噪声抑制问题。原文同时指出，这项进展面向量子安全通信规模化商用部署的关键技术环节。",
+    "facts": [
+      {
+        "label": "主",
+        "value": "中国电信研究院联合科大国盾量子、长飞、中兴及北京邮电大学完成量子-经典空芯共纤传输试验。"
+      },
+      {
+        "label": "时",
+        "value": "原文发布时间为2026-05-11 20:05:17。"
+      },
+      {
+        "label": "数",
+        "value": "试验实现40Tbps（50×800Gbps）经典光通信与商用QKD在百公里空芯光纤稳定共传，安全密钥率达9.56kbps。"
+      },
+      {
+        "label": "影",
+        "value": "直接指向量子安全通信与现网大容量传输并行部署的技术可行性，为后续规模化商用部署提供基础。"
+      }
+    ],
+    "tags": [
+      "中国电信",
+      "量子通信",
+      "空芯光纤",
+      "光通信"
+    ],
+    "sourceName": "大河财立方",
+    "sourceType": "新闻稿",
+    "sourceUrl": "https://app.dahecube.com/nweb/spider/20260511/789041n20434c743af.htm",
+    "id": "2026-05-11-2aee30274e98987b",
     "slug": "中国电信实现40tbps量子-经典空芯共纤传输-刷新全球纪录"
   },
   {
